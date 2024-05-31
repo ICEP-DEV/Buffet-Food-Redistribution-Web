@@ -12,6 +12,7 @@ import Contact from './pages/Contact';
 import SignUp from './pages/SignUp';
 import Login from './pages/Login';
 import RecepientSignUp from './pages/RecepientSignUp';
+import DonorForm from './pages/DonorForm';
 
 
 function App() {
@@ -30,6 +31,8 @@ function App() {
               <Nav.Link href='/' className='active text-uppercase'>Home</Nav.Link>
               <Nav.Link href='/about' className='active text-uppercase'>About</Nav.Link>
               <Nav.Link href='/contact' className='active text-uppercase'>Contact</Nav.Link>
+              <Nav.Link href='/Login' className='active text-uppercase'>Login</Nav.Link>
+              
               <DropdownButton title="SIGN UP" variant="outline-success" className="btn-lg">
                 <Dropdown.Item as={Link} to="/signup">As Donor</Dropdown.Item>
                 <Dropdown.Item as={Link} to="/recepientsignup">As Recipient</Dropdown.Item>
@@ -47,6 +50,7 @@ function App() {
         <Route path ='/signup' element={<SignUp/>}/>
         <Route path ='/login' element= {<Login/>}/>
         <Route path ='/recepientsignup' element={<RecepientSignUp/>}/>
+        <Route path ='/DonorForm' element={<DonorForm/>}/>
       </Routes>
 
       <footer className='bg-body-tertiary'>
