@@ -45,10 +45,10 @@ function Contact() {
                                     <Form.Label htmlFor='date'>Date</Form.Label>
                                     <Form.Control type='date' id='date' />
                                 </div>
-                                <div className='col-md-6'>
+                                {/* <div className='col-md-6'>
                                     <Form.Label htmlFor='guests-number'>Number Of Guests</Form.Label>
                                     <Form.Control type='number' id='guests-number' />
-                                </div>
+                                </div> */}
                             </Form.Group>
                             <Form.Group className='mb-4'>
                                 <Form.Label htmlFor='comments'>Comments</Form.Label>
