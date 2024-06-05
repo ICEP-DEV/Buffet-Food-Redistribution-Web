@@ -4,17 +4,18 @@ import Datetime from 'react-datetime';
 import 'react-datetime/css/react-datetime.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useNavigate } from 'react-router-dom';
+//import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 function FoodForm({ addFoodItem }) {
   const [itemName, setItemName] = useState('');
   const [itemQuantity, setItemQuantity] = useState('');
   const [itemDescription, setItemDescription] = useState('');
   const [timeCooked, setTimeCooked] = useState('');
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const currentTime = new Date();
     const timeDifference = Math.abs(currentTime - new Date(timeCooked)) / 36e5; // Calculate the time difference in hours
@@ -28,29 +29,50 @@ function FoodForm({ addFoodItem }) {
       timeCooked &&
       timeDifference < 12 // Check if time cooked is less than 12 hours ago
     ) {
-      addFoodItem(itemName, itemQuantity, itemDescription, timeCooked);
-      setItemName('');
-      setItemQuantity('');
-      setItemDescription('');
-      setTimeCooked('');
+      try {
+        const apiUrl = `http://localhost:5282/api/FoodItem/AddItem`;
+        const data = {
+          ItemName: itemName,
+          Quantity: itemQuantity,
+          Description: itemDescription,
+          DateCooked: timeCooked
+          
+        }
+        const response = await axios.post(apiUrl,data);
 
-      // Save updated food items to local storage
-      const updatedFoodItems = JSON.parse(localStorage.getItem('foodItems')) || [];
-      updatedFoodItems.push({ name: itemName, quantity: itemQuantity, description: itemDescription, timeCooked: timeCooked });
-      localStorage.setItem('foodItems', JSON.stringify(updatedFoodItems));
-      
-      // Display success notification
-      toast.success('You have successfully donated. Thank you!');
-
-          //  navigate('/menu');
+        if (response.status === 200) {
+          setItemName('');
+          setItemQuantity('');
+          setItemDescription('');
+          setTimeCooked('');
+          toast.success('Food item added successfully!');
+        } else {
+          toast.error('Error adding food item. Please try again later.');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        toast.error('Network error. Please check your internet connection.');
+      }
     } else if (timeDifference >= 12) {
-      // Display error notification if time cooked is 12 or more hours ago
       toast.error('Unfortunately, you cannot donate food that was prepared 12 or more hours ago!');
     } else {
-      // Display error notification if form fields are not filled correctly
       toast.error('Please fill out all fields correctly.');
     }
+
+
   };
+
+      // Save updated food items to local storage
+      //const updatedFoodItems = JSON.parse(localStorage.getItem('foodItems')) || [];
+      //updatedFoodItems.push({ name: itemName, quantity: itemQuantity, description: itemDescription, timeCooked: timeCooked });
+      //localStorage.setItem('foodItems', JSON.stringify(updatedFoodItems));
+      
+      // Display success notification
+      //toast.success('You have successfully donated. Thank you!');
+
+          //  navigate('/menu');
+    
+  
   
 
   return (
