@@ -13,6 +13,7 @@ function FoodForm({ addFoodItem }) {
   const [itemQuantity, setItemQuantity] = useState('');
   const [itemDescription, setItemDescription] = useState('');
   const [timeCooked, setTimeCooked] = useState('');
+  const [address, setAddress] = useState(''); 
   //const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -35,8 +36,8 @@ function FoodForm({ addFoodItem }) {
           ItemName: itemName,
           Quantity: itemQuantity,
           Description: itemDescription,
-          DateCooked: timeCooked
-          
+          DateCooked: timeCooked,
+          Address: address
         }
         const response = await axios.post(apiUrl,data);
 
@@ -63,9 +64,9 @@ function FoodForm({ addFoodItem }) {
   };
 
       // Save updated food items to local storage
-      //const updatedFoodItems = JSON.parse(localStorage.getItem('foodItems')) || [];
-      //updatedFoodItems.push({ name: itemName, quantity: itemQuantity, description: itemDescription, timeCooked: timeCooked });
-      //localStorage.setItem('foodItems', JSON.stringify(updatedFoodItems));
+      const updatedFoodItems = JSON.parse(localStorage.getItem('foodItems')) || [];
+      updatedFoodItems.push({ name: itemName, quantity: itemQuantity, description: itemDescription, timeCooked: timeCooked, address: address });
+      localStorage.setItem('foodItems', JSON.stringify(updatedFoodItems));
       
       // Display success notification
       //toast.success('You have successfully donated. Thank you!');
@@ -119,6 +120,16 @@ function FoodForm({ addFoodItem }) {
                 value={timeCooked}
                 onChange={(date) => setTimeCooked(date)}
                 inputProps={{ style: { color: 'rgba(0, 0, 0, 1.5)' } }} // Set placeholder color
+              />
+            </Form.Group>
+            <Form.Group controlId="address">
+              <Form.Label><strong>Physical Address</strong></Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter your address"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+                style={{ color: 'rgba(0, 0, 0, 1.5)' }} // Set placeholder color
               />
             </Form.Group>
             <Button type="submit" variant="dark" className="mt-3 btn-block btn-lg" style={{ width: '100%' }}>Add Item</Button>
