@@ -38,6 +38,7 @@ function FoodForm({ addFoodItem }) {
           Description: itemDescription,
           DateCooked: timeCooked,
           Address: address
+          
         }
         const response = await axios.post(apiUrl,data);
 
@@ -64,9 +65,9 @@ function FoodForm({ addFoodItem }) {
   };
 
       // Save updated food items to local storage
-      const updatedFoodItems = JSON.parse(localStorage.getItem('foodItems')) || [];
-      updatedFoodItems.push({ name: itemName, quantity: itemQuantity, description: itemDescription, timeCooked: timeCooked, address: address });
-      localStorage.setItem('foodItems', JSON.stringify(updatedFoodItems));
+      //const updatedFoodItems = JSON.parse(localStorage.getItem('foodItems')) || [];
+      //updatedFoodItems.push({ name: itemName, quantity: itemQuantity, description: itemDescription, timeCooked: timeCooked });
+      //localStorage.setItem('foodItems', JSON.stringify(updatedFoodItems));
       
       // Display success notification
       //toast.success('You have successfully donated. Thank you!');

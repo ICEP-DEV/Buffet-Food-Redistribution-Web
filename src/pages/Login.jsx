@@ -138,8 +138,8 @@ const Login = () => {
         `}
       </style>
       <div className="login">
-        <form  onSubmit={handleLogin}>
-          <h3>Login</h3>
+        <form style={{ width: '450px', margin: 'auto', background: '#ffffff', boxShadow: '0px 14px 80px rgba(34, 35, 58, 0.2)', padding: '40px 55px 45px 55px', borderRadius: '15px', transition: 'all .3s' }}  onSubmit={handleLogin}>
+          <h3 style={{ textAlign: 'center', margin: '0', lineHeight: '1', paddingBottom: '20px' }}>Login</h3>
           <div>
             <input
               type="radio"

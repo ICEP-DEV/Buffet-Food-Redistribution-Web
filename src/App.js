@@ -16,6 +16,7 @@ import Routez from './Landing-page/routes'
 import LandingPage from './Landing-page/LandingPage';
 
 
+
 function App() {
   return (
     <div>
@@ -50,6 +51,8 @@ function App() {
         <Route path ='/signup' element={<SignUp/>}/>
         <Route path ='/login' element= {<Login/>}/>
         <Route path ='/recepientsignup' element={<RecepientSignUp/>}/>
+    
+    
       </Routes>
       <Routez />
 

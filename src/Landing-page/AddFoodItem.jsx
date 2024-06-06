@@ -1,6 +1,6 @@
 // AddFoodItem.js
 
-import { useState } from 'react';
+/*import { useState } from 'react';
 
 function useAddFoodItem() {
   const [foodItems, setFoodItems] = useState([]);
@@ -16,4 +16,4 @@ function useAddFoodItem() {
   return addFoodItem;
 }
 
-export default useAddFoodItem;
+export default useAddFoodItem;*/
