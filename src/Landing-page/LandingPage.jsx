@@ -1,56 +1,79 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import video from '../components/videos/f.mp4';
 import logo from '../components/FoodShareNetwork.jpeg';
-import { FaTachometerAlt } from 'react-icons/fa'; // Import speedometer icon from Font Awesome
-import { BiDonateHeart } from 'react-icons/bi'; // Import heart icon from react-icons
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; // Import FontAwesomeIcon // Import record icon from Font Awesome
-import { faCircle } from '@fortawesome/free-solid-svg-icons'; // Import a different icon from Font Awesome
+import { FaTachometerAlt } from 'react-icons/fa';
+import { BiDonateHeart } from 'react-icons/bi';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircle, faInfoCircle, faEnvelope, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { UserContext } from '../App';
 
 const LandingPage = () => {
+  const { setUser } = useContext(UserContext);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    setUser(null);
+    navigate('/');
+  };
+
   return (
     <>
       <section id="video-section" className="header-banner mb-3 mt-5">
         <div className="container-fluid">
           <div className="row align-items-center">
-            {/* Sidebar */}
-            <div className="col-md-2" style={{ paddingLeft: '0' }}>
-              <div className="sidebar" style={{ backgroundColor: 'grey', height: '100vh', paddingLeft: '0', marginLeft: '0' }}>
-                <img src={logo} alt="Food Share Network Logo" style={{ width: '100%', marginBottom: '20px', marginTop: '7px' }} />
-                <div style={{ marginTop: '40px' }}>
-                  <div className="p-2 bg-light rounded" style={{ width: '80%', marginLeft: 'auto', marginRight: 'auto', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <Link to="/foodform" className="text-dark fw-bold text-decoration-none d-block" style={{ display: 'flex', alignItems: 'center' }}>
-                      <FaTachometerAlt size={20} className="me-2" /> {/* Font Awesome speedometer icon */}
-                      <span>Dashboard</span>
-                    </Link>
-                  </div>
-                  <div className="p-2 bg-light rounded" style={{ width: '80%', marginLeft: 'auto', marginRight: 'auto', marginTop: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <Link to="/foodform" className="text-dark fw-bold text-decoration-none d-block" style={{ display: 'flex', alignItems: 'center' }}>
-                      <BiDonateHeart size={20} className="me-2" /> {/* Donate icon */}
-                      <span>Donate</span>
-                    </Link>
-                  </div>
-                  <div className="p-2 bg-light rounded" style={{ width: '80%', marginLeft: 'auto', marginRight: 'auto', marginTop: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <Link to="/Historys" className="text-dark fw-bold text-decoration-none d-block" style={{ display: 'flex', alignItems: 'center' }}>
-                      <FontAwesomeIcon icon={faCircle} size="lg" className="me-2" /> {/* Font Awesome circle icon */}
-                      <span>Record</span>
-                    </Link>
-                  </div>
-                </div>
+            <div className="col-md-2 p-0">
+              <div className="bg-secondary text-light vh-100 d-flex flex-column align-items-center pt-3 rounded-end">
+                <img src={logo} alt="Food Share Network Logo" className="img-fluid mb-3" style={{ maxWidth: '80%' }} />
+                <Link to="/foodform" className="btn btn-light mb-3 w-75 d-flex align-items-center justify-content-center sidebar-link" style={{ marginTop: '20px' }}>
+                  <FaTachometerAlt size={20} className="me-2" />
+                  <span className="fw-bold">Dashboard</span>
+                </Link>
+                <Link to="/foodform" className="btn btn-light mb-3 w-75 d-flex align-items-center justify-content-center sidebar-link" style={{ marginTop: '20px' }}>
+                  <BiDonateHeart size={20} className="me-2" />
+                  <span className="fw-bold">Donate</span>
+                </Link>
+                <Link to="/Historys" className="btn btn-light mb-3 w-75 d-flex align-items-center justify-content-center sidebar-link" style={{ marginTop: '20px' }}>
+                  <FontAwesomeIcon icon={faCircle} size="lg" className="me-2" />
+                  <span className="fw-bold">Record</span>
+                </Link>
+                <Link to="/contact" className="btn btn-light mb-3 w-75 d-flex align-items-center justify-content-center sidebar-link" style={{ marginTop: '20px' }}>
+                  <FontAwesomeIcon icon={faEnvelope} size="lg" className="me-2" />
+                  <span className="fw-bold">Contact</span>
+                </Link>
+                <Link to="/about" className="btn btn-light mb-3 w-75 d-flex align-items-center justify-content-center sidebar-link" style={{ marginTop: '20px' }}>
+                  <FontAwesomeIcon icon={faInfoCircle} size="lg" className="me-2" />
+                  <span className="fw-bold">About</span>
+                </Link>
+                <Link to="/" onClick={handleLogout} className="btn btn-light mb-3 w-75 d-flex align-items-center justify-content-center sidebar-link" style={{ marginTop: '20px' }}>
+                  <FontAwesomeIcon icon={faSignOutAlt} size="lg" className="me-2" />
+                  <span className="fw-bold">Logout</span>
+                </Link>
               </div>
             </div>
-            {/* Main Content */}
             <div className="col-md-10">
-              <div className="header-image text-center">
-                <video
-                  autoPlay
-                  loop
-                  muted
-                  className="img-fluid"
-                  style={{ maxWidth: '100%', height: 'auto', marginTop: '50px' }}
-                >
-                  <source src={video} type="video/mp4"></source>
-                </video>
+              <div className="text-center position-relative mt-5">
+                <div className="position-relative">
+                  <video
+                    autoPlay
+                    loop
+                    muted
+                    className="img-fluid"
+                  >
+                    <source src={video} type="video/mp4"></source>
+                  </video>
+                  <div
+                    className="position-absolute w-100 h-100" style={{
+                      top: 0,
+                      left: 0,
+                      backgroundColor: 'rgba(0, 0, 0, 0.3)',
+                    }}
+                  ></div>
+                  <div className="position-absolute top-50 start-50 translate-middle text-white text-center">
+                    <h1 className="text-white fw-bold">Welcome to FoodShare Network!</h1>
+                    <p className="text-white fw-bold">WE MAKE A LIVING BY WHAT WE GET, BUT WE MAKE A LIFE BY WHAT WE GIVE...</p>
+                  </div>
+                </div>
                 <div className="header-overlay"></div>
               </div>
             </div>
@@ -61,10 +84,6 @@ const LandingPage = () => {
       <section id="features" className="section mt-5 mb-5">
         {/* Features section content */}
       </section>
-
-      <footer style={{ textAlign: 'center', paddingBottom: '20px' }}>
-        © 2024 FoodShare Network. All rights reserved.
-      </footer>
     </>
   );
 };

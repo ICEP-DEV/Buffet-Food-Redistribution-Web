@@ -1,25 +1,24 @@
 import React, { useState } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, InputGroup } from 'react-bootstrap';
 import Datetime from 'react-datetime';
 import 'react-datetime/css/react-datetime.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-//import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { FaUtensils, FaSortNumericUp, FaClipboard, FaClock, FaMapMarkerAlt } from 'react-icons/fa';
 import axios from 'axios';
 
-function FoodForm({ addFoodItem }) {
+function FoodForm() {
   const [itemName, setItemName] = useState('');
   const [itemQuantity, setItemQuantity] = useState('');
   const [itemDescription, setItemDescription] = useState('');
   const [timeCooked, setTimeCooked] = useState('');
-  const [address, setAddress] = useState(''); 
-  //const navigate = useNavigate();
+  const [address, setAddress] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const currentTime = new Date();
-    const timeDifference = Math.abs(currentTime - new Date(timeCooked)) / 36e5; // Calculate the time difference in hours
+    const timeDifference = Math.abs(currentTime - new Date(timeCooked)) / 36e5;
 
     if (
       itemName.trim() &&
@@ -28,25 +27,32 @@ function FoodForm({ addFoodItem }) {
       itemDescription.trim() &&
       (typeof timeCooked === 'string' ? timeCooked.trim() : timeCooked) &&
       timeCooked &&
-      timeDifference < 12 // Check if time cooked is less than 12 hours ago
+      address.trim() &&
+      timeDifference < 12
     ) {
       try {
-        const apiUrl = `http://localhost:5282/api/FoodItem/AddItem`;
+        const apiUrl = `http://localhost:5282/api/FoodItem`;
         const data = {
           ItemName: itemName,
           Quantity: itemQuantity,
           Description: itemDescription,
           DateCooked: timeCooked,
           Address: address
-          
-        }
-        const response = await axios.post(apiUrl,data);
+        };
+        const response = await axios.post(apiUrl, data);
 
         if (response.status === 200) {
+          // Save to local storage with a timestamp
+          const updatedFoodItems = JSON.parse(localStorage.getItem('foodItems')) || [];
+          updatedFoodItems.push({ name: itemName, quantity: itemQuantity, description: itemDescription, timeCooked: timeCooked, address: address, addedAt: new Date() });
+          localStorage.setItem('foodItems', JSON.stringify(updatedFoodItems));
+          
           setItemName('');
           setItemQuantity('');
           setItemDescription('');
           setTimeCooked('');
+          setAddress('');
+
           toast.success('Food item added successfully!');
         } else {
           toast.error('Error adding food item. Please try again later.');
@@ -60,78 +66,83 @@ function FoodForm({ addFoodItem }) {
     } else {
       toast.error('Please fill out all fields correctly.');
     }
-
-
   };
 
-      // Save updated food items to local storage
-      //const updatedFoodItems = JSON.parse(localStorage.getItem('foodItems')) || [];
-      //updatedFoodItems.push({ name: itemName, quantity: itemQuantity, description: itemDescription, timeCooked: timeCooked });
-      //localStorage.setItem('foodItems', JSON.stringify(updatedFoodItems));
-      
-      // Display success notification
-      //toast.success('You have successfully donated. Thank you!');
-
-          //  navigate('/menu');
-    
-  
-  
-
   return (
-    
-    <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh', backgroundColor: 'rgba(211,211,211,0.5)', padding: '20px' }}>
+    <div className="d-flex justify-content-center align-items-center vh-100" style={{ backgroundColor: 'rgba(211,211,211,0.5)', padding: '20px' }}>
       <div style={{ maxWidth: '600px', width: '100%' }}>
         <div className="text-center" style={{ backgroundColor: 'grey', padding: '20px', borderRadius: '10px' }}>
-          <h2>Donations</h2>
+          <h2>Donation</h2>
           <Form onSubmit={handleSubmit} className="mt-4">
-            <Form.Group controlId="foodType">
+            <Form.Group controlId="foodType" className="mb-3">
               <Form.Label><strong>Food Type</strong></Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter food type"
-                value={itemName}
-                onChange={(e) => setItemName(e.target.value)}
-                style={{ color: 'rgba(0, 0, 0, 1.5)' }} // Set placeholder color
-              />
+              <InputGroup className="border rounded">
+                <InputGroup.Text><FaUtensils /></InputGroup.Text>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter food type"
+                  value={itemName}
+                  onChange={(e) => setItemName(e.target.value)}
+                  style={{ color: 'rgba(0, 0, 0, 1.5)' }}
+                />
+              </InputGroup>
             </Form.Group>
-            <Form.Group controlId="quantity">
+            <Form.Group controlId="quantity" className="mb-3">
               <Form.Label><strong>Quantity</strong></Form.Label>
-              <Form.Control
-                type="number"
-                placeholder="Enter quantity"
-                value={itemQuantity}
-                onChange={(e) => setItemQuantity(e.target.value)}
-                min="0"
-                style={{ color: 'rgba(0, 0, 0, 1.5)' }} // Set placeholder color
-              />
+              <InputGroup className="border rounded">
+                <InputGroup.Text><FaSortNumericUp /></InputGroup.Text>
+                <Form.Control
+                  type="number"
+                  placeholder="Enter quantity"
+                  value={itemQuantity}
+                  onChange={(e) => setItemQuantity(e.target.value)}
+                  min="0"
+                  style={{ color: 'rgba(0, 0, 0, 1.5)' }}
+                />
+              </InputGroup>
             </Form.Group>
-            <Form.Group controlId="description">
+            <Form.Group controlId="description" className="mb-3">
               <Form.Label><strong>Description</strong></Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter food description"
-                value={itemDescription}
-                onChange={(e) => setItemDescription(e.target.value)}
-                style={{ color: 'rgba(0, 0, 0, 1.5)' }} // Set placeholder color
-              />
+              <InputGroup className="border rounded">
+                <InputGroup.Text><FaClipboard /></InputGroup.Text>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter food description"
+                  value={itemDescription}
+                  onChange={(e) => setItemDescription(e.target.value)}
+                  style={{ color: 'rgba(0, 0, 0, 1.5)' }}
+                />
+              </InputGroup>
             </Form.Group>
-            <Form.Group controlId="timeCooked">
+            <Form.Group controlId="timeCooked" className="mb-3">
               <Form.Label><strong>Time Cooked</strong></Form.Label>
-              <Datetime
-                value={timeCooked}
-                onChange={(date) => setTimeCooked(date)}
-                inputProps={{ style: { color: 'rgba(0, 0, 0, 1.5)' } }} // Set placeholder color
-              />
+              <InputGroup className="border rounded">
+                <InputGroup.Text><FaClock /></InputGroup.Text>
+                <Form.Control
+                  as={Datetime}
+                  value={timeCooked}
+                  onChange={(date) => setTimeCooked(date)}
+                  dateFormat="DD-MM-YYYY"
+                  timeFormat="HH:mm"
+                  inputProps={{
+                    placeholder: 'Enter time cooked', 
+                    style: { color: 'rgba(0, 0, 0, 1.5)' } 
+                  }}
+                />
+              </InputGroup>
             </Form.Group>
-            <Form.Group controlId="address">
+            <Form.Group controlId="address" className="mb-3">
               <Form.Label><strong>Physical Address</strong></Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter your address"
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-                style={{ color: 'rgba(0, 0, 0, 1.5)' }} // Set placeholder color
-              />
+              <InputGroup className="border rounded">
+                <InputGroup.Text><FaMapMarkerAlt /></InputGroup.Text>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter your address"
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
+                  style={{ color: 'rgba(0, 0, 0, 1.5)' }}
+                />
+              </InputGroup>
             </Form.Group>
             <Button type="submit" variant="dark" className="mt-3 btn-block btn-lg" style={{ width: '100%' }}>Add Item</Button>
           </Form>
