@@ -4,6 +4,9 @@ import { Routes, Route } from 'react-router-dom';
 import FoodForm from './FoodForm';
 // import Home from './pages/Home';
 import Historys from './Historys';
+import Donordashboard from '../Dashboard/Donordashboard';
+// import UserProfile from '../Dashboard/UserProfile';
+import ProfileApp from '../Dashboard/profileApp';
 
 
 const RoutesComponent = () => {
@@ -22,6 +25,8 @@ const RoutesComponent = () => {
             {/* <Route path='/' element={<Home />} /> */}
             <Route path='/foodform' element={<FoodForm addFoodItem={addFoodItem} />} />
             <Route path='/historys' element={<Historys foodItems={foodItems} />} />
+            <Route path ='/donordashboard' element={<Donordashboard/>}/> 
+            <Route path ='/ProfileApp' element={<ProfileApp/>}/> 
         </Routes>
     );
 };

@@ -14,6 +14,11 @@ import Login from './pages/Login';
 import RecepientSignUp from './pages/RecepientSignUp';
 import Routez from './Landing-page/routes';
 import LandingPage from './Landing-page/LandingPage';
+import FoodListing from './pages/FoodListing';
+import RecipientLandingPage from './Landing-page/RecipientLandingPage';
+import ProfileApp from './Dashboard/profileApp';
+import UserProfile from './Dashboard/UserProfile';
+
 
 // Create UserContext
 export const UserContext = createContext(null);
@@ -26,7 +31,36 @@ function App() {
     setUser(null);
     navigate('/');
   };
-
+  // const foodItems = [
+  //   {
+  //     ItemName: 'Pizza',
+  //     Quantity: 1,
+  //     Description: 'Delicious pizza with cheese and pepperoni toppings',
+  //     DateCooked: '2024-06-07',
+  //     Address: '123 Main St'
+  //   },
+  //   {
+  //     ItemName: 'Salad',
+  //     Quantity: 2,
+  //     Description: 'Fresh salad with mixed greens and vinaigrette dressing',
+  //     DateCooked: '2024-06-07',
+  //     Address: '456 Elm St'
+  //   },
+  //   {
+  //     ItemName: 'Salad',
+  //     Quantity: 2,
+  //     Description: 'Fresh salad with mixed greens and vinaigrette dressing',
+  //     DateCooked: '2024-06-07',
+  //     Address: '456 Elm St'
+  //   },
+  //   {
+  //     ItemName: 'Salad',
+  //     Quantity: 2,
+  //     Description: 'Fresh salad with mixed greens and vinaigrette dressing',
+  //     DateCooked: '2024-06-07',
+  //     Address: '456 Elm St'
+  //   }
+  // ];
   return (
     <UserContext.Provider value={{ user, setUser }}>
       <Navbar expand="lg" className='fixed-top bg-dark shadow'>
@@ -44,6 +78,7 @@ function App() {
                 <>
                   <Nav.Link as={Link} to='/about' className='active text-uppercase text-white'>About</Nav.Link>
                   <Nav.Link as={Link} to='/contact' className='active text-uppercase text-white'>Contact</Nav.Link>
+                  <Nav.Link as={Link} to='/login' className='active text-uppercase text-white'>Login</Nav.Link>
                 </>
               )}
               {!user ? (
@@ -75,6 +110,12 @@ function App() {
         <Route path='/signup' element={<SignUp />} />
         <Route path='/login' element={<Login />} />
         <Route path='/recepientsignup' element={<RecepientSignUp />} />
+        <Route path='/foodlisting' element={<FoodListing  />} />
+        <Route path='/RecipientLandingPage' element={<RecipientLandingPage />} />
+        <Route path='/profileApp' element={<profileApp />} />
+        <Route path='/UserProfile' element={<UserProfile />} />
+
+        
       </Routes>
       <Routez />
 
