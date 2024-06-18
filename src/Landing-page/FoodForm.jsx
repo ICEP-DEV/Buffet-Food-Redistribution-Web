@@ -15,6 +15,8 @@ function FoodForm() {
   const [timeCooked, setTimeCooked] = useState('');
   const [address, setAddress] = useState('');
 
+ const token = localStorage.getItem('token');
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const currentTime = new Date();
@@ -31,7 +33,7 @@ function FoodForm() {
       timeDifference < 12
     ) {
       try {
-        const apiUrl = `http://localhost:5282/api/FoodItem`;
+        const apiUrl = `http://localhost:5282/api/FoodDonation/populate`;
         const data = {
           ItemName: itemName,
           Quantity: itemQuantity,
@@ -39,7 +41,9 @@ function FoodForm() {
           DateCooked: timeCooked,
           Address: address
         };
-        const response = await axios.post(apiUrl, data);
+        const response = await axios.post(apiUrl, data,{
+          headers:{Authorization: `Bearer ${token}`}
+        });
 
         if (response.status === 200) {
           // Save to local storage with a timestamp
