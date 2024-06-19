@@ -27,10 +27,12 @@ const RecepientSignUp = () => {
       console.log('Sign up successful:', response.data);
 
       if (response.data.flag) {
-        toast.success(response.data.message);
+        toast.success(response.data.message, {
+          autoClose: 1000 // Set the autoClose duration to 1 second (1000 milliseconds)
+        });
         setTimeout(() => {
           navigate('/Login');
-        }, 5000);
+        }, 2000);
       } else {
         toast.warning(response.data.message);
       }
@@ -59,37 +61,37 @@ const RecepientSignUp = () => {
         >
           <h3 style={{ textAlign: 'center', margin: '0', lineHeight: '1', paddingBottom: '20px' }}>Sign Up</h3>
           <div className="mb-3">
-            <label style={{ fontWeight: 'bold' }}>Organisation name</label>
+            <label style={{ fontWeight: 'bold' }}><strong>Organisation name</strong></label>
             <input
               type="text"
               className="form-control"
               placeholder="Enter Organization name"
               value={name}
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => setName(e.target.value)}required
             />
           </div>
           <div className="mb-3">
-            <label style={{ fontWeight: 'bold' }}>Email address</label>
+            <label style={{ fontWeight: 'bold' }}><strong>Email address</strong></label>
             <input
               type="email"
               className="form-control"
               placeholder="Enter email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}required
             />
           </div>
           <div className="mb-3">
-            <label style={{ fontWeight: 'bold' }}>Telephone number</label>
+            <label style={{ fontWeight: 'bold' }}><strong>Telephone number</strong></label>
             <input
               type="tel"
               className="form-control"
               placeholder="Enter Telephone number"
               value={telephoneNumber}
-              onChange={(e) => setTelephoneNumber(e.target.value)}
+              onChange={(e) => setTelephoneNumber(e.target.value)}required
             />
           </div>
           <div>
-            <label style={{ fontWeight: 'bold' }}>Business Address</label>
+            <label style={{ fontWeight: 'bold' }}><strong>Business Address</strong></label>
             <div className="mb-3">
               <input
                 type="text"
@@ -103,7 +105,7 @@ const RecepientSignUp = () => {
             {/* Other address fields */}
           </div>
           <div className="mb-3">
-            <label style={{ fontWeight: 'bold' }}>Password</label>
+            <label style={{ fontWeight: 'bold' }}><strong>Password</strong></label>
             <input
               type="password"
               className="form-control"

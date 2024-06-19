@@ -16,9 +16,8 @@ import Routez from './Landing-page/routes';
 import LandingPage from './Landing-page/LandingPage';
 import FoodListing from './pages/FoodListing';
 import RecipientLandingPage from './Landing-page/RecipientLandingPage';
-import ProfileApp from './Dashboard/profileApp';
+// import ProfileApp from './Dashboard/profileApp';
 import UserProfile from './Dashboard/UserProfile';
-
 
 // Create UserContext
 export const UserContext = createContext(null);
@@ -31,36 +30,13 @@ function App() {
     setUser(null);
     navigate('/');
   };
-  // const foodItems = [
-  //   {
-  //     ItemName: 'Pizza',
-  //     Quantity: 1,
-  //     Description: 'Delicious pizza with cheese and pepperoni toppings',
-  //     DateCooked: '2024-06-07',
-  //     Address: '123 Main St'
-  //   },
-  //   {
-  //     ItemName: 'Salad',
-  //     Quantity: 2,
-  //     Description: 'Fresh salad with mixed greens and vinaigrette dressing',
-  //     DateCooked: '2024-06-07',
-  //     Address: '456 Elm St'
-  //   },
-  //   {
-  //     ItemName: 'Salad',
-  //     Quantity: 2,
-  //     Description: 'Fresh salad with mixed greens and vinaigrette dressing',
-  //     DateCooked: '2024-06-07',
-  //     Address: '456 Elm St'
-  //   },
-  //   {
-  //     ItemName: 'Salad',
-  //     Quantity: 2,
-  //     Description: 'Fresh salad with mixed greens and vinaigrette dressing',
-  //     DateCooked: '2024-06-07',
-  //     Address: '456 Elm St'
-  //   }
-  // ];
+
+  const loggedInButton = (
+    <Nav.Link as={Link} to='/home' className='active text-uppercase text-white'>
+      Landing Page
+    </Nav.Link>
+  );
+
   return (
     <UserContext.Provider value={{ user, setUser }}>
       <Navbar expand="lg" className='fixed-top bg-dark shadow'>
@@ -81,6 +57,7 @@ function App() {
                   <Nav.Link as={Link} to='/login' className='active text-uppercase text-white'>Login</Nav.Link>
                 </>
               )}
+              {user ? loggedInButton : null}
               {!user ? (
                 <DropdownButton title="SIGN UP" variant="outline-success" className="btn-lg">
                   <Dropdown.Item as={Link} to="/signup">As Donor</Dropdown.Item>
@@ -114,8 +91,6 @@ function App() {
         <Route path='/RecipientLandingPage' element={<RecipientLandingPage />} />
         <Route path='/profileApp' element={<profileApp />} />
         <Route path='/UserProfile' element={<UserProfile />} />
-
-        
       </Routes>
       <Routez />
 

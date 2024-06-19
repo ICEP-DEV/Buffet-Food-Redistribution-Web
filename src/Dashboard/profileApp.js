@@ -5,10 +5,10 @@ const ProfileApp = () => {
   // Initialize user data directly
   const initialUserData = {
     id: 1,
-    name: "John Doe",
-    email: "john@example.com",
+    name: "Mlando Sibiya",
+    email: "mlando@gmail.com",
     telephone: "123-456-7890",
-    address: "123 Main St",
+    address: "1711 BLOCK H",
     password: "password123"
   };
 
