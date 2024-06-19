@@ -1,13 +1,11 @@
-<<<<<<< HEAD
 
-=======
->>>>>>> 5487506f4e1b3dec433aeb3497534bb14593ddd7
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { UserContext } from '../App';
+
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -36,15 +34,17 @@ const Login = () => {
 
       if (result.data.flag) {
         toast.success(result.data.message);
+
         const prefixUsername = getPrefixUsername(email);
         setUser({ prefixUsername });
+
         setTimeout(() => {
           if (userType.toLowerCase() === 'recipient') {
             navigate('/RecipientLandingPage');
           } else {
             navigate('/home');
           }
-        }, 2000);
+        }, 5000);
       } else {
         toast.warning(result.data.message);
       }
@@ -64,44 +64,44 @@ const Login = () => {
 
   return (
     <div className="signup-container" style={{ height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', margin: 0 }}>
-      <ToastContainer autoClose={2000} />
+      <ToastContainer />
       <div className="signup">
         <form style={{ width: '450px', margin: 'auto', background: '#A9A9A9', boxShadow: '0px 14px 80px rgba(34, 35, 58, 0.2)', padding: '40px 55px 45px 55px', borderRadius: '15px', transition: 'all .3s' }} onSubmit={handleLogin}>
           <h3 style={{ textAlign: 'center', margin: '0', lineHeight: '1', paddingBottom: '20px' }}>Login</h3>
           <div>
-            <input className='align-items-center'
+            <input
               type="radio"
               name="userType"
               value="Recipient"
-              onChange={(e) => setUserType(e.target.value)}required
+              onChange={(e) => setUserType(e.target.value)}
             />{' '}
-            <strong>Recipient</strong>
+            Recipient
             <input
               type="radio"
               name="userType"
               value="Donor"
-              onChange={(e) => setUserType(e.target.value)}required
+              onChange={(e) => setUserType(e.target.value)}
             />{' '}
-            <strong>Donor</strong>
+            Donor
           </div>
           <div className="mb-3">
-            <label><strong>Email address</strong></label>
+            <label>Email address</label>
             <input
               type="email"
               className="form-control"
               placeholder="Enter email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}required
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div className="mb-3">
-            <label><strong>Password</strong></label>
+            <label>Password</label>
             <input
               type="password"
               className="form-control"
               placeholder="Enter password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}required
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
           <div className="mb-3">
@@ -111,17 +111,17 @@ const Login = () => {
                 className="custom-control-input"
                 id="customCheck1"
               />
-              <label className="custom-control-label" htmlFor="customCheck1" >
+              <label className="custom-control-label" htmlFor="customCheck1">
                 Remember me
               </label>
             </div>
           </div>
           <div className="d-grid">
-            <button type="submit" className="btn btn-dark" style={{ width: '100%' }} >
+            <button type="submit" className="btn btn-dark" style={{ width: '100%' }}>
               Submit
             </button>
           </div>
-          <p className="forgot-password text-right" style={{ paddingRight: '2rem' }}>
+          <p className="forgot-password text-right">
             Forgot <a href="#">password?</a>
           </p>
         </form>
@@ -131,3 +131,4 @@ const Login = () => {
 };
 
 export default Login;
+
