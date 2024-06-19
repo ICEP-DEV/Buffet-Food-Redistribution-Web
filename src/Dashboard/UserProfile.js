@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faEnvelope, faPhone, faMapMarker, faLock, faUserCircle, faTrash, faEdit, faSave } from '@fortawesome/free-solid-svg-icons';
 import 'bootstrap/dist/css/bootstrap.css';
+import axios from 'axios';
 
 const UserProfile = ({ userData, onEdit, onDelete }) => {
   const [editMode, setEditMode] = useState(false);
@@ -10,10 +11,32 @@ const UserProfile = ({ userData, onEdit, onDelete }) => {
   const handleEditClick = () => {
     setEditMode(true);
   };
+  const handleSaveClick = async () => {
+    try {
+      // Destructure 'password' from editedUserData to omit it from the request
+      const { password, ...userDataWithoutPassword } = editedUserData;
 
-  const handleSaveClick = () => {
-    setEditMode(false);
-    onEdit(editedUserData);
+      const token = localStorage.getItem('token'); // Retrieve token from localStorage
+
+      if (!token) {
+        throw new Error('No token available');
+      }
+
+      // Make PUT request to update user data, excluding 'password'
+      const response = await axios.put("http://localhost:5282/api/Donor", userDataWithoutPassword, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+
+      // Update user data locally with editedUserData upon successful edit
+      onEdit(editedUserData);
+      setEditMode(false);
+      console.log(response);
+    } catch (error) {
+      console.error('Error updating user:', error);
+      // Handle error (e.g., show error message)
+    }
   };
 
   const handleDeleteClick = () => {
@@ -43,7 +66,7 @@ const UserProfile = ({ userData, onEdit, onDelete }) => {
                     <div className="row mb-4">
                       <div className="col-md-3 d-flex align-items-center">
                         <FontAwesomeIcon icon={faUser} className="me-2" />
-                        <strong>Name:</strong>
+                        <strong>Name:{userData.donorName}</strong>
                       </div>
                       <div className="col-md-9 d-flex align-items-center">
                         <p className="mb-0">{userData.name}</p>
@@ -52,16 +75,16 @@ const UserProfile = ({ userData, onEdit, onDelete }) => {
                     <div className="row mb-4">
                       <div className="col-md-3 d-flex align-items-center ">
                         <FontAwesomeIcon icon={faEnvelope} className="me-2" />
-                        <strong>Email:</strong>
+                        <strong>Email:{userData.donorEmail}</strong>
                       </div>
                       <div className="col-md-9 d-flex align-items-center">
-                        <p className="mb-0">{userData.email}</p>
+                        <p className="mb-0"></p>
                       </div>
                     </div>
                     <div className="row mb-4">
                       <div className="col-md-3 d-flex align-items-center">
                         <FontAwesomeIcon icon={faPhone} className="me-2" />
-                        <strong>Telephone:</strong>
+                        <strong>Telephone:{userData.donorPhoneNum}</strong>
                       </div>
                       <div className="col-md-9 d-flex align-items-center">
                         <p className="mb-0">{userData.telephone}</p>
@@ -70,7 +93,7 @@ const UserProfile = ({ userData, onEdit, onDelete }) => {
                     <div className="row mb-4">
                       <div className="col-md-3 d-flex align-items-center">
                         <FontAwesomeIcon icon={faMapMarker} className="me-2" />
-                        <strong>Address:</strong>
+                        <strong>Address:{userData.donorAddress}</strong>
                       </div>
                       <div className="col-md-9 d-flex align-items-center">
                         <p className="mb-0">{userData.address}</p>
@@ -85,24 +108,21 @@ const UserProfile = ({ userData, onEdit, onDelete }) => {
                     <form>
                       <div className="mb-3">
                         <label className="form-label"><FontAwesomeIcon icon={faUser} /> Name</label>
-                        <input type="text" className="form-control" name="name" value={editedUserData.name} onChange={handleChange} />
+                        <input type="text" className="form-control" name="name" value={editedUserData.donorName} onChange={handleChange} />
                       </div>
                       <div className="mb-3">
                         <label className="form-label"><FontAwesomeIcon icon={faEnvelope} /> Email</label>
-                        <input type="email" className="form-control" name="email" value={editedUserData.email} onChange={handleChange} />
+                        <input type="email" className="form-control" name="email" value={editedUserData.donorEmail} onChange={handleChange} />
                       </div>
                       <div className="mb-3">
                         <label className="form-label"><FontAwesomeIcon icon={faPhone} /> Telephone</label>
-                        <input type="tel" className="form-control" name="telephone" value={editedUserData.telephone} onChange={handleChange} />
+                        <input type="tel" className="form-control" name="telephone" value={editedUserData.donorPhoneNum} onChange={handleChange} />
                       </div>
                       <div className="mb-3">
                         <label className="form-label"><FontAwesomeIcon icon={faMapMarker} /> Address</label>
-                        <input type="text" className="form-control" name="address" value={editedUserData.address} onChange={handleChange} />
+                        <input type="text" className="form-control" name="address" value={editedUserData.donorAddress} onChange={handleChange} />
                       </div>
-                      <div className="mb-3">
-                        <label className="form-label"><FontAwesomeIcon icon={faLock} /> Password</label>
-                        <input type="password" className="form-control" name="password" value={editedUserData.password} onChange={handleChange} />
-                      </div>
+                      
                       <div className="d-grid">
                         <button type="button" className="btn btn-primary" onClick={handleSaveClick}><FontAwesomeIcon icon={faSave} /> Save</button>
                       </div>
