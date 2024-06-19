@@ -3,6 +3,7 @@ import axios from 'axios';
 import UserProfile from './UserProfile';
 
 const ProfileApp = () => {
+<<<<<<< HEAD
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true); // Initialize loading as true
   const [error, setError] = useState(null);
@@ -36,6 +37,17 @@ const ProfileApp = () => {
     fetchUserProfile(); // Call fetchUserProfile function
 
   }, []); // Empty dependency array ensures this effect runs only once on component mount
+=======
+  // Initialize user data directly
+  const initialUserData = {
+    id: 1,
+    name: "Mlando Sibiya",
+    email: "mlando@gmail.com",
+    telephone: "123-456-7890",
+    address: "1711 BLOCK H",
+    password: "password123"
+  };
+>>>>>>> 5487506f4e1b3dec433aeb3497534bb14593ddd7
 
   const handleEdit = async (editedUserData) => {
     try {

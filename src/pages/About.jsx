@@ -8,13 +8,10 @@ import { Reviews } from '../components/Reviews';
 function About() {
     return (
         <div className='about-page'>
-            <header className='mt-5' style={{ backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url(../utils/img/img_logo.jpeg)', height: '50vh' }}>
-                <div className='container h-100 d-flex align-items-center justify-content-center'>
-                    <h1 className='text-light'></h1>
-                </div>
+            <header>
             </header>
-
-            <div className='container my-5'>
+                      <br />
+            <div className='container my-5 '>
                 <div className='container h-100 d-flex align-items-center font-color-black justify-content-center'>
                     <h1 className='text-dark'>About</h1>
                 </div>
@@ -28,10 +25,10 @@ function About() {
 
                 <div className='row'>
                     <div className='col-lg-6'>
-                        <img src={AboutChef1} className='img-fluid my-4' alt="" />
+                        <img src={AboutChef1} className='img-fluid my-4 vh-100' alt="" />
                     </div>
                     <div className='col-lg-6'>
-                        <img src={AboutChef2} className='img-fluid my-4' alt="" />
+                        <img src={AboutChef2} className='img-fluid my-4 vh-100' alt="" />
                     </div>
                 </div>
 

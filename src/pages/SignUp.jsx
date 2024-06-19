@@ -3,7 +3,6 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-
 const SignUp = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -25,12 +24,12 @@ const SignUp = () => {
 
       console.log('Sign up successful:', response.data);
       if (response.data.flag) {
-        toast.success(response.data.message);
+        toast.success(response.data.message, {
+          autoClose: 1000 // Set the autoClose duration to 1 second (1000 milliseconds)
+        });
         setTimeout(() => {
-          //window.location.reload();
-          // navigate('/Login');
           window.location.href = '/login';
-        }, 5000);
+        }, 2000);
       } else {
         toast.warning(response.data.message);
       }
@@ -58,54 +57,54 @@ const SignUp = () => {
         >
           <div className="mb-3">
             <h3 style={{ textAlign: 'center', margin: '0', lineHeight: '1', paddingBottom: '20px' }}>Sign Up</h3>
-            <label style={{ fontWeight: 'bold' }}>Name</label>
+            <label style={{ fontWeight: 'bold' }}><strong>Name</strong></label>
             <input
               type="text"
               className="form-control"
               placeholder="Enter Donor Name"
               value={name}
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => setName(e.target.value)} required
             />
           </div>
 
           <div className="mb-3">
-            <label style={{ fontWeight: 'bold' }}>Email Address</label>
+            <label style={{ fontWeight: 'bold' }}><strong>Email Address</strong></label>
             <input
               type="email"
               className="form-control"
               placeholder="Enter Email Address"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}required
             />
           </div>
           <div className="mb-3">
-            <label style={{ fontWeight: 'bold' }}>Telephone Number</label>
+            <label style={{ fontWeight: 'bold' }}><strong>Telephone Number</strong></label>
             <input
               type="tel"
               className="form-control"
               placeholder="Enter Telephone Number"
               value={telephoneNumber}
-              onChange={(e) => setTelephoneNumber(e.target.value)}
+              onChange={(e) => setTelephoneNumber(e.target.value)}required
             />
           </div>
           <div className="mb-3">
-            <label style={{ fontWeight: 'bold' }}>Physical Address</label>
+            <label style={{ fontWeight: 'bold' }}><strong>Physical Address</strong></label>
             <input
               type="text"
               className="form-control"
               placeholder="Enter Physical Address"
               value={address}
-              onChange={(e) => setAddress(e.target.value)}
+              onChange={(e) => setAddress(e.target.value)}required
             />
           </div>
           <div className="mb-3">
-            <label style={{ fontWeight: 'bold' }}>Password</label>
+            <label style={{ fontWeight: 'bold' }}><strong>Password</strong></label>
             <input
               type="password"
               className="form-control"
               placeholder="Enter password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}required
             />
           </div>
           <div className="d-grid">
@@ -116,6 +115,7 @@ const SignUp = () => {
           <p className="forgot-password text-right" style={{ textAlign: 'right' }}>
             Already registered? <a href="/login">Login</a>
           </p>
+          <p><a href="#" className=''>Terms Of Condition</a></p>
         </form>
       </div>
     </div>
@@ -123,4 +123,3 @@ const SignUp = () => {
 };
 
 export default SignUp;
-

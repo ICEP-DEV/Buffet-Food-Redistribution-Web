@@ -55,7 +55,7 @@ function History() {
                 <img src={item.image} alt="Food" style={{ maxWidth: '100%', height: 'auto', maxHeight: '150px' }} />
               </div>
             )}
-            <button className="btn btn-dark mt-3 mt-md-0 ml-md-3" onClick={() => handleRemove(index)}>Remove</button>
+            <button className="btn btn-danger mt-3 mt-md-0 ml-md-3" onClick={() => handleRemove(index)}>Remove</button>
           </div>
         ))}
       </div>

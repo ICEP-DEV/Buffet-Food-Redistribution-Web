@@ -9,7 +9,7 @@ import { faCircle, faInfoCircle, faEnvelope, faSignOutAlt } from '@fortawesome/f
 import { UserContext } from '../App';
 
 const LandingPage = () => {
-  const { setUser } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -89,4 +89,3 @@ const LandingPage = () => {
 };
 
 export default LandingPage;
-
