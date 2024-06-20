@@ -14,6 +14,8 @@ function FoodForm() {
   const [timeCooked, setTimeCooked] = useState('');
   const [address, setAddress] = useState('');
 
+ const token = localStorage.getItem('token');
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const currentTime = new Date();
@@ -30,7 +32,7 @@ function FoodForm() {
       timeDifference < 12
     ) {
       try {
-        const apiUrl = `http://localhost:5282/api/FoodItem`;
+        const apiUrl = `http://localhost:5282/api/FoodDonation/populate`;
         const data = {
           ItemName: itemName,
           Quantity: itemQuantity,
@@ -38,7 +40,9 @@ function FoodForm() {
           DateCooked: timeCooked,
           Address: address
         };
-        const response = await axios.post(apiUrl, data);
+        const response = await axios.post(apiUrl, data,{
+          headers:{Authorization: `Bearer ${token}`}
+        });
 
         if (response.status === 200) {
           // Save to local storage with a timestamp
@@ -68,7 +72,7 @@ function FoodForm() {
   };
 
   return (
-    <div className="mt-5 d-flex justify-content-center align-items-center vh-100" style={{ backgroundColor: 'rgba(211,211,211,0.5)', padding: '20px' }}>
+    <div className="d-flex justify-content-center align-items-center vh-100" style={{ backgroundColor: 'rgba(211,211,211,0.5)', padding: '20px' }}>
       <div style={{ maxWidth: '600px', width: '100%' }}>
         <div className="text-center" style={{ backgroundColor: 'grey', padding: '20px', borderRadius: '10px' }}>
           <h2>Donation</h2>
@@ -145,7 +149,7 @@ function FoodForm() {
             </Form.Group>
             <Button type="submit" variant="dark" className="mt-3 btn-block btn-lg" style={{ width: '100%' }}>Add Item</Button>
           </Form>
-          {/* <Link to="/historys" className="btn btn-primary mt-3">View Donations</Link> */}
+          <Link to="/historys" className="btn btn-primary mt-3">View Donations</Link>
         </div>
       </div>
       <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />

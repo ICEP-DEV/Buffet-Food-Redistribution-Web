@@ -8,6 +8,7 @@ import image5 from './images/5.jpg';
 import image6 from './images/6.jpg';
 
 export function ImageGallery() {
+<<<<<<< HEAD
   // Sample image URLs for demonstration
   const images = [
     image1,
@@ -29,6 +30,36 @@ export function ImageGallery() {
               <div className="card-body">
                 {/* Any additional content or text here */}
               </div>
+=======
+    return (
+        <div className="container py-5">
+            <h2 className="text-center fs-1 mb-5 text-uppercase fw-bold">Image Gallery</h2>
+            <div className="row">
+                <div className="col-md-4 px-2">
+                    <div className="my-3">
+                        <img src={Gallery1} className="img-fluid" alt="" />
+                    </div>
+                    <div className="my-3">
+                        <img src={Gallery2} className="img-fluid" alt="" />
+                    </div>
+                </div>
+                <div className="col-md-4 px-2">
+                    <div className="my-3">
+                        <img src={Gallery3} className="img-fluid" alt="" />
+                    </div>
+                    <div className="my-3">
+                        <img src={Gallery4} className="img-fluid" alt="" />
+                    </div>
+                </div>
+                <div className="col-md-4 px-2">
+                    <div className="my-3">
+                        <img src={Gallery5} className="img-fluid" alt="" />
+                    </div>
+                    <div className="my-3">
+                        <img src={Gallery6} className="img-fluid" alt="" />
+                    </div>
+                </div>
+>>>>>>> c9da272aad7276eff16ddc6c62494fa44a74cd6e
             </div>
           </div>
         ))}

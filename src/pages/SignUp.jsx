@@ -279,6 +279,7 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+
 const SignUp = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -326,12 +327,12 @@ const SignUp = () => {
 
       console.log('Sign up successful:', response.data);
       if (response.data.flag) {
-        toast.success(response.data.message, {
-          autoClose: 1000 // Set the autoClose duration to 1 second (1000 milliseconds)
-        });
+        toast.success(response.data.message);
         setTimeout(() => {
+          //window.location.reload();
+          // navigate('/Login');
           window.location.href = '/login';
-        }, 2000);
+        }, 5000);
       } else {
         toast.warning(response.data.message);
       }
@@ -359,53 +360,66 @@ const SignUp = () => {
         >
           <div className="mb-3">
             <h3 style={{ textAlign: 'center', margin: '0', lineHeight: '1', paddingBottom: '20px' }}>Sign Up</h3>
-            <label style={{ fontWeight: 'bold' }}><strong>Name</strong></label>
+            <label style={{ fontWeight: 'bold' }}>Name</label>
             <input
               type="text"
               className="form-control"
               placeholder="Enter Donor Name"
               value={name}
-              onChange={(e) => setName(e.target.value)} required
+              onChange={(e) => setName(e.target.value)}
             />
           </div>
 
           <div className="mb-3">
-            <label style={{ fontWeight: 'bold' }}><strong>Email Address</strong></label>
+            <label style={{ fontWeight: 'bold' }}>Email Address</label>
             <input
               type="email"
               className="form-control"
               placeholder="Enter Email Address"
               value={email}
+<<<<<<< HEAD
               onChange={(e) => setEmail(e.target.value)} required
+=======
+              onChange={(e) => setEmail(e.target.value)}
+>>>>>>> c9da272aad7276eff16ddc6c62494fa44a74cd6e
             />
           </div>
           <div className="mb-3">
-            <label style={{ fontWeight: 'bold' }}><strong>Telephone Number</strong></label>
+            <label style={{ fontWeight: 'bold' }}>Telephone Number</label>
             <input
               type="tel"
               className="form-control"
               placeholder="Enter Telephone Number"
               value={telephoneNumber}
+<<<<<<< HEAD
               onChange={(e) => setTelephoneNumber(e.target.value)} required
+=======
+              onChange={(e) => setTelephoneNumber(e.target.value)}
+>>>>>>> c9da272aad7276eff16ddc6c62494fa44a74cd6e
             />
           </div>
           <div className="mb-3">
-            <label style={{ fontWeight: 'bold' }}><strong>Physical Address</strong></label>
+            <label style={{ fontWeight: 'bold' }}>Physical Address</label>
             <input
               type="text"
               className="form-control"
               placeholder="Enter Physical Address"
               value={address}
+<<<<<<< HEAD
               onChange={(e) => setAddress(e.target.value)} required
+=======
+              onChange={(e) => setAddress(e.target.value)}
+>>>>>>> c9da272aad7276eff16ddc6c62494fa44a74cd6e
             />
           </div>
           <div className="mb-3">
-            <label style={{ fontWeight: 'bold' }}><strong>Password</strong></label>
+            <label style={{ fontWeight: 'bold' }}>Password</label>
             <input
               type="password"
               className="form-control"
               placeholder="Enter password"
               value={password}
+<<<<<<< HEAD
               onChange={(e) => setPassword(e.target.value)} required
             />
           </div>
@@ -417,6 +431,9 @@ const SignUp = () => {
               placeholder="Confirm password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)} required
+=======
+              onChange={(e) => setPassword(e.target.value)}
+>>>>>>> c9da272aad7276eff16ddc6c62494fa44a74cd6e
             />
           </div>
           <div className="d-grid">
@@ -427,7 +444,10 @@ const SignUp = () => {
           <p className="forgot-password text-right" style={{ textAlign: 'right' }}>
             Already registered? <a href="/login">Login</a>
           </p>
+<<<<<<< HEAD
           <p><a href="/Policies" className=''>Terms Of Conditionn</a></p>
+=======
+>>>>>>> c9da272aad7276eff16ddc6c62494fa44a74cd6e
         </form>
       </div>
     </div>
@@ -435,3 +455,4 @@ const SignUp = () => {
 };
 
 export default SignUp;
+

@@ -120,7 +120,12 @@ import Routez from './Landing-page/routes';
 import LandingPage from './Landing-page/LandingPage';
 import FoodListing from './pages/FoodListing';
 import RecipientLandingPage from './Landing-page/RecipientLandingPage';
+<<<<<<< HEAD
+=======
+import ProfileApp from './Dashboard/profileApp';
+>>>>>>> c9da272aad7276eff16ddc6c62494fa44a74cd6e
 import UserProfile from './Dashboard/UserProfile';
+
 
 // Create UserContext
 export const UserContext = createContext(null);
@@ -134,6 +139,7 @@ function App() {
     navigate('/');
   };
 
+<<<<<<< HEAD
   // const loggedInButton = user && user.userType === 'recipient' ? (
   //   <Nav.Link as={Link} to='/RecipientLandingPage' className='active text-uppercase text-white'>
   //     Landing Page
@@ -162,6 +168,8 @@ function App() {
   
   
 
+=======
+>>>>>>> c9da272aad7276eff16ddc6c62494fa44a74cd6e
   return (
     <UserContext.Provider value={{ user, setUser }}>
       <Navbar expand="lg" className='fixed-top bg-dark shadow'>
@@ -182,7 +190,6 @@ function App() {
                   <Nav.Link as={Link} to='/login' className='active text-uppercase text-white'>Login</Nav.Link>
                 </>
               )}
-              {user ? loggedInButton : null}
               {!user ? (
                 <DropdownButton title="SIGN UP" variant="outline-success" className="btn-lg">
                   <Dropdown.Item as={Link} to="/signup">As Donor</Dropdown.Item>
@@ -216,6 +223,8 @@ function App() {
         <Route path='/RecipientLandingPage' element={<RecipientLandingPage />} />
         <Route path='/profileApp' element={<profileApp />} />
         <Route path='/UserProfile' element={<UserProfile />} />
+
+        
       </Routes>
       <Routez />
 
