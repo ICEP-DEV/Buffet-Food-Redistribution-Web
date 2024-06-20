@@ -377,11 +377,7 @@ const SignUp = () => {
               className="form-control"
               placeholder="Enter Email Address"
               value={email}
-<<<<<<< HEAD
               onChange={(e) => setEmail(e.target.value)} required
-=======
-              onChange={(e) => setEmail(e.target.value)}
->>>>>>> c9da272aad7276eff16ddc6c62494fa44a74cd6e
             />
           </div>
           <div className="mb-3">
@@ -391,11 +387,7 @@ const SignUp = () => {
               className="form-control"
               placeholder="Enter Telephone Number"
               value={telephoneNumber}
-<<<<<<< HEAD
               onChange={(e) => setTelephoneNumber(e.target.value)} required
-=======
-              onChange={(e) => setTelephoneNumber(e.target.value)}
->>>>>>> c9da272aad7276eff16ddc6c62494fa44a74cd6e
             />
           </div>
           <div className="mb-3">
@@ -405,11 +397,7 @@ const SignUp = () => {
               className="form-control"
               placeholder="Enter Physical Address"
               value={address}
-<<<<<<< HEAD
               onChange={(e) => setAddress(e.target.value)} required
-=======
-              onChange={(e) => setAddress(e.target.value)}
->>>>>>> c9da272aad7276eff16ddc6c62494fa44a74cd6e
             />
           </div>
           <div className="mb-3">
@@ -419,7 +407,6 @@ const SignUp = () => {
               className="form-control"
               placeholder="Enter password"
               value={password}
-<<<<<<< HEAD
               onChange={(e) => setPassword(e.target.value)} required
             />
           </div>
@@ -431,9 +418,6 @@ const SignUp = () => {
               placeholder="Confirm password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)} required
-=======
-              onChange={(e) => setPassword(e.target.value)}
->>>>>>> c9da272aad7276eff16ddc6c62494fa44a74cd6e
             />
           </div>
           <div className="d-grid">
@@ -444,10 +428,7 @@ const SignUp = () => {
           <p className="forgot-password text-right" style={{ textAlign: 'right' }}>
             Already registered? <a href="/login">Login</a>
           </p>
-<<<<<<< HEAD
           <p><a href="/Policies" className=''>Terms Of Conditionn</a></p>
-=======
->>>>>>> c9da272aad7276eff16ddc6c62494fa44a74cd6e
         </form>
       </div>
     </div>

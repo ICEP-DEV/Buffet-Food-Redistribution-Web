@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 // import React, { useState, useContext } from 'react';
 // import axios from 'axios';
 // import { useNavigate } from 'react-router-dom';
@@ -123,8 +122,6 @@
 // };
 
 // export default Login;
-=======
->>>>>>> c9da272aad7276eff16ddc6c62494fa44a74cd6e
 
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
@@ -201,22 +198,14 @@ const Login = () => {
               type="radio"
               name="userType"
               value="Recipient"
-<<<<<<< HEAD
               onChange={(e) => setUserType(e.target.value)} required
-=======
-              onChange={(e) => setUserType(e.target.value)}
->>>>>>> c9da272aad7276eff16ddc6c62494fa44a74cd6e
             />{' '}
             Recipient
             <input
               type="radio"
               name="userType"
               value="Donor"
-<<<<<<< HEAD
               onChange={(e) => setUserType(e.target.value)} required
-=======
-              onChange={(e) => setUserType(e.target.value)}
->>>>>>> c9da272aad7276eff16ddc6c62494fa44a74cd6e
             />{' '}
             Donor
           </div>
@@ -227,11 +216,7 @@ const Login = () => {
               className="form-control"
               placeholder="Enter email"
               value={email}
-<<<<<<< HEAD
               onChange={(e) => setEmail(e.target.value)} required
-=======
-              onChange={(e) => setEmail(e.target.value)}
->>>>>>> c9da272aad7276eff16ddc6c62494fa44a74cd6e
             />
           </div>
           <div className="mb-3">
@@ -241,11 +226,7 @@ const Login = () => {
               className="form-control"
               placeholder="Enter password"
               value={password}
-<<<<<<< HEAD
               onChange={(e) => setPassword(e.target.value)} required
-=======
-              onChange={(e) => setPassword(e.target.value)}
->>>>>>> c9da272aad7276eff16ddc6c62494fa44a74cd6e
             />
           </div>
           <div className="mb-3">
