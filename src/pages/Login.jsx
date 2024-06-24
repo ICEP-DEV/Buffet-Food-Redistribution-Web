@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 // import React, { useState, useContext } from 'react';
 // import axios from 'axios';
 // import { useNavigate } from 'react-router-dom';
@@ -123,8 +122,6 @@
 // };
 
 // export default Login;
-=======
->>>>>>> c9da272aad7276eff16ddc6c62494fa44a74cd6e
 
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
@@ -132,7 +129,6 @@ import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { UserContext } from '../App';
-
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -147,7 +143,7 @@ const Login = () => {
     try {
       let result;
       if (userType.toLowerCase() === 'recipient') {
-         result = await axios.post('http://localhost:5282/api/Recipient/Login', {
+        result = await axios.post('http://localhost:5282/api/Recipient/Login', {
           RecipientEmail: email,
           password,
         });
@@ -158,12 +154,11 @@ const Login = () => {
         });
       }
       
-
       if (result.data.flag) {
         toast.success(result.data.message);
 
         const prefixUsername = getPrefixUsername(email);
-        setUser({ prefixUsername });
+        setUser({ prefixUsername, userType: userType.toLowerCase() });
 
         setTimeout(() => {
           if (userType.toLowerCase() === 'recipient') {
@@ -171,18 +166,17 @@ const Login = () => {
           } else {
             navigate('/home');
           }
-        }, 5000);
+        }, 2000);
       } else {
         toast.warning(result.data.message);
       }
       const token = result.data.token;
       localStorage.setItem('token', token);
-      console.log(token)
+      console.log(token);
     } catch (error) {
       console.error('Login failed:', error.response);
       toast.error('Login failed. Please check your credentials.');
     }
-    
   };
 
   const getPrefixUsername = (email) => {
@@ -192,7 +186,7 @@ const Login = () => {
 
   return (
     <div className="signup-container" style={{ height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', margin: 0 }}>
-      <ToastContainer />
+      <ToastContainer autoClose={2000} />
       <div className="signup">
         <form style={{ width: '450px', margin: 'auto', background: '#A9A9A9', boxShadow: '0px 14px 80px rgba(34, 35, 58, 0.2)', padding: '40px 55px 45px 55px', borderRadius: '15px', transition: 'all .3s' }} onSubmit={handleLogin}>
           <h3 style={{ textAlign: 'center', margin: '0', lineHeight: '1', paddingBottom: '20px' }}>Login</h3>
@@ -201,51 +195,35 @@ const Login = () => {
               type="radio"
               name="userType"
               value="Recipient"
-<<<<<<< HEAD
               onChange={(e) => setUserType(e.target.value)} required
-=======
-              onChange={(e) => setUserType(e.target.value)}
->>>>>>> c9da272aad7276eff16ddc6c62494fa44a74cd6e
             />{' '}
             Recipient
             <input
               type="radio"
               name="userType"
               value="Donor"
-<<<<<<< HEAD
               onChange={(e) => setUserType(e.target.value)} required
-=======
-              onChange={(e) => setUserType(e.target.value)}
->>>>>>> c9da272aad7276eff16ddc6c62494fa44a74cd6e
             />{' '}
             Donor
           </div>
           <div className="mb-3">
-            <label>Email address</label>
+            <label className="fw-bold">Email address</label>
             <input
               type="email"
               className="form-control"
               placeholder="Enter email"
               value={email}
-<<<<<<< HEAD
               onChange={(e) => setEmail(e.target.value)} required
-=======
-              onChange={(e) => setEmail(e.target.value)}
->>>>>>> c9da272aad7276eff16ddc6c62494fa44a74cd6e
             />
           </div>
           <div className="mb-3">
-            <label>Password</label>
+            <label className="fw-bold">Password</label>
             <input
               type="password"
               className="form-control"
               placeholder="Enter password"
               value={password}
-<<<<<<< HEAD
               onChange={(e) => setPassword(e.target.value)} required
-=======
-              onChange={(e) => setPassword(e.target.value)}
->>>>>>> c9da272aad7276eff16ddc6c62494fa44a74cd6e
             />
           </div>
           <div className="mb-3">
@@ -255,7 +233,7 @@ const Login = () => {
                 className="custom-control-input"
                 id="customCheck1"
               />
-              <label className="custom-control-label" htmlFor="customCheck1">
+              <label className="custom-control-label fw-bold" htmlFor="customCheck1">
                 Remember me
               </label>
             </div>
@@ -265,7 +243,7 @@ const Login = () => {
               Submit
             </button>
           </div>
-          <p className="forgot-password text-right">
+          <p className="forgot-password text-right" style={{ textAlign: 'right' }}>
             Forgot <a href="#">password?</a>
           </p>
         </form>
@@ -275,4 +253,5 @@ const Login = () => {
 };
 
 export default Login;
+
 

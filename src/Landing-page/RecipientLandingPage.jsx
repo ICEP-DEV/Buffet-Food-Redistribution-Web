@@ -97,9 +97,11 @@ import { FaTachometerAlt } from 'react-icons/fa';
 import { BiDonateHeart } from 'react-icons/bi';
 import { RiRestaurantLine } from 'react-icons/ri';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircle, faInfoCircle, faEnvelope, faSignOutAlt,faUser } from '@fortawesome/free-solid-svg-icons';
+import { faCircle, faInfoCircle, faEnvelope, faSignOutAlt, faUser } from '@fortawesome/free-solid-svg-icons';
 import { UserContext } from '../App';
 import ProfileApp from '../Dashboard/profileApp';
+import Typewriter from 'typewriter-effect'; // Importing Typewriter component
+
 const LandingPage = () => {
   const { setUser } = useContext(UserContext);
   const navigate = useNavigate();
@@ -118,13 +120,10 @@ const LandingPage = () => {
               <div className="bg-secondary text-light vh-100 d-flex flex-column align-items-center pt-3 rounded-end">
                 <img src={logo} alt="Food Share Network Logo" className="img-fluid mb-3" style={{ maxWidth: '80%' }} />
 
-
                 <Link to="/profileApp" className="btn btn-light mb-3 w-75 d-flex align-items-center justify-content-center sidebar-link" style={{ marginTop: '20px' }}>
-                    <FontAwesomeIcon icon={faUser} className="me-2" />
-                      <span className="fw-bold">Profile</span>
+                  <FontAwesomeIcon icon={faUser} className="me-2" />
+                  <span className="fw-bold">Profile</span>
                 </Link>
-               
-
 
                 <Link to="/foodlisting" className="btn btn-light mb-3 w-75 d-flex align-items-center justify-content-center sidebar-link" style={{ marginTop: '20px' }}>
                   <RiRestaurantLine size={20} className="me-2" />
@@ -156,8 +155,24 @@ const LandingPage = () => {
                   </video>
                   <div className="position-absolute w-100 h-100" style={{ top: 0, left: 0, backgroundColor: 'rgba(0, 0, 0, 0.3)' }}></div>
                   <div className="position-absolute top-50 start-50 translate-middle text-white text-center">
-                    <h1 className="text-white fw-bold">Welcome to FoodShare Network!</h1>
-                    <p className="text-white fw-bold">WE MAKE A LIVING BY WHAT WE GET, BUT WE MAKE A LIFE BY WHAT WE GIVE...</p>
+                    <h1 className="text-white fw-bold">
+                      <Typewriter
+                        options={{
+                          strings: ['Welcome to FoodShare Network!'],
+                          autoStart: true,
+                          loop: true,
+                        }}
+                      />
+                    </h1>
+                    <p className="text-white fw-bold">
+                      <Typewriter
+                        options={{
+                          strings: ['WE MAKE A LIVING BY WHAT WE GET, BUT WE MAKE A LIFE BY WHAT WE GIVE...'],
+                          autoStart: true,
+                          loop: true,
+                        }}
+                      />
+                    </p>
                   </div>
                 </div>
                 <div className="header-overlay"></div>
@@ -175,4 +190,5 @@ const LandingPage = () => {
 };
 
 export default LandingPage;
+
 

@@ -6,6 +6,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FaUtensils, FaSortNumericUp, FaClipboard, FaClock, FaMapMarkerAlt } from 'react-icons/fa';
 import axios from 'axios';
+import TermsModal from './TermsModal'; // Import the TermsModal component
 
 function FoodForm() {
   const [itemName, setItemName] = useState('');
@@ -13,13 +14,27 @@ function FoodForm() {
   const [itemDescription, setItemDescription] = useState('');
   const [timeCooked, setTimeCooked] = useState('');
   const [address, setAddress] = useState('');
-
- const token = localStorage.getItem('token');
+  const [agreedToTerms, setAgreedToTerms] = useState(false); // State for terms checkbox
+  const [showTermsModal, setShowTermsModal] = useState(false); // State for showing the modal
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const currentTime = new Date();
-    const timeDifference = Math.abs(currentTime - new Date(timeCooked)) / 36e5;
+    const donationTime = new Date(); // Capture the exact donation time
+    const cookedTime = new Date(timeCooked); // Convert timeCooked to a Date object
+
+    // Check if the cooked time is in the future
+    if (cookedTime > donationTime) {
+      toast.error('You cannot select a future date for time cooked.');
+      return;
+    }
+
+    const timeDifference = (donationTime - cookedTime) / (1000 * 60 * 60); // Difference in hours
+
+    // Check if the cooked time is 12 or more hours ago
+    if (timeDifference >= 12) {
+      toast.error('You cannot donate food that was cooked 12 or more hours ago.');
+      return;
+    }
 
     if (
       itemName.trim() &&
@@ -29,32 +44,40 @@ function FoodForm() {
       (typeof timeCooked === 'string' ? timeCooked.trim() : timeCooked) &&
       timeCooked &&
       address.trim() &&
-      timeDifference < 12
+      agreedToTerms // Ensure the terms are agreed to
     ) {
       try {
-        const apiUrl = `http://localhost:5282/api/FoodDonation/populate`;
+        const apiUrl = `http://localhost:5282/api/FoodItem`;
         const data = {
           ItemName: itemName,
           Quantity: itemQuantity,
           Description: itemDescription,
           DateCooked: timeCooked,
-          Address: address
+          Address: address,
+          DonationTime: donationTime // Send the donation time to the backend
         };
-        const response = await axios.post(apiUrl, data,{
-          headers:{Authorization: `Bearer ${token}`}
-        });
+        const response = await axios.post(apiUrl, data);
 
         if (response.status === 200) {
-          // Save to local storage with a timestamp
-          const updatedFoodItems = JSON.parse(localStorage.getItem('foodItems')) || [];
-          updatedFoodItems.push({ name: itemName, quantity: itemQuantity, description: itemDescription, timeCooked: timeCooked, address: address, addedAt: new Date() });
+          // Store item in local storage
+          const storedFoodItems = JSON.parse(localStorage.getItem('foodItems')) || [];
+          const newItem = {
+            name: itemName,
+            quantity: itemQuantity,
+            description: itemDescription,
+            timeCooked,
+            address,
+            addedAt: donationTime
+          };
+          const updatedFoodItems = [...storedFoodItems, newItem];
           localStorage.setItem('foodItems', JSON.stringify(updatedFoodItems));
-          
+
           setItemName('');
           setItemQuantity('');
           setItemDescription('');
           setTimeCooked('');
           setAddress('');
+          setAgreedToTerms(false); // Reset the terms checkbox
 
           toast.success('Food item added successfully!');
         } else {
@@ -64,15 +87,13 @@ function FoodForm() {
         console.error('Error:', error);
         toast.error('Network error. Please check your internet connection.');
       }
-    } else if (timeDifference >= 12) {
-      toast.error('Unfortunately, you cannot donate food that was prepared 12 or more hours ago!');
     } else {
       toast.error('Please fill out all fields correctly.');
     }
   };
 
   return (
-    <div className="d-flex justify-content-center align-items-center vh-100" style={{ backgroundColor: 'rgba(211,211,211,0.5)', padding: '20px' }}>
+    <div className="mt-5 d-flex justify-content-center align-items-center vh-100" style={{ backgroundColor: 'rgba(211,211,211,0.5)', padding: '20px' }}>
       <div style={{ maxWidth: '600px', width: '100%' }}>
         <div className="text-center" style={{ backgroundColor: 'grey', padding: '20px', borderRadius: '10px' }}>
           <h2>Donation</h2>
@@ -128,8 +149,8 @@ function FoodForm() {
                   dateFormat="DD-MM-YYYY"
                   timeFormat="HH:mm"
                   inputProps={{
-                    placeholder: 'Enter time cooked', 
-                    style: { color: 'rgba(0, 0, 0, 1.5)' } 
+                    placeholder: 'Enter time cooked',
+                    style: { color: 'rgba(0, 0, 0, 1.5)' }
                   }}
                 />
               </InputGroup>
@@ -147,12 +168,22 @@ function FoodForm() {
                 />
               </InputGroup>
             </Form.Group>
-            <Button type="submit" variant="dark" className="mt-3 btn-block btn-lg" style={{ width: '100%' }}>Add Item</Button>
+            <Form.Group controlId="terms" className="mb-3">
+              <Form.Check 
+                type="checkbox" 
+                label={<span>I agree to the <a href="#" onClick={() => setShowTermsModal(true)}>terms and conditions</a></span>} 
+                checked={agreedToTerms}
+                onChange={(e) => setAgreedToTerms(e.target.checked)}
+              />
+            </Form.Group>
+            <Button type="submit" variant="dark" className="mt-3 btn-block btn-lg" style={{ width: '100%' }} disabled={!agreedToTerms}>
+              Add Item
+            </Button>
           </Form>
-          <Link to="/historys" className="btn btn-primary mt-3">View Donations</Link>
         </div>
       </div>
       <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
+      <TermsModal show={showTermsModal} handleClose={() => setShowTermsModal(false)} />
     </div>
   );
 }
