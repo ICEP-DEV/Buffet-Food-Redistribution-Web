@@ -6,6 +6,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FaUtensils, FaSortNumericUp, FaClipboard, FaClock, FaMapMarkerAlt } from 'react-icons/fa';
 import axios from 'axios';
+import {Link} from 'react-router-dom';
 import TermsModal from './TermsModal'; // Import the TermsModal component
 
 function FoodForm() {

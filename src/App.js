@@ -16,6 +16,7 @@ import Routez from './Landing-page/routes';
 import LandingPage from './Landing-page/LandingPage';
 import FoodListing from './pages/FoodListing';
 import RecipientLandingPage from './Landing-page/RecipientLandingPage';
+import ProfileApp from './Dashboard/profileApp';
 import UserProfile from './Dashboard/UserProfile';
 
 // Create UserContext
