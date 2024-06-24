@@ -122,7 +122,9 @@ import FoodListing from './pages/FoodListing';
 import RecipientLandingPage from './Landing-page/RecipientLandingPage';
 import ProfileApp from './Dashboard/profileApp';
 import UserProfile from './Dashboard/UserProfile';
-
+import AdminApp from './AdminDashboard/AdminApp';
+import AdminDash from './AdminDashboard/AdminDash';
+import AdminLogin from './AdminDashboard/components/AdminLogin';
 
 // Create UserContext
 export const UserContext = createContext(null);
@@ -182,6 +184,8 @@ function App() {
                   <Nav.Link as={Link} to='/about' className='active text-uppercase text-white'>About</Nav.Link>
                   <Nav.Link as={Link} to='/contact' className='active text-uppercase text-white'>Contact</Nav.Link>
                   <Nav.Link as={Link} to='/login' className='active text-uppercase text-white'>Login</Nav.Link>
+                  <Nav.Link as={Link} to='/AdminLogin' className='active text-uppercase text-white'>AdminLogin</Nav.Link>
+                 
                 </>
               )}
               {!user ? (
@@ -217,10 +221,13 @@ function App() {
         <Route path='/RecipientLandingPage' element={<RecipientLandingPage />} />
         <Route path='/profileApp' element={<profileApp />} />
         <Route path='/UserProfile' element={<UserProfile />} />
+        <Route path='/AdminLogin' element={<AdminLogin />} />
+       
 
         
       </Routes>
       <Routez />
+     
 
       <footer className='bg-dark text-white fixed-bottom mt-5'>
         <p className='p-3 m-0 text-center'>copyright @ made by Food Share Network</p>
