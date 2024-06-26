@@ -122,6 +122,7 @@ import FoodListing from './pages/FoodListing';
 import RecipientLandingPage from './Landing-page/RecipientLandingPage';
 import ProfileApp from './Dashboard/profileApp';
 import UserProfile from './Dashboard/UserProfile';
+import './App.css'
 
 
 // Create UserContext
