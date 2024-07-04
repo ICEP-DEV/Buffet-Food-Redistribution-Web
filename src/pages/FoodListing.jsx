@@ -2,30 +2,40 @@ import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUtensils } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import {  acceptRequest, declineRequest} from '../Redux/actions';
+
 
 function FoodListing() {
   const [foodItems, setFoodItems] = useState([]);
   const [requestedItems, setRequestedItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  
+  //var response = axios.get('http://localhost:5282/api/FoodItem')
   useEffect(() => {
-    // Fetch data from the API endpoint
-    axios.get('http://localhost:5282/api/FoodItem')
-      .then(response => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://localhost:5282/api/FoodItem');
         setFoodItems(response.data);
         setLoading(false);
-        console.log(response);
-      })
-      .catch(error => {
+        //console.log(response);
+      } catch (error) {
         console.error('Error fetching data:', error);
         setLoading(false);
-      });
+      }
+    };
+
+    fetchData();
   }, []);
+
+  console.log(foodItems);
 
   const handleRequest = (itemId) => {
     const selectedItem = foodItems.find(item => item.id === itemId);
     if (selectedItem) {
+      
+      const api = `http://localhost:5282/api/Email/DonorMail?email=${selectedItem.contactInfo}`
+      axios.post(api);
       alert(`Request for ${selectedItem.itemName} sent!`);
       setRequestedItems([...requestedItems, selectedItem]);
     }
@@ -64,5 +74,8 @@ function FoodListing() {
     </div>
   );
 }
+const mapStateToProps = state => ({
+  requests: state.requests,
+});
 
-export default FoodListing;
+export default connect(mapStateToProps, {acceptRequest, declineRequest })(FoodListing);

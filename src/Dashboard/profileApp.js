@@ -17,7 +17,6 @@ const ProfileApp = () => {
         setLoading(false);
         return; // Exit early if token is not available
       }
-
       try {
         const response = await axios.get("http://localhost:5282/api/Donor/DonorProfile", {
           headers: {
