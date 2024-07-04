@@ -104,11 +104,23 @@ const SignUp = () => {
               className="form-control"
               placeholder="Enter Email Address"
               value={email}
+<<<<<<< HEAD
 
+||||||| 106bd1d
+<<<<<<< HEAD
+=======
+>>>>>>> ca696f3eebfa85fc23fa7e10adb56f2fad5e56bb
               onChange={(e) => setEmail(e.target.value)} required
+<<<<<<< HEAD
 
              
 
+||||||| 106bd1d
+=======
+              onChange={(e) => setEmail(e.target.value)}
+>>>>>>> c9da272aad7276eff16ddc6c62494fa44a74cd6e
+=======
+>>>>>>> ca696f3eebfa85fc23fa7e10adb56f2fad5e56bb
             />
           </div>
           <div className="mb-3">
@@ -118,11 +130,23 @@ const SignUp = () => {
               className="form-control"
               placeholder="Enter Telephone Number"
               value={telephoneNumber}
+<<<<<<< HEAD
 
+||||||| 106bd1d
+<<<<<<< HEAD
+=======
+>>>>>>> ca696f3eebfa85fc23fa7e10adb56f2fad5e56bb
               onChange={(e) => setTelephoneNumber(e.target.value)} required
+<<<<<<< HEAD
 
             
 
+||||||| 106bd1d
+=======
+              onChange={(e) => setTelephoneNumber(e.target.value)}
+>>>>>>> c9da272aad7276eff16ddc6c62494fa44a74cd6e
+=======
+>>>>>>> ca696f3eebfa85fc23fa7e10adb56f2fad5e56bb
             />
           </div>
           <div className="mb-3">
@@ -132,11 +156,23 @@ const SignUp = () => {
               className="form-control"
               placeholder="Enter Physical Address"
               value={address}
+<<<<<<< HEAD
 
+||||||| 106bd1d
+<<<<<<< HEAD
+=======
+>>>>>>> ca696f3eebfa85fc23fa7e10adb56f2fad5e56bb
               onChange={(e) => setAddress(e.target.value)} required
+<<<<<<< HEAD
 
               
 
+||||||| 106bd1d
+=======
+              onChange={(e) => setAddress(e.target.value)}
+>>>>>>> c9da272aad7276eff16ddc6c62494fa44a74cd6e
+=======
+>>>>>>> ca696f3eebfa85fc23fa7e10adb56f2fad5e56bb
             />
           </div>
           <div className="mb-3">
@@ -167,10 +203,21 @@ const SignUp = () => {
           <p className="forgot-password text-right" style={{ textAlign: 'right' }}>
             Already registered? <a href="/login">Login</a>
           </p>
+<<<<<<< HEAD
 
+||||||| 106bd1d
+<<<<<<< HEAD
+=======
+>>>>>>> ca696f3eebfa85fc23fa7e10adb56f2fad5e56bb
           <p><a href="/Policies" className=''>Terms Of Conditionn</a></p>
+<<<<<<< HEAD
 
 
+||||||| 106bd1d
+=======
+>>>>>>> c9da272aad7276eff16ddc6c62494fa44a74cd6e
+=======
+>>>>>>> ca696f3eebfa85fc23fa7e10adb56f2fad5e56bb
         </form>
       </div>
     </div>

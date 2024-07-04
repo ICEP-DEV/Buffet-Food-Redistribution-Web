@@ -8,7 +8,12 @@ import image5 from './images/5.jpg';
 import image6 from './images/6.jpg';
 
 export function ImageGallery() {
+<<<<<<< HEAD
 
+||||||| 106bd1d
+<<<<<<< HEAD
+=======
+>>>>>>> ca696f3eebfa85fc23fa7e10adb56f2fad5e56bb
   // Sample image URLs for demonstration
   const images = [
     image1,

@@ -33,8 +33,33 @@ function App() {
     navigate('/');
   };
 
+<<<<<<< HEAD
   // Conditional rendering for logged in user buttons
   const loggedInButtons = user ? (
+||||||| 106bd1d
+<<<<<<< HEAD
+  // const loggedInButton = user && user.userType === 'recipient' ? (
+  //   <Nav.Link as={Link} to='/RecipientLandingPage' className='active text-uppercase text-white'>
+  //     Landing Page
+  //   </Nav.Link>
+  // ) : (
+  //   <Nav.Link as={Link} to='/LandingPage' className='active text-uppercase text-white'>
+  //     Landing Page
+  //   </Nav.Link>
+  // );
+  const loggedInButton = user ? (
+=======
+  // const loggedInButton = user && user.userType === 'recipient' ? (
+  //   <Nav.Link as={Link} to='/RecipientLandingPage' className='active text-uppercase text-white'>
+  //     Landing Page
+  //   </Nav.Link>
+  // ) : (
+  //   <Nav.Link as={Link} to='/LandingPage' className='active text-uppercase text-white'>
+  //     Landing Page
+  //   </Nav.Link>
+  // );
+  const loggedInButton = user ? (
+>>>>>>> ca696f3eebfa85fc23fa7e10adb56f2fad5e56bb
     <>
       {user.userType === 'recipient' && (
         <Nav.Link as={Link} to='/RecipientLandingPage' className='active text-uppercase text-white'>
