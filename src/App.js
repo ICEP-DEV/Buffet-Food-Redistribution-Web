@@ -1,4 +1,3 @@
-
 import React, { useState, createContext } from 'react';
 import { Link, Routes, Route, useNavigate } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
@@ -33,41 +32,15 @@ function App() {
     navigate('/');
   };
 
-<<<<<<< HEAD
-  // Conditional rendering for logged in user buttons
   const loggedInButtons = user ? (
-||||||| 106bd1d
-<<<<<<< HEAD
-  // const loggedInButton = user && user.userType === 'recipient' ? (
-  //   <Nav.Link as={Link} to='/RecipientLandingPage' className='active text-uppercase text-white'>
-  //     Landing Page
-  //   </Nav.Link>
-  // ) : (
-  //   <Nav.Link as={Link} to='/LandingPage' className='active text-uppercase text-white'>
-  //     Landing Page
-  //   </Nav.Link>
-  // );
-  const loggedInButton = user ? (
-=======
-  // const loggedInButton = user && user.userType === 'recipient' ? (
-  //   <Nav.Link as={Link} to='/RecipientLandingPage' className='active text-uppercase text-white'>
-  //     Landing Page
-  //   </Nav.Link>
-  // ) : (
-  //   <Nav.Link as={Link} to='/LandingPage' className='active text-uppercase text-white'>
-  //     Landing Page
-  //   </Nav.Link>
-  // );
-  const loggedInButton = user ? (
->>>>>>> ca696f3eebfa85fc23fa7e10adb56f2fad5e56bb
     <>
       {user.userType === 'recipient' && (
-        <Nav.Link as={Link} to='/RecipientLandingPage' className='active text-uppercase text-white'>
+        <Nav.Link as={Link} to='/RecipientLandingPage' className='text-uppercase text-white'>
           Landing Page (Recipient)
         </Nav.Link>
       )}
       {user.userType === 'donor' && (
-        <Nav.Link as={Link} to='/home' className='active text-uppercase text-white'>
+        <Nav.Link as={Link} to='/home' className='text-uppercase text-white'>
           Landing Page (Donor)
         </Nav.Link>
       )}
@@ -86,12 +59,12 @@ function App() {
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
             <Nav className='me-auto justify-content-end w-100 fw-normal'>
-              <Nav.Link as={Link} to='/' className='active text-uppercase text-white'>Home</Nav.Link>
+              <Nav.Link as={Link} to='/' className='text-uppercase text-white'>Home</Nav.Link>
               {!user && (
                 <>
-                  <Nav.Link as={Link} to='/about' className='active text-uppercase text-white'>About</Nav.Link>
-                  <Nav.Link as={Link} to='/contact' className='active text-uppercase text-white'>Contact</Nav.Link>
-                  <Nav.Link as={Link} to='/login' className='active text-uppercase text-white'>Login</Nav.Link>
+                  <Nav.Link as={Link} to='/about' className='text-uppercase text-white'>About</Nav.Link>
+                  <Nav.Link as={Link} to='/contact' className='text-uppercase text-white'>Contact</Nav.Link>
+                  <Nav.Link as={Link} to='/login' className='text-uppercase text-white'>Login</Nav.Link>
                 </>
               )}
               {!user ? (
@@ -141,4 +114,3 @@ function App() {
 }
 
 export default App;
-
