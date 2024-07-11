@@ -15,6 +15,7 @@ function FoodForm() {
   const [itemDescription, setItemDescription] = useState('');
   const [timeCooked, setTimeCooked] = useState('');
   const [address, setAddress] = useState('');
+  const [contact,setContact] = useState();
 
  const token = localStorage.getItem('token');
 
@@ -145,6 +146,19 @@ function FoodForm() {
                   placeholder="Enter your address"
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
+                  style={{ color: 'rgba(0, 0, 0, 1.5)' }}
+                />
+              </InputGroup>
+            </Form.Group>
+            <Form.Group controlId="address" className="mb-3">
+              <Form.Label><strong>Contact Information</strong></Form.Label>
+              <InputGroup className="border rounded">
+                <InputGroup.Text><FaMapMarkerAlt /></InputGroup.Text>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter your contact information"
+                  value={contact}
+                  onChange={(e) => setContact(e.target.value)}
                   style={{ color: 'rgba(0, 0, 0, 1.5)' }}
                 />
               </InputGroup>

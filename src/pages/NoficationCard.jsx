@@ -1,35 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { acceptRequest, declineRequest } from '../Redux/actions';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useParams } from 'react-router-dom';
 
-const CookieCard = ({ requesterName, foodName, foodDescription, acceptRequest, declineRequest }) => {
+const CookieCard = ({ requesterName, foodName, foodDescription, requestId }) => {
+    const {id} = useParams()
+    const dispatch = useDispatch();
     const [acceptMessage, setAcceptMessage] = useState('');
     const [declineMessage, setDeclineMessage] = useState('');
     const [timer, setTimer] = useState(0);
     const [showCard, setShowCard] = useState(true);
 
-    // Simulating token retrieval
-    //const token = { RecipientEmail: localStorage.getItem('token') };
-
+    
     // Function to handle responding to the request
     const respondToRequest = async (accepted) => {
         try {
-            const response = await axios.post(`http://localhost:5282/api/Email/RecipientMail?email=kamomohapi17@gmail.com`);
+            const response = await axios.put(`http://localhost:5282/api/Request/updatestatus/${id}?newStatus=${accepted ? 'Accepted' : 'Declined'}`);
+            console.log(id);
             if (response.status === 200) {
                 if (accepted) {
-                    setAcceptMessage('Your response has been sent!');
+                    setAcceptMessage('Your request has been accepted. Expires in 32 minutes.');
                     setTimer(32 * 60); // 32 minutes in seconds
-                    acceptRequest(); // Dispatch acceptRequest action
-                    toast.success('Your request has been accepted. Expires in 32 minutes.');
+                    dispatch(acceptRequest(requestId)); // Dispatch acceptRequest action with requestId
                 } else {
-                    setDeclineMessage('Your response has been sent!');
-                    declineRequest(); // Dispatch declineRequest action
+                    setDeclineMessage('Your request has been declined.');
+                    dispatch(declineRequest(requestId)); // Dispatch declineRequest action with requestId
                     setShowCard(false); // Hide the card after declining
-                    toast.success('Your request has been declined.');
                 }
+                const emailResponse = await axios.post(`http://localhost:5282/api/Email/RecipientMail?requestId=${id}`);
+                console.log('Email Response:', emailResponse.data);
             } else {
                 console.error('Failed to respond to request:', response.data);
                 toast.error('Failed to respond to request.');
@@ -39,7 +41,7 @@ const CookieCard = ({ requesterName, foodName, foodDescription, acceptRequest, d
             toast.error('Error responding to request.');
         }
     };
-
+    
     // Effect to update accept message based on timer
     useEffect(() => {
         let interval;
@@ -61,6 +63,9 @@ const CookieCard = ({ requesterName, foodName, foodDescription, acceptRequest, d
             setAcceptMessage('');
         }
     }, [timer]);
+
+    
+
 
     return (
         <div>
@@ -107,4 +112,4 @@ const CookieCard = ({ requesterName, foodName, foodDescription, acceptRequest, d
     );
 };
 
-export default connect(null, { acceptRequest, declineRequest })(CookieCard);
+export default CookieCard;

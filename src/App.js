@@ -101,7 +101,7 @@ function App() {
         <Route path='/RecipientLandingPage' element={<RecipientLandingPage />} />
         <Route path='/profile' element={<ProfileApp />} />
         <Route path='/UserProfile' element={<UserProfile />} />
-        <Route path="/request" element={<RequestPage />} />
+        <Route path="/request/:id" element={<RequestPage />} />
       </Routes>
 
       <Routez />
