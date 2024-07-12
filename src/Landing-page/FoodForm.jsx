@@ -41,7 +41,8 @@ function FoodForm() {
           Quantity: itemQuantity,
           Description: itemDescription,
           DateCooked: timeCooked,
-          Address: address
+          Address: address,
+          Contact:contact
         };
         const response = await axios.post(apiUrl, data,{
           headers:{Authorization: `Bearer ${token}`}
@@ -58,6 +59,8 @@ function FoodForm() {
           setItemDescription('');
           setTimeCooked('');
           setAddress('');
+          setContact('');
+
 
           toast.success('Food item added successfully!');
         } else {
