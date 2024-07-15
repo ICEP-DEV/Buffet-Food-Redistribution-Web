@@ -8,7 +8,6 @@ function FoodListing() {
   const [requestedItems, setRequestedItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  
   useEffect(() => {
     // Fetch data from the API endpoint
     axios.get('http://localhost:5282/api/FoodItem')
@@ -21,19 +20,15 @@ function FoodListing() {
         console.error('Error fetching data:', error);
         setLoading(false);
       });
-  }, []);
+  }, []); // Ensure to pass an empty dependency array to useEffect if it should only run once
 
   const handleRequest = (itemId) => {
-    const selectedItem = foodItems.find(item => item.id === itemId);
-    if (selectedItem) {
-      alert(`Request for ${selectedItem.itemName} sent!`);
-      setRequestedItems([...requestedItems, selectedItem]);
+    // Handle request logic here, e.g., adding the item to requestedItems
+    const itemToRequest = foodItems.find(item => item.id === itemId);
+    if (itemToRequest) {
+      setRequestedItems([...requestedItems, itemToRequest]);
     }
   };
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <div>

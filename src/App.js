@@ -16,8 +16,8 @@ import Routez from './Landing-page/routes';
 import LandingPage from './Landing-page/LandingPage';
 import FoodListing from './pages/FoodListing';
 import RecipientLandingPage from './Landing-page/RecipientLandingPage';
-import ProfileApp from './Dashboard/profileApp';
 import UserProfile from './Dashboard/UserProfile';
+import PrivacyPolicyContent from './pages/PrivacyPolicyContent';
 
 // Create UserContext
 export const UserContext = createContext(null);
@@ -99,6 +99,7 @@ function App() {
         <Route path='/foodlisting' element={<FoodListing />} />
         <Route path='/RecipientLandingPage' element={<RecipientLandingPage />} />
         <Route path='/profileApp' element={<UserProfile />} />
+        <Route path="/privacy" element={<PrivacyPolicyContent />} />
       </Routes>
       <Routez />
 

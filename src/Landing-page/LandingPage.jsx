@@ -25,7 +25,7 @@ const LandingPage = () => {
           <div className="row align-items-center">
             <div className="col-md-2 p-0">
               <div className="bg-secondary text-light vh-100 d-flex flex-column align-items-center pt-3 rounded-end">
-                <img src={logo} alt="Food Share Network Logo" className="img-fluid mb-3" style={{ maxWidth: '80%' }} />
+                <img src={logo} alt="Food Share Network Logo rounded-end" className="img-fluid mb-3 rounded-end" style={{ maxWidth: '80%' }} />
                 <Link to="/Donordashboard" className="btn btn-light mb-3 w-75 d-flex align-items-center justify-content-center sidebar-link" style={{ marginTop: '20px' }}>
                   <FaTachometerAlt size={20} className="me-2" />
                   <span className="fw-bold">Dashboard</span>
