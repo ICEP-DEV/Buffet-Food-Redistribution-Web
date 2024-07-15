@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {Link} from 'react-router-dom';
 import { Form, Button, InputGroup } from 'react-bootstrap';
 import Datetime from 'react-datetime';
 import 'react-datetime/css/react-datetime.css';
@@ -6,8 +7,12 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FaUtensils, FaSortNumericUp, FaClipboard, FaClock, FaMapMarkerAlt } from 'react-icons/fa';
 import axios from 'axios';
+<<<<<<< HEAD
 import {Link} from 'react-router-dom';
 import TermsModal from './TermsModal'; // Import the TermsModal component
+=======
+
+>>>>>>> 2649c5c08ce08a34509cbb822b9c5785e5950a4e
 
 function FoodForm() {
   const [itemName, setItemName] = useState('');
@@ -15,8 +20,14 @@ function FoodForm() {
   const [itemDescription, setItemDescription] = useState('');
   const [timeCooked, setTimeCooked] = useState('');
   const [address, setAddress] = useState('');
+<<<<<<< HEAD
   const [agreedToTerms, setAgreedToTerms] = useState(false); // State for terms checkbox
   const [showTermsModal, setShowTermsModal] = useState(false); // State for showing the modal
+=======
+  const [contact,setContact] = useState();
+
+ const token = localStorage.getItem('token');
+>>>>>>> 2649c5c08ce08a34509cbb822b9c5785e5950a4e
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -55,7 +66,11 @@ function FoodForm() {
           Description: itemDescription,
           DateCooked: timeCooked,
           Address: address,
+<<<<<<< HEAD
           DonationTime: donationTime // Send the donation time to the backend
+=======
+          Contact:contact
+>>>>>>> 2649c5c08ce08a34509cbb822b9c5785e5950a4e
         };
         const response = await axios.post(apiUrl, data);
 
@@ -78,7 +93,12 @@ function FoodForm() {
           setItemDescription('');
           setTimeCooked('');
           setAddress('');
+<<<<<<< HEAD
           setAgreedToTerms(false); // Reset the terms checkbox
+=======
+          setContact('');
+
+>>>>>>> 2649c5c08ce08a34509cbb822b9c5785e5950a4e
 
           toast.success('Food item added successfully!');
         } else {
@@ -169,6 +189,7 @@ function FoodForm() {
                 />
               </InputGroup>
             </Form.Group>
+<<<<<<< HEAD
             <Form.Group controlId="terms" className="mb-3">
               <Form.Check 
                 type="checkbox" 
@@ -180,6 +201,22 @@ function FoodForm() {
             <Button type="submit" variant="dark" className="mt-3 btn-block btn-lg" style={{ width: '100%' }} disabled={!agreedToTerms}>
               Add Item
             </Button>
+=======
+            <Form.Group controlId="address" className="mb-3">
+              <Form.Label><strong>Contact Information</strong></Form.Label>
+              <InputGroup className="border rounded">
+                <InputGroup.Text><FaMapMarkerAlt /></InputGroup.Text>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter your contact information"
+                  value={contact}
+                  onChange={(e) => setContact(e.target.value)}
+                  style={{ color: 'rgba(0, 0, 0, 1.5)' }}
+                />
+              </InputGroup>
+            </Form.Group>
+            <Button type="submit" variant="dark" className="mt-3 btn-block btn-lg" style={{ width: '100%' }}>Add Item</Button>
+>>>>>>> 2649c5c08ce08a34509cbb822b9c5785e5950a4e
           </Form>
         </div>
       </div>

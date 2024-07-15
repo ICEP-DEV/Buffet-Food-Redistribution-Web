@@ -1,9 +1,12 @@
+
+
 // import React, { useState, useContext } from 'react';
 // import axios from 'axios';
 // import { useNavigate } from 'react-router-dom';
 // import { ToastContainer, toast } from 'react-toastify';
 // import 'react-toastify/dist/ReactToastify.css';
 // import { UserContext } from '../App';
+
 
 // const Login = () => {
 //   const [email, setEmail] = useState('');
@@ -14,11 +17,11 @@
 
 //   const handleLogin = async (event) => {
 //     event.preventDefault();
-
+  
 //     try {
 //       let result;
 //       if (userType.toLowerCase() === 'recipient') {
-//         result = await axios.post('http://localhost:5282/api/Recipient/Login', {
+//          result = await axios.post('http://localhost:5282/api/Recipient/Login', {
 //           RecipientEmail: email,
 //           password,
 //         });
@@ -28,24 +31,32 @@
 //           password,
 //         });
 //       }
+      
 
 //       if (result.data.flag) {
 //         toast.success(result.data.message);
+
 //         const prefixUsername = getPrefixUsername(email);
 //         setUser({ prefixUsername });
+
 //         setTimeout(() => {
 //           if (userType.toLowerCase() === 'recipient') {
 //             navigate('/RecipientLandingPage');
 //           } else {
 //             navigate('/home');
 //           }
-//         }, 2000);
+//         }, 5000);
 //       } else {
 //         toast.warning(result.data.message);
 //       }
+//       const token = result.data.token;
+//       localStorage.setItem('token', token);
+//       console.log(token)
 //     } catch (error) {
 //       console.error('Login failed:', error.response);
+//       toast.error('Login failed. Please check your credentials.');
 //     }
+    
 //   };
 
 //   const getPrefixUsername = (email) => {
@@ -55,44 +66,70 @@
 
 //   return (
 //     <div className="signup-container" style={{ height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', margin: 0 }}>
-//       <ToastContainer autoClose={2000} />
+//       <ToastContainer />
 //       <div className="signup">
 //         <form style={{ width: '450px', margin: 'auto', background: '#A9A9A9', boxShadow: '0px 14px 80px rgba(34, 35, 58, 0.2)', padding: '40px 55px 45px 55px', borderRadius: '15px', transition: 'all .3s' }} onSubmit={handleLogin}>
 //           <h3 style={{ textAlign: 'center', margin: '0', lineHeight: '1', paddingBottom: '20px' }}>Login</h3>
 //           <div>
-//             <input className='align-items-center'
+//             <input
 //               type="radio"
 //               name="userType"
 //               value="Recipient"
-//               onChange={(e) => setUserType(e.target.value)}required
+
+//               onChange={(e) => setUserType(e.target.value)} required
+
+
+
+
 //             />{' '}
-//             <strong>Recipient</strong>
+//             Recipient
 //             <input
 //               type="radio"
 //               name="userType"
 //               value="Donor"
-//               onChange={(e) => setUserType(e.target.value)}required
+
+//               onChange={(e) => setUserType(e.target.value)} required
+
+
+              
+
+
+
 //             />{' '}
-//             <strong>Donor</strong>
+//             Donor
 //           </div>
 //           <div className="mb-3">
-//             <label><strong>Email address</strong></label>
+//             <label>Email address</label>
 //             <input
 //               type="email"
 //               className="form-control"
 //               placeholder="Enter email"
 //               value={email}
-//               onChange={(e) => setEmail(e.target.value)}required
+
+//               onChange={(e) => setEmail(e.target.value)} required
+
+
+              
+
+
+
 //             />
 //           </div>
 //           <div className="mb-3">
-//             <label><strong>Password</strong></label>
+//             <label>Password</label>
 //             <input
 //               type="password"
 //               className="form-control"
 //               placeholder="Enter password"
 //               value={password}
-//               onChange={(e) => setPassword(e.target.value)}required
+
+//               onChange={(e) => setPassword(e.target.value)} required
+
+
+              
+
+
+
 //             />
 //           </div>
 //           <div className="mb-3">
@@ -102,17 +139,17 @@
 //                 className="custom-control-input"
 //                 id="customCheck1"
 //               />
-//               <label className="custom-control-label" htmlFor="customCheck1" >
+//               <label className="custom-control-label" htmlFor="customCheck1">
 //                 Remember me
 //               </label>
 //             </div>
 //           </div>
 //           <div className="d-grid">
-//             <button type="submit" className="btn btn-dark" style={{ width: '100%' }} >
+//             <button type="submit" className="btn btn-dark" style={{ width: '100%' }}>
 //               Submit
 //             </button>
 //           </div>
-//           <p className="forgot-password text-right" style={{ paddingRight: '2rem' }}>
+//           <p className="forgot-password text-right">
 //             Forgot <a href="#">password?</a>
 //           </p>
 //         </form>
@@ -123,7 +160,9 @@
 
 // export default Login;
 
-import React, { useState, useContext } from 'react';
+
+
+import React, { useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
@@ -136,6 +175,17 @@ const Login = () => {
   const [userType, setUserType] = useState('');
   const { setUser } = useContext(UserContext);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // Check localStorage for saved email and userType on component mount
+    const storedEmail = localStorage.getItem('rememberedEmail');
+    const storedUserType = localStorage.getItem('rememberedUserType');
+
+    if (storedEmail && storedUserType) {
+      setEmail(storedEmail);
+      setUserType(storedUserType);
+    }
+  }, []);
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -160,6 +210,16 @@ const Login = () => {
         const prefixUsername = getPrefixUsername(email);
         setUser({ prefixUsername, userType: userType.toLowerCase() });
 
+        // Remember email and userType if "Remember me" is checked
+        const rememberMeChecked = document.getElementById('customCheck1').checked;
+        if (rememberMeChecked) {
+          localStorage.setItem('rememberedEmail', email);
+          localStorage.setItem('rememberedUserType', userType);
+        } else {
+          localStorage.removeItem('rememberedEmail');
+          localStorage.removeItem('rememberedUserType');
+        }
+
         setTimeout(() => {
           if (userType.toLowerCase() === 'recipient') {
             navigate('/RecipientLandingPage');
@@ -170,9 +230,13 @@ const Login = () => {
       } else {
         toast.warning(result.data.message);
       }
+
       const token = result.data.token;
       localStorage.setItem('token', token);
+<<<<<<< HEAD
       console.log(token);
+=======
+>>>>>>> 2649c5c08ce08a34509cbb822b9c5785e5950a4e
     } catch (error) {
       console.error('Login failed:', error.response);
       toast.error('Login failed. Please check your credentials.');
@@ -195,14 +259,18 @@ const Login = () => {
               type="radio"
               name="userType"
               value="Recipient"
-              onChange={(e) => setUserType(e.target.value)} required
+              checked={userType === 'Recipient'}
+              onChange={(e) => setUserType(e.target.value)}
+              required
             />{' '}
             Recipient
             <input
               type="radio"
               name="userType"
               value="Donor"
-              onChange={(e) => setUserType(e.target.value)} required
+              checked={userType === 'Donor'}
+              onChange={(e) => setUserType(e.target.value)}
+              required
             />{' '}
             Donor
           </div>
@@ -213,7 +281,8 @@ const Login = () => {
               className="form-control"
               placeholder="Enter email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)} required
+              onChange={(e) => setEmail(e.target.value)}
+              required
             />
           </div>
           <div className="mb-3">
@@ -223,7 +292,8 @@ const Login = () => {
               className="form-control"
               placeholder="Enter password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)} required
+              onChange={(e) => setPassword(e.target.value)}
+              required
             />
           </div>
           <div className="mb-3">
@@ -253,5 +323,8 @@ const Login = () => {
 };
 
 export default Login;
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 2649c5c08ce08a34509cbb822b9c5785e5950a4e
