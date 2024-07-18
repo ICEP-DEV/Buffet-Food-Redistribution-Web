@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
+
 import { acceptRequest, declineRequest } from '../Redux/actions';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useParams } from 'react-router-dom';
+
 
 const CookieCard = ({ requesterName, foodName, foodDescription, requestId }) => {
     const { id } = useParams();
@@ -37,10 +39,11 @@ const CookieCard = ({ requesterName, foodName, foodDescription, requestId }) => 
                 if (accepted) {
                     setAcceptMessage('Your request has been accepted. Expires in 32 minutes.');
                     setTimer(32 * 60); // 32 minutes in seconds
-                    dispatch(acceptRequest(requestId)); // Dispatch acceptRequest action with requestId
+                    acceptRequest(); // Dispatch acceptRequest action
+                    toast.success('Your request has been accepted. Expires in 32 minutes.');
                 } else {
-                    setDeclineMessage('Your request has been declined.');
-                    dispatch(declineRequest(requestId)); // Dispatch declineRequest action with requestId
+                    setDeclineMessage('Your response has been sent!');
+                    declineRequest(); // Dispatch declineRequest action
                     setShowCard(false); // Hide the card after declining
                 }
                 const emailResponse = await axios.post(`http://localhost:5282/api/Email/RecipientMail?requestId=${id}`);
@@ -74,6 +77,9 @@ const CookieCard = ({ requesterName, foodName, foodDescription, requestId }) => 
             setAcceptMessage('');
         }
     }, [timer]);
+
+    
+
 
     return (
         <div>
