@@ -93,13 +93,11 @@ import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import video from '../components/videos/f.mp4';
 import logo from '../components/FoodShareNetwork.jpeg';
-import { FaTachometerAlt } from 'react-icons/fa';
-import { BiDonateHeart } from 'react-icons/bi';
 import { RiRestaurantLine } from 'react-icons/ri';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircle, faInfoCircle, faEnvelope, faSignOutAlt,faUser } from '@fortawesome/free-solid-svg-icons';
 import { UserContext } from '../App';
-import ProfileApp from '../Dashboard/profileApp';
+
 const LandingPage = () => {
   const { setUser } = useContext(UserContext);
   const navigate = useNavigate();
@@ -130,7 +128,7 @@ const LandingPage = () => {
                   <RiRestaurantLine size={20} className="me-2" />
                   <span className="fw-bold">FoodList</span>
                 </Link>
-                <Link to="/Historys" className="btn btn-light mb-3 w-75 d-flex align-items-center justify-content-center sidebar-link" style={{ marginTop: '20px' }}>
+                <Link to="/RequestedItemsHistory" className="btn btn-light mb-3 w-75 d-flex align-items-center justify-content-center sidebar-link" style={{ marginTop: '20px' }}>
                   <FontAwesomeIcon icon={faCircle} size="lg" className="me-2" />
                   <span className="fw-bold">Record</span>
                 </Link>
