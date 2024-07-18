@@ -1,35 +1,50 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { acceptRequest, declineRequest } from '../Redux/actions';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useParams } from 'react-router-dom';
 
-const CookieCard = ({ requesterName, foodName, foodDescription, acceptRequest, declineRequest }) => {
+const CookieCard = ({ requesterName, foodName, foodDescription, requestId }) => {
+    const { id } = useParams();
+    const dispatch = useDispatch();
     const [acceptMessage, setAcceptMessage] = useState('');
     const [declineMessage, setDeclineMessage] = useState('');
     const [timer, setTimer] = useState(0);
     const [showCard, setShowCard] = useState(true);
+    const [recipientInfo, setRecipientInfo] = useState(null);
 
-    // Simulating token retrieval
-    //const token = { RecipientEmail: localStorage.getItem('token') };
+    useEffect(() => {
+        const fetchRecipientInfo = async () => {
+            try {
+                const response = await axios.get(`http://localhost:5282/api/Email?requestid=${id}`);
+                setRecipientInfo(response.data); // Update recipientInfo state with fetched data
+            } catch (error) {
+                console.error('Error fetching recipient information:', error);
+                toast.error('Error fetching recipient information.');
+            }
+        };
 
-    // Function to handle responding to the request
+        fetchRecipientInfo();
+    }, [id]);
+
     const respondToRequest = async (accepted) => {
         try {
-            const response = await axios.post(`http://localhost:5282/api/Email/RecipientMail?email=kamomohapi17@gmail.com`);
+            const response = await axios.put(`http://localhost:5282/api/Request/updatestatus/${id}?newStatus=${accepted ? 'Accepted' : 'Declined'}`);
+            console.log(id);
             if (response.status === 200) {
                 if (accepted) {
-                    setAcceptMessage('Your response has been sent!');
+                    setAcceptMessage('Your request has been accepted. Expires in 32 minutes.');
                     setTimer(32 * 60); // 32 minutes in seconds
-                    acceptRequest(); // Dispatch acceptRequest action
-                    toast.success('Your request has been accepted. Expires in 32 minutes.');
+                    dispatch(acceptRequest(requestId)); // Dispatch acceptRequest action with requestId
                 } else {
-                    setDeclineMessage('Your response has been sent!');
-                    declineRequest(); // Dispatch declineRequest action
+                    setDeclineMessage('Your request has been declined.');
+                    dispatch(declineRequest(requestId)); // Dispatch declineRequest action with requestId
                     setShowCard(false); // Hide the card after declining
-                    toast.success('Your request has been declined.');
                 }
+                const emailResponse = await axios.post(`http://localhost:5282/api/Email/RecipientMail?requestId=${id}`);
+                console.log('Email Response:', emailResponse.data);
             } else {
                 console.error('Failed to respond to request:', response.data);
                 toast.error('Failed to respond to request.');
@@ -40,7 +55,6 @@ const CookieCard = ({ requesterName, foodName, foodDescription, acceptRequest, d
         }
     };
 
-    // Effect to update accept message based on timer
     useEffect(() => {
         let interval;
         if (timer > 0) {
@@ -51,7 +65,6 @@ const CookieCard = ({ requesterName, foodName, foodDescription, acceptRequest, d
         return () => clearInterval(interval);
     }, [timer]);
 
-    // Effect to update accept message when timer changes
     useEffect(() => {
         if (timer > 0) {
             const minutes = Math.floor(timer / 60);
@@ -65,7 +78,7 @@ const CookieCard = ({ requesterName, foodName, foodDescription, acceptRequest, d
     return (
         <div>
             <ToastContainer />
-            {showCard && (
+            {recipientInfo && ( // Conditionally render if recipientInfo is not null
                 <div className="container-fluid d-flex justify-content-center align-items-center vh-100" style={{ backgroundColor: 'rgba(50, 50, 50, 0.2)' }}>
                     <div className="card text-center border" style={{
                         backgroundColor: 'rgba(255, 255, 255, 0.8)',
@@ -92,7 +105,7 @@ const CookieCard = ({ requesterName, foodName, foodDescription, acceptRequest, d
                         </div>
                         <p className="cookieHeading" style={{ fontWeight: 'bold' }}>Pending Donation Request!</p>
                         <p className="cookieDescription" style={{ fontWeight: 'bold', color: 'grey', fontSize: '0.8em' }}>
-                            {requesterName} has made a request for {foodName}. {foodDescription}
+                            {recipientInfo.RecipientName} has made a request from {recipientInfo.RecipientAddress}
                         </p>
                         <div className="buttonContainer" style={{ width: '100%', justifyContent: 'center', gap: '20px' }}>
                             <button className="btn btn-info acceptButton rounded-pill" onClick={() => respondToRequest(true)}>Accept</button>
@@ -107,4 +120,4 @@ const CookieCard = ({ requesterName, foodName, foodDescription, acceptRequest, d
     );
 };
 
-export default connect(null, { acceptRequest, declineRequest })(CookieCard);
+export default CookieCard;

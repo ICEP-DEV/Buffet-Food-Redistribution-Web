@@ -7,7 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FaUtensils, FaSortNumericUp, FaClipboard, FaClock, FaMapMarkerAlt } from 'react-icons/fa';
 import axios from 'axios';
-import {Link} from 'react-router-dom';
+
 
 function FoodForm() {
   const [itemName, setItemName] = useState('');
@@ -15,6 +15,7 @@ function FoodForm() {
   const [itemDescription, setItemDescription] = useState('');
   const [timeCooked, setTimeCooked] = useState('');
   const [address, setAddress] = useState('');
+  const [contact,setContact] = useState();
 
  const token = localStorage.getItem('token');
 
@@ -40,7 +41,8 @@ function FoodForm() {
           Quantity: itemQuantity,
           Description: itemDescription,
           DateCooked: timeCooked,
-          Address: address
+          Address: address,
+          Contact:contact
         };
         const response = await axios.post(apiUrl, data,{
           headers:{Authorization: `Bearer ${token}`}
@@ -57,6 +59,8 @@ function FoodForm() {
           setItemDescription('');
           setTimeCooked('');
           setAddress('');
+          setContact('');
+
 
           toast.success('Food item added successfully!');
         } else {
@@ -145,6 +149,19 @@ function FoodForm() {
                   placeholder="Enter your address"
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
+                  style={{ color: 'rgba(0, 0, 0, 1.5)' }}
+                />
+              </InputGroup>
+            </Form.Group>
+            <Form.Group controlId="address" className="mb-3">
+              <Form.Label><strong>Contact Information</strong></Form.Label>
+              <InputGroup className="border rounded">
+                <InputGroup.Text><FaMapMarkerAlt /></InputGroup.Text>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter your contact information"
+                  value={contact}
+                  onChange={(e) => setContact(e.target.value)}
                   style={{ color: 'rgba(0, 0, 0, 1.5)' }}
                 />
               </InputGroup>
