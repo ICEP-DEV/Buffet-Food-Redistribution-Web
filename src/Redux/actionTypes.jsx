@@ -1,4 +1,3 @@
-
 export const ACCEPT_REQUEST = 'ACCEPT_REQUEST';
 export const DECLINE_REQUEST = 'DECLINE_REQUEST';
 export const SEND_REQUEST = 'SEND_REQUEST';

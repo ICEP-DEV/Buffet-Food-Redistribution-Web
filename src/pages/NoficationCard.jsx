@@ -40,11 +40,12 @@ const CookieCard = ({ requesterName, foodName, foodDescription, requestId }) => 
                     setAcceptMessage('Your request has been accepted. Expires in 32 minutes.');
                     setTimer(32 * 60); // 32 minutes in seconds
                     acceptRequest(); // Dispatch acceptRequest action
-                    toast.success('Your request has been accepted. Expires in 32 minutes.');
+                    toast.success('Response sent!');
                 } else {
                     setDeclineMessage('Your response has been sent!');
                     declineRequest(); // Dispatch declineRequest action
                     setShowCard(false); // Hide the card after declining
+                    toast.success('Response sent!');
                 }
                 const emailResponse = await axios.post(`http://localhost:5282/api/Email/RecipientMail?requestId=${id}`);
                 console.log('Email Response:', emailResponse.data);
