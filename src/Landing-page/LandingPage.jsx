@@ -7,6 +7,7 @@ import { BiDonateHeart } from 'react-icons/bi';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircle, faInfoCircle, faEnvelope, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { UserContext } from '../App';
+import Typewriter from 'typewriter-effect'; // Importing Typewriter component
 
 const LandingPage = () => {
   const { setUser } = useContext(UserContext);
@@ -24,7 +25,7 @@ const LandingPage = () => {
           <div className="row align-items-center">
             <div className="col-md-2 p-0">
               <div className="bg-secondary text-light vh-100 d-flex flex-column align-items-center pt-3 rounded-end">
-                <img src={logo} alt="Food Share Network Logo" className="img-fluid mb-3" style={{ maxWidth: '80%' }} />
+                <img src={logo} alt="Food Share Network Logo rounded-end" className="img-fluid mb-3 rounded-end" style={{ maxWidth: '80%' }} />
                 <Link to="/Donordashboard" className="btn btn-light mb-3 w-75 d-flex align-items-center justify-content-center sidebar-link" style={{ marginTop: '20px' }}>
                   <FaTachometerAlt size={20} className="me-2" />
                   <span className="fw-bold">Dashboard</span>
@@ -70,8 +71,26 @@ const LandingPage = () => {
                     }}
                   ></div>
                   <div className="position-absolute top-50 start-50 translate-middle text-white text-center">
-                    <h1 className="text-white fw-bold">Welcome to FoodShare Network!</h1>
-                    <p className="text-white fw-bold">WE MAKE A LIVING BY WHAT WE GET, BUT WE MAKE A LIFE BY WHAT WE GIVE...</p>
+                    <h1 className="text-white fw-bold">
+                      <Typewriter
+                        options={{
+                          strings: ['Welcome to FoodShare Network!'],
+                          autoStart: true,
+                          loop: true,
+                        }}
+                      />
+                    </h1>
+                    <p className="text-white fw-bold">
+                      <Typewriter
+                        options={{
+                          strings: [
+                            'WE MAKE A LIVING BY WHAT WE GET, BUT WE MAKE A LIFE BY WHAT WE GIVE...',
+                          ],
+                          autoStart: true,
+                          loop: true,
+                        }}
+                      />
+                    </p>
                   </div>
                 </div>
                 <div className="header-overlay"></div>
@@ -89,4 +108,3 @@ const LandingPage = () => {
 };
 
 export default LandingPage;
-

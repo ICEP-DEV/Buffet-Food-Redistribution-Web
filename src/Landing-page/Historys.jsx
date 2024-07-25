@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { ListGroup, Button } from 'react-bootstrap';
+// import { FaUtensils, FaSortNumericUp, FaClipboard, FaClock, FaMapMarkerAlt } from 'react-icons/fa';
 
 function History() {
   const [foodItems, setFoodItems] = useState([]);
@@ -40,11 +42,11 @@ function History() {
   };
 
   return (
-    <div className="container-fluid d-flex flex-column align-items-center bg-light" style={{ minHeight: '100vh', marginTop: '50px', paddingBottom: '50px' }}>
+    <div className="container-fluid d-flex flex-column align-items-center bg-light" style={{ minHeight: '100vh', marginTop: '50px', paddingBottom: '50px', overflowY: 'auto' }}>
       <h1 className="text-center mt-5 mb-4">Record</h1>
-      <div className="list-group w-100 mb-5" style={{ maxWidth: '800px' }}>
+      <ListGroup className="w-100 mb-5" style={{ maxWidth: '800px', maxHeight: '500px', overflowY: 'auto' }}>
         {foodItems.map((item, index) => (
-          <div key={index} className="list-group-item border rounded d-flex flex-column flex-md-row justify-content-between align-items-center mt-3 p-3 bg-secondary text-light">
+          <ListGroup.Item key={index} className="border rounded d-flex flex-column flex-md-row justify-content-between align-items-center mt-3 p-3 bg-secondary text-light">
             <div className="flex-grow-1">
               <div>{item.name} - {item.quantity} - {item.description}</div>
               <div>Time cooked {formatTime(item.timeCooked)}, {formatDate(item.timeCooked)}</div>
@@ -52,13 +54,13 @@ function History() {
             </div>
             {item.image && (
               <div className="mt-3 mt-md-0 ml-md-3">
-                <img src={item.image} alt="Food" style={{ maxWidth: '100%', height: 'auto', maxHeight: '150px' }} />
+                <img src={item.image} alt="Food" className="img-fluid" style={{ maxWidth: '100%', height: 'auto', maxHeight: '150px' }} />
               </div>
             )}
-            <button className="btn btn-dark mt-3 mt-md-0 ml-md-3" onClick={() => handleRemove(index)}>Remove</button>
-          </div>
+            <Button variant="dark" className="mt-3 mt-md-0 ml-md-3" onClick={() => handleRemove(index)}>Remove</Button>
+          </ListGroup.Item>
         ))}
-      </div>
+      </ListGroup>
       <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
     </div>
   );

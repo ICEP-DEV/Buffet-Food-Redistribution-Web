@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 // import React, { useState, createContext } from 'react';
 // import { Link, Routes, Route, useNavigate } from 'react-router-dom';
 // import Container from 'react-bootstrap/Container';
@@ -116,6 +118,7 @@
 // export default App;
 
 
+>>>>>>> 2649c5c08ce08a34509cbb822b9c5785e5950a4e
 import React, { useState, createContext } from 'react';
 import { Link, Routes, Route, useNavigate } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
@@ -133,12 +136,15 @@ import RecepientSignUp from './pages/RecepientSignUp';
 import LandingPage from './Landing-page/LandingPage';
 import FoodListing from './pages/FoodListing';
 import RecipientLandingPage from './Landing-page/RecipientLandingPage';
-import ProfileApp from './Dashboard/profileApp';
 import UserProfile from './Dashboard/UserProfile';
+<<<<<<< HEAD
+import PrivacyPolicyContent from './pages/PrivacyPolicyContent';
+=======
 import Routez from './Landing-page/routes';
 import RequestPage from './pages/request';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons';
+>>>>>>> 2649c5c08ce08a34509cbb822b9c5785e5950a4e
 
 // Create UserContext
 export const UserContext = createContext(null);
@@ -152,6 +158,18 @@ function App() {
     navigate('/');
   };
 
+<<<<<<< HEAD
+  const loggedInButton = user ? (
+    <>
+      {user.userType === 'recipient' && (
+        <Nav.Link as={Link} to='/RecipientLandingPage' className='active text-uppercase text-white'>
+          Landing Page 
+        </Nav.Link>
+      )}
+      {user.userType === 'donor' && (
+        <Nav.Link as={Link} to='/home' className='active text-uppercase text-white'>
+          Landing Page
+=======
   const loggedInButtons = user ? (
     <>
       {user.userType === 'recipient' && (
@@ -162,6 +180,7 @@ function App() {
       {user.userType === 'donor' && (
         <Nav.Link as={Link} to='/home' className='text-uppercase text-white'>
           Landing Page (Donor)
+>>>>>>> 2649c5c08ce08a34509cbb822b9c5785e5950a4e
         </Nav.Link>
       )}
     </>
@@ -187,6 +206,7 @@ function App() {
                   <Nav.Link as={Link} to='/login' className='text-uppercase text-white'>Login</Nav.Link>
                 </>
               )}
+              {user ? loggedInButton : null}
               {!user ? (
                 <DropdownButton title="SIGN UP" variant="outline-success" className="btn-lg">
                   <Dropdown.Item as={Link} to="/signup">As Donor</Dropdown.Item>
@@ -219,9 +239,14 @@ function App() {
         <Route path='/recepientsignup' element={<RecepientSignUp />} />
         <Route path='/foodlisting' element={<FoodListing />} />
         <Route path='/RecipientLandingPage' element={<RecipientLandingPage />} />
+<<<<<<< HEAD
+        <Route path='/profileApp' element={<UserProfile />} />
+        <Route path="/privacy" element={<PrivacyPolicyContent />} />
+=======
         <Route path='/profile' element={<ProfileApp />} />
         <Route path='/UserProfile' element={<UserProfile />} />
         <Route path="/request/:id" element={<RequestPage />} />
+>>>>>>> 2649c5c08ce08a34509cbb822b9c5785e5950a4e
       </Routes>
 
       <Routez />

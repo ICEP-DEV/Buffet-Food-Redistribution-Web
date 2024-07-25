@@ -193,7 +193,7 @@ const Login = () => {
     try {
       let result;
       if (userType.toLowerCase() === 'recipient') {
-         result = await axios.post('http://localhost:5282/api/Recipient/Login', {
+        result = await axios.post('http://localhost:5282/api/Recipient/Login', {
           RecipientEmail: email,
           password,
         });
@@ -208,7 +208,7 @@ const Login = () => {
         toast.success(result.data.message);
 
         const prefixUsername = getPrefixUsername(email);
-        setUser({ prefixUsername });
+        setUser({ prefixUsername, userType: userType.toLowerCase() });
 
         // Remember email and userType if "Remember me" is checked
         const rememberMeChecked = document.getElementById('customCheck1').checked;
@@ -226,13 +226,17 @@ const Login = () => {
           } else {
             navigate('/home');
           }
-        }, 5000);
+        }, 2000);
       } else {
         toast.warning(result.data.message);
       }
 
       const token = result.data.token;
       localStorage.setItem('token', token);
+<<<<<<< HEAD
+      console.log(token);
+=======
+>>>>>>> 2649c5c08ce08a34509cbb822b9c5785e5950a4e
     } catch (error) {
       console.error('Login failed:', error.response);
       toast.error('Login failed. Please check your credentials.');
@@ -246,7 +250,7 @@ const Login = () => {
 
   return (
     <div className="signup-container" style={{ height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', margin: 0 }}>
-      <ToastContainer />
+      <ToastContainer autoClose={2000} />
       <div className="signup">
         <form style={{ width: '450px', margin: 'auto', background: '#A9A9A9', boxShadow: '0px 14px 80px rgba(34, 35, 58, 0.2)', padding: '40px 55px 45px 55px', borderRadius: '15px', transition: 'all .3s' }} onSubmit={handleLogin}>
           <h3 style={{ textAlign: 'center', margin: '0', lineHeight: '1', paddingBottom: '20px' }}>Login</h3>
@@ -274,7 +278,7 @@ const Login = () => {
             Donor
           </div>
           <div className="mb-3">
-            <label>Email address</label>
+            <label className="fw-bold">Email address</label>
             <input
               type="email"
               className="form-control"
@@ -285,7 +289,7 @@ const Login = () => {
             />
           </div>
           <div className="mb-3">
-            <label>Password</label>
+            <label className="fw-bold">Password</label>
             <input
               type="password"
               className="form-control"
@@ -302,7 +306,7 @@ const Login = () => {
                 className="custom-control-input"
                 id="customCheck1"
               />
-              <label className="custom-control-label" htmlFor="customCheck1">
+              <label className="custom-control-label fw-bold" htmlFor="customCheck1">
                 Remember me
               </label>
             </div>
@@ -312,7 +316,7 @@ const Login = () => {
               Submit
             </button>
           </div>
-          <p className="forgot-password text-right">
+          <p className="forgot-password text-right" style={{ textAlign: 'right' }}>
             Forgot <a href="#">password?</a>
           </p>
         </form>
@@ -322,3 +326,8 @@ const Login = () => {
 };
 
 export default Login;
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> 2649c5c08ce08a34509cbb822b9c5785e5950a4e

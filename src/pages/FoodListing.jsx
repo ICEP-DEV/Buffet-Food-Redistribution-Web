@@ -24,6 +24,19 @@ function FoodListing({ acceptRequest, declineRequest }) {
       } catch (error) {
         console.error('Error fetching data:', error);
         setLoading(false);
+<<<<<<< HEAD
+      });
+  }, []); // Ensure to pass an empty dependency array to useEffect if it should only run once
+
+  const handleRequest = (itemId) => {
+    // Handle request logic here, e.g., adding the item to requestedItems
+    const itemToRequest = foodItems.find(item => item.id === itemId);
+    if (itemToRequest) {
+      setRequestedItems([...requestedItems, itemToRequest]);
+    }
+  };
+
+=======
       }
     };
 
@@ -72,6 +85,7 @@ function FoodListing({ acceptRequest, declineRequest }) {
     return <div>Loading...</div>;
   }
 
+>>>>>>> 2649c5c08ce08a34509cbb822b9c5785e5950a4e
   return (
     <div>
       <h2 className="mt-5 mb-3 text-center">Available Donations</h2>
