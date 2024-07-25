@@ -619,6 +619,12 @@ const SignUp = () => {
           <p className="forgot-password text-right" style={{ textAlign: 'right' }}>
             Already registered? <a href="/login">Login</a>
           </p>
+
+          {/* <p><a href="/Policies" className=''>Terms Of Conditionn</a></p> */}
+
+
+          <p><a href="/Policies" className=''>Terms Of Conditionn</a></p>
+
         </form>
       </div>
     </div>
