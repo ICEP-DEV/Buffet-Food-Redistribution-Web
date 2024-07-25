@@ -7,12 +7,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FaUtensils, FaSortNumericUp, FaClipboard, FaClock, FaMapMarkerAlt } from 'react-icons/fa';
 import axios from 'axios';
-<<<<<<< HEAD
-import {Link} from 'react-router-dom';
 import TermsModal from './TermsModal'; // Import the TermsModal component
-=======
-
->>>>>>> 2649c5c08ce08a34509cbb822b9c5785e5950a4e
+import moment from 'moment'; // Import moment for time formatting
 
 function FoodForm() {
   const [itemName, setItemName] = useState('');
@@ -20,15 +16,10 @@ function FoodForm() {
   const [itemDescription, setItemDescription] = useState('');
   const [timeCooked, setTimeCooked] = useState('');
   const [address, setAddress] = useState('');
-<<<<<<< HEAD
+  const [contact,setContact] = useState();
   const [agreedToTerms, setAgreedToTerms] = useState(false); // State for terms checkbox
   const [showTermsModal, setShowTermsModal] = useState(false); // State for showing the modal
-=======
-  const [contact,setContact] = useState();
-
- const token = localStorage.getItem('token');
->>>>>>> 2649c5c08ce08a34509cbb822b9c5785e5950a4e
-
+  const token = localStorage.getItem('token');
   const handleSubmit = async (e) => {
     e.preventDefault();
     const donationTime = new Date(); // Capture the exact donation time
@@ -59,20 +50,19 @@ function FoodForm() {
       agreedToTerms // Ensure the terms are agreed to
     ) {
       try {
-        const apiUrl = `http://localhost:5282/api/FoodItem`;
+        const apiUrl = `http://localhost:5282/api/FoodDonation/populate`;
         const data = {
           ItemName: itemName,
           Quantity: itemQuantity,
           Description: itemDescription,
           DateCooked: timeCooked,
           Address: address,
-<<<<<<< HEAD
-          DonationTime: donationTime // Send the donation time to the backend
-=======
           Contact:contact
->>>>>>> 2649c5c08ce08a34509cbb822b9c5785e5950a4e
         };
-        const response = await axios.post(apiUrl, data);
+
+        const response = await axios.post(apiUrl, data,{
+          headers:{Authorization: `Bearer ${token}`}
+        });
 
         if (response.status === 200) {
           // Store item in local storage
@@ -93,14 +83,12 @@ function FoodForm() {
           setItemDescription('');
           setTimeCooked('');
           setAddress('');
-<<<<<<< HEAD
           setAgreedToTerms(false); // Reset the terms checkbox
-=======
           setContact('');
 
->>>>>>> 2649c5c08ce08a34509cbb822b9c5785e5950a4e
 
-          toast.success('Food item added successfully!');
+          const formattedTime = moment(donationTime).format('YYYY-MM-DD HH:mm:ss');
+          toast.success(`Food item added successfully at ${formattedTime}!`);
         } else {
           toast.error('Error adding food item. Please try again later.');
         }
@@ -189,19 +177,6 @@ function FoodForm() {
                 />
               </InputGroup>
             </Form.Group>
-<<<<<<< HEAD
-            <Form.Group controlId="terms" className="mb-3">
-              <Form.Check 
-                type="checkbox" 
-                label={<span>I agree to the <a href="#" onClick={() => setShowTermsModal(true)}>terms and conditions</a></span>} 
-                checked={agreedToTerms}
-                onChange={(e) => setAgreedToTerms(e.target.checked)}
-              />
-            </Form.Group>
-            <Button type="submit" variant="dark" className="mt-3 btn-block btn-lg" style={{ width: '100%' }} disabled={!agreedToTerms}>
-              Add Item
-            </Button>
-=======
             <Form.Group controlId="address" className="mb-3">
               <Form.Label><strong>Contact Information</strong></Form.Label>
               <InputGroup className="border rounded">
@@ -215,8 +190,17 @@ function FoodForm() {
                 />
               </InputGroup>
             </Form.Group>
-            <Button type="submit" variant="dark" className="mt-3 btn-block btn-lg" style={{ width: '100%' }}>Add Item</Button>
->>>>>>> 2649c5c08ce08a34509cbb822b9c5785e5950a4e
+            <Form.Group controlId="terms" className="mb-3">
+              <Form.Check 
+                type="checkbox" 
+                label={<span>I agree to the <a href="#" onClick={() => setShowTermsModal(true)}>terms and conditions</a></span>} 
+                checked={agreedToTerms}
+                onChange={(e) => setAgreedToTerms(e.target.checked)}
+              />
+            </Form.Group>
+            <Button type="submit" variant="dark" className="mt-3 btn-block btn-lg" style={{ width: '100%' }} disabled={!agreedToTerms}>
+              Add Item
+            </Button>
           </Form>
         </div>
       </div>

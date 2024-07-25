@@ -24,68 +24,27 @@ function FoodListing({ acceptRequest, declineRequest }) {
       } catch (error) {
         console.error('Error fetching data:', error);
         setLoading(false);
-<<<<<<< HEAD
-      });
+      }
+    };
+
+    fetchData();
   }, []); // Ensure to pass an empty dependency array to useEffect if it should only run once
 
   const handleRequest = (itemId) => {
     // Handle request logic here, e.g., adding the item to requestedItems
     const itemToRequest = foodItems.find(item => item.id === itemId);
     if (itemToRequest) {
-      setRequestedItems([...requestedItems, itemToRequest]);
-    }
-  };
-
-=======
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  const handleRequest = async (itemId) => {
-    const selectedItem = foodItems.find((item) => item.id === itemId);
-    if (selectedItem) {
-      const token = localStorage.getItem('token');
-      const requestTime = new Date().toISOString();
-
-      try {
-        // Example of sending an email to the donor
-        await axios.post(`http://localhost:5282/api/Email/DonorMail?email=${selectedItem.contact}&itemId=${selectedItem.id}`);
-        
-        // Example of sending a request to the backend to mark the item as requested
-        await axios.post(`http://localhost:5282/api/Request?foodDonationId=${selectedItem.id}`, {}, {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        });
-
-        // Update requested items state and local storage
-        const updatedItem = { ...selectedItem, requestTime };
-        const updatedRequestedItems = [...requestedItems, updatedItem];
-        setRequestedItems(updatedRequestedItems);
-        localStorage.setItem('requestedItems', JSON.stringify(updatedRequestedItems));
-
-        // Dispatch Redux action if needed (acceptRequest)
-
-        alert(`Request for ${selectedItem.itemName} sent!`);
-      } catch (error) {
-        console.error('Error handling request:', error);
-      }
+      const updatedRequestedItems = [...requestedItems, itemToRequest];
+      setRequestedItems(updatedRequestedItems);
+      localStorage.setItem('requestedItems', JSON.stringify(updatedRequestedItems));
     }
   };
 
   const clearLocalStorage = () => {
     localStorage.removeItem('requestedItems');
     setRequestedItems([]);
-    alert('Local storage cleared!');
   };
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
->>>>>>> 2649c5c08ce08a34509cbb822b9c5785e5950a4e
   return (
     <div>
       <h2 className="mt-5 mb-3 text-center">Available Donations</h2>

@@ -34,7 +34,7 @@ const LandingPage = () => {
                   <BiDonateHeart size={20} className="me-2" />
                   <span className="fw-bold">Donate</span>
                 </Link>
-                <Link to="/Historys" className="btn btn-light mb-3 w-75 d-flex align-items-center justify-content-center sidebar-link" style={{ marginTop: '20px' }}>
+                <Link to="/record" className="btn btn-light mb-3 w-75 d-flex align-items-center justify-content-center sidebar-link" style={{ marginTop: '20px' }}>
                   <FontAwesomeIcon icon={faCircle} size="lg" className="me-2" />
                   <span className="fw-bold">Record</span>
                 </Link>
