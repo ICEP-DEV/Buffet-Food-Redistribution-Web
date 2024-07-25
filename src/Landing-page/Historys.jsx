@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ListGroup, Button } from 'react-bootstrap';
-// import { FaUtensils, FaSortNumericUp, FaClipboard, FaClock, FaMapMarkerAlt } from 'react-icons/fa';
 
 function History() {
   const [foodItems, setFoodItems] = useState([]);
@@ -49,14 +48,10 @@ function History() {
           <ListGroup.Item key={index} className="border rounded d-flex flex-column flex-md-row justify-content-between align-items-center mt-3 p-3 bg-secondary text-light">
             <div className="flex-grow-1">
               <div>{item.name} - {item.quantity} - {item.description}</div>
-              <div>Time cooked {formatTime(item.timeCooked)}, {formatDate(item.timeCooked)}</div>
-              <div>{item.address}</div>
+              <div>Time cooked: {formatTime(item.timeCooked)}, {formatDate(item.timeCooked)}</div>
+              <div>Address: {item.address}</div>
+              <div>Added at: {formatTime(item.addedAt)}, {formatDate(item.addedAt)}</div>
             </div>
-            {item.image && (
-              <div className="mt-3 mt-md-0 ml-md-3">
-                <img src={item.image} alt="Food" className="img-fluid" style={{ maxWidth: '100%', height: 'auto', maxHeight: '150px' }} />
-              </div>
-            )}
             <Button variant="dark" className="mt-3 mt-md-0 ml-md-3" onClick={() => handleRemove(index)}>Remove</Button>
           </ListGroup.Item>
         ))}

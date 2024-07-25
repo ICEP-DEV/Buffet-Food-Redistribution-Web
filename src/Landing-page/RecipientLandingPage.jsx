@@ -97,10 +97,11 @@ import { FaTachometerAlt } from 'react-icons/fa';
 import { BiDonateHeart } from 'react-icons/bi';
 import { RiRestaurantLine } from 'react-icons/ri';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircle, faInfoCircle, faEnvelope, faSignOutAlt, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faCircle, faInfoCircle, faEnvelope, faSignOutAlt, faUser, faComment } from '@fortawesome/free-solid-svg-icons';
 import { UserContext } from '../App';
 import ProfileApp from '../Dashboard/profileApp';
-import Typewriter from 'typewriter-effect'; // Importing Typewriter component
+import Typewriter from 'typewriter-effect'; 
+import CustomForm from './CustomForm'
 
 const LandingPage = () => {
   const { setUser } = useContext(UserContext);
@@ -120,7 +121,7 @@ const LandingPage = () => {
               <div className="bg-secondary text-light vh-100 d-flex flex-column align-items-center pt-3 rounded-end">
                 <img src={logo} alt="Food Share Network Logo" className="img-fluid mb-3" style={{ maxWidth: '80%' }} />
 
-                <Link to="/profileApp" className="btn btn-light mb-3 w-75 d-flex align-items-center justify-content-center sidebar-link" style={{ marginTop: '20px' }}>
+                <Link to="/RecipientProfile" className="btn btn-light mb-3 w-75 d-flex align-items-center justify-content-center sidebar-link" style={{ marginTop: '20px' }}>
                   <FontAwesomeIcon icon={faUser} className="me-2" />
                   <span className="fw-bold">Profile</span>
                 </Link>
@@ -140,6 +141,10 @@ const LandingPage = () => {
                 <Link to="/about" className="btn btn-light mb-3 w-75 d-flex align-items-center justify-content-center sidebar-link" style={{ marginTop: '20px' }}>
                   <FontAwesomeIcon icon={faInfoCircle} size="lg" className="me-2" />
                   <span className="fw-bold">About</span>
+                </Link>
+                <Link to="/CustomForm" className="btn btn-light mb-3 w-75 d-flex align-items-center justify-content-center sidebar-link" style={{ marginTop: '20px' }}>
+                  <FontAwesomeIcon icon={faComment} size="lg" className="me-2" />
+                  <span className="fw-bold">Send Feedback</span>
                 </Link>
                 <Link to="/" onClick={handleLogout} className="btn btn-light mb-3 w-75 d-flex align-items-center justify-content-center sidebar-link" style={{ marginTop: '20px' }}>
                   <FontAwesomeIcon icon={faSignOutAlt} size="lg" className="me-2" />

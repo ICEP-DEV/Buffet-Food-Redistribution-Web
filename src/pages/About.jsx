@@ -4,20 +4,23 @@ import AboutChef1 from '../utils/img/about-chef1.webp';
 import AboutChef2 from '../utils/img/about-chef2.jpg';
 import { ImageGallery } from '../components/ImageGallery';
 import { Reviews } from '../components/Reviews';
+import backgroundImage from '../utils/img/contact-page-img.jpg';
 
 function About() {
     return (
         <div className='about-page'>
-            <header className='mt-5' style={{ backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url(../utils/img/img_logo.jpeg)', height: '50vh' }}>
-                <div className='container h-100 d-flex align-items-center justify-content-center'>
-                    <h1 className='text-light'></h1>
-                </div>
+           <header className='mt-5 d-flex justify-content-center align-items-center'
+                    style={{
+                        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${backgroundImage})`,
+                        height: '50vh',
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                        backgroundRepeat: 'no-repeat'
+                    }}>
+                <h1 className='text-light'>About</h1>
             </header>
 
             <div className='container my-5'>
-                <div className='container h-100 d-flex align-items-center font-color-black justify-content-center'>
-                    <h1 className='text-dark'>About</h1>
-                </div>
                 <p>
                     At FoodShare Network, we are dedicated to combating food waste and hunger through our innovative food redistribution system. Founded on the belief that no edible food should go to waste while people in our communities are going hungry, we have been working tirelessly to create a more sustainable and equitable food system.
                 </p>
@@ -35,18 +38,13 @@ function About() {
                     </div>
                 </div>
 
-                <p>
-                    FoodShare Network - Fighting Hunger, Reducing Waste, Building Community.
-                </p>
-            </div>
+                <p className="fw-bold">
+  FoodShare Network - Fighting Hunger, Reducing Waste, Building Community.
+</p>
 
-            <div className='bg-dark text-light'>
-                <ImageGallery />
             </div>
-
-            <div className='my-5'>
-                <Reviews />
-            </div>
+                <br>
+                </br>
         </div>
     )
 }

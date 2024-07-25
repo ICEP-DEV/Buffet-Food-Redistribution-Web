@@ -6,8 +6,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FaUtensils, FaSortNumericUp, FaClipboard, FaClock, FaMapMarkerAlt } from 'react-icons/fa';
 import axios from 'axios';
-import {Link} from 'react-router-dom';
 import TermsModal from './TermsModal'; // Import the TermsModal component
+import moment from 'moment'; // Import moment for time formatting
 
 function FoodForm() {
   const [itemName, setItemName] = useState('');
@@ -15,6 +15,7 @@ function FoodForm() {
   const [itemDescription, setItemDescription] = useState('');
   const [timeCooked, setTimeCooked] = useState('');
   const [address, setAddress] = useState('');
+  const [contact,setContact] = useState();
   const [agreedToTerms, setAgreedToTerms] = useState(false); // State for terms checkbox
   const [showTermsModal, setShowTermsModal] = useState(false); // State for showing the modal
 
@@ -55,6 +56,7 @@ function FoodForm() {
           Description: itemDescription,
           DateCooked: timeCooked,
           Address: address,
+          Contact:contact,
           DonationTime: donationTime // Send the donation time to the backend
         };
         const response = await axios.post(apiUrl, data);
@@ -80,7 +82,8 @@ function FoodForm() {
           setAddress('');
           setAgreedToTerms(false); // Reset the terms checkbox
 
-          toast.success('Food item added successfully!');
+          const formattedTime = moment(donationTime).format('YYYY-MM-DD HH:mm:ss');
+          toast.success(`Food item added successfully at ${formattedTime}!`);
         } else {
           toast.error('Error adding food item. Please try again later.');
         }
@@ -165,6 +168,19 @@ function FoodForm() {
                   placeholder="Enter your address"
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
+                  style={{ color: 'rgba(0, 0, 0, 1.5)' }}
+                />
+              </InputGroup>
+            </Form.Group>
+            <Form.Group controlId="address" className="mb-3">
+              <Form.Label><strong>Contact Information</strong></Form.Label>
+              <InputGroup className="border rounded">
+                <InputGroup.Text><FaMapMarkerAlt /></InputGroup.Text>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter your contact information"
+                  value={contact}
+                  onChange={(e) => setContact(e.target.value)}
                   style={{ color: 'rgba(0, 0, 0, 1.5)' }}
                 />
               </InputGroup>
