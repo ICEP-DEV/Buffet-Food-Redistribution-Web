@@ -101,7 +101,8 @@ import Content from './Content';
 
 const DonorDashboard = () => {
   const [selectedPage, setSelectedPage] = useState('home');
-
+  
+  // Function to handle page selection
   const handleSelect = (page) => {
     setSelectedPage(page);
   };

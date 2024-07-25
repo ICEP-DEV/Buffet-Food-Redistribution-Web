@@ -38,6 +38,7 @@ import React, { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import FoodForm from './FoodForm';
 import Historys from './Historys';
+import RequestedItemsHistory from './RequestedItemsHistory';
 import Donordashboard from '../Dashboard/Donordashboard';
 import profileApp from '../Dashboard/profileApp';
 
@@ -56,8 +57,9 @@ const RoutesComponent = () => {
         <Routes>
             <Route path='/foodform' element={<FoodForm addFoodItem={addFoodItem} />} />
             <Route path='/historys' element={<Historys foodItems={foodItems} />} />
-            <Route path='/donordashboard' element={<Donordashboard />} />
-            <Route path='/profileapp' element={<profileApp />} />
+            <Route path='/RequestedItemsHistory' element={<RequestedItemsHistory foodItems={foodItems} />} />
+            <Route path ='/donordashboard' element={<Donordashboard/>}/> 
+            <Route path ='/ProfileApp' element={<ProfileApp/>}/> 
         </Routes>
     );
 };

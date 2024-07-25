@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {Link} from 'react-router-dom';
 import { Form, Button, InputGroup } from 'react-bootstrap';
 import Datetime from 'react-datetime';
 import 'react-datetime/css/react-datetime.css';
@@ -18,7 +19,7 @@ function FoodForm() {
   const [contact,setContact] = useState();
   const [agreedToTerms, setAgreedToTerms] = useState(false); // State for terms checkbox
   const [showTermsModal, setShowTermsModal] = useState(false); // State for showing the modal
-
+  const token = localStorage.getItem('token');
   const handleSubmit = async (e) => {
     e.preventDefault();
     const donationTime = new Date(); // Capture the exact donation time
@@ -49,17 +50,19 @@ function FoodForm() {
       agreedToTerms // Ensure the terms are agreed to
     ) {
       try {
-        const apiUrl = `http://localhost:5282/api/FoodItem`;
+        const apiUrl = `http://localhost:5282/api/FoodDonation/populate`;
         const data = {
           ItemName: itemName,
           Quantity: itemQuantity,
           Description: itemDescription,
           DateCooked: timeCooked,
           Address: address,
-          Contact:contact,
-          DonationTime: donationTime // Send the donation time to the backend
+          Contact:contact
         };
-        const response = await axios.post(apiUrl, data);
+
+        const response = await axios.post(apiUrl, data,{
+          headers:{Authorization: `Bearer ${token}`}
+        });
 
         if (response.status === 200) {
           // Store item in local storage
@@ -81,6 +84,8 @@ function FoodForm() {
           setTimeCooked('');
           setAddress('');
           setAgreedToTerms(false); // Reset the terms checkbox
+          setContact('');
+
 
           const formattedTime = moment(donationTime).format('YYYY-MM-DD HH:mm:ss');
           toast.success(`Food item added successfully at ${formattedTime}!`);

@@ -538,7 +538,14 @@ const SignUp = () => {
               className="form-control"
               placeholder="Enter Email Address"
               value={email}
+
               onChange={(e) => setEmail(e.target.value)} required
+
+
+
+
+
+
             />
           </div>
           <div className="mb-3">
@@ -548,7 +555,12 @@ const SignUp = () => {
               className="form-control"
               placeholder="Enter Telephone Number"
               value={telephoneNumber}
+
+
               onChange={(e) => setTelephoneNumber(e.target.value)} required
+
+
+
             />
           </div>
           <div className="mb-3">
@@ -558,7 +570,15 @@ const SignUp = () => {
               className="form-control"
               placeholder="Enter Physical Address"
               value={address}
+
               onChange={(e) => setAddress(e.target.value)} required
+
+
+
+
+
+
+
             />
           </div>
           <div className="mb-3">
