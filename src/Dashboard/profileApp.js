@@ -18,7 +18,7 @@ const ProfileApp = () => {
         return; // Exit early if token is not available
       }
       try {
-        const response = await axios.get("http://localhost:5282/api/Donor/DonorProfile", {
+        const response = await axios.get("http://localhost:5282/api/Donor/Profile", {
           headers: {
             Authorization: `Bearer ${token}`
           }

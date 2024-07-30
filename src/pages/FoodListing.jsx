@@ -28,22 +28,49 @@ function FoodListing({ acceptRequest, declineRequest }) {
     };
 
     fetchData();
-  }, []); // Ensure to pass an empty dependency array to useEffect if it should only run once
+  }, []);
 
-  const handleRequest = (itemId) => {
-    // Handle request logic here, e.g., adding the item to requestedItems
-    const itemToRequest = foodItems.find(item => item.id === itemId);
-    if (itemToRequest) {
-      const updatedRequestedItems = [...requestedItems, itemToRequest];
-      setRequestedItems(updatedRequestedItems);
-      localStorage.setItem('requestedItems', JSON.stringify(updatedRequestedItems));
+  const handleRequest = async (itemId) => {
+    const selectedItem = foodItems.find((item) => item.id === itemId);
+    if (selectedItem) {
+      const token = localStorage.getItem('token');
+      const requestTime = new Date().toISOString();
+
+      try {
+        // Example of sending an email to the donor
+        await axios.post(`http://localhost:5282/api/Email/DonorMail?email=${selectedItem.contact}&itemId=${selectedItem.id}`);
+        
+        // Example of sending a request to the backend to mark the item as requested
+        await axios.post(`http://localhost:5282/api/Request?foodDonationId=${selectedItem.id}`, {}, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+
+        // Update requested items state and local storage
+        const updatedItem = { ...selectedItem, requestTime };
+        const updatedRequestedItems = [...requestedItems, updatedItem];
+        setRequestedItems(updatedRequestedItems);
+        localStorage.setItem('requestedItems', JSON.stringify(updatedRequestedItems));
+
+        // Dispatch Redux action if needed (acceptRequest)
+
+        alert(`Request for ${selectedItem.itemName} sent!`);
+      } catch (error) {
+        console.error('Error handling request:', error);
+      }
     }
   };
 
   const clearLocalStorage = () => {
     localStorage.removeItem('requestedItems');
     setRequestedItems([]);
+    alert('Local storage cleared!');
   };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div>

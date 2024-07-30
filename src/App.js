@@ -353,7 +353,7 @@ function App() {
         <Route path='/recepientsignup' element={<RecepientSignUp />} />
         <Route path='/foodlisting' element={<FoodListing />} />
         <Route path='/RecipientLandingPage' element={<RecipientLandingPage />} />
-        <Route path='/profileApp' element={<UserProfile />} />
+        <Route path='Dashboard/profileApp' element={<UserProfile />} />
         <Route path='/forgot-password' element={<ForgotPassword />} />
         <Route path="/privacy" element={<PrivacyPolicyContent />} />
         <Route path="/recipientProfile" element={<RecipientProfile recipient={recipientData} />} />
