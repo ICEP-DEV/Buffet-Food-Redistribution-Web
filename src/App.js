@@ -222,14 +222,14 @@ import ForgotPassword from './pages/ForgotPassword';
 import PrivacyPolicyContent from './pages/PrivacyPolicyContent';
 import CustomForm from './Landing-page/CustomForm';
 import Reviewfeedback from './Dashboard/Reviewfeedback';
-import RecipientProfile from './Landing-page/RecipientProfile';
+//import RecipientProfile from './Landing-page/RecipientProfile';
 import Historys from './Landing-page/Historys';
 import Donordashboard from './Dashboard/Donordashboard';
 import ProfileApp from './Dashboard/profileApp';
 import FoodForm from './Landing-page/FoodForm';
 import ProfileSettings from './Dashboard/ProfileSettings';
 import RequestPage from './pages/request';
-import RecipientProfileApp from './Landing-page/RecipientProfileApp';
+import RecipientProfileApp from './Landing-page/RecipientProfile';
 
 // Create UserContext
 export const UserContext = createContext(null);
