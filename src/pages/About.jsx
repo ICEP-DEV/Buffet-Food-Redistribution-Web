@@ -1,9 +1,6 @@
 import React from 'react';
-
 import AboutChef1 from '../utils/img/about-chef1.webp';
 import AboutChef2 from '../utils/img/about-chef2.jpg';
-import { ImageGallery } from '../components/ImageGallery';
-import { Reviews } from '../components/Reviews';
 import backgroundImage from '../utils/img/contact-page-img.jpg';
 
 function About() {
@@ -29,18 +26,41 @@ function About() {
                     Join us in our mission to create a world where no one goes hungry and where surplus food serves a greater purpose. Together, we can make a difference, one meal at a time.
                 </p>
 
-                <div className='row'>
+                {/* <div className='row'>
                     <div className='col-lg-6'>
                         <img src={AboutChef1} className='img-fluid my-4' alt="" />
                     </div>
                     <div className='col-lg-6'>
                         <img src={AboutChef2} className='img-fluid my-4' alt="" />
                     </div>
+                </div> */}
+               
+               <div className='container my-5'>
+                    <div className='row'>
+                        <div className='col-lg-6 mb-4'>
+                            <div className='card'>
+                                <img src={AboutChef1} className='card-img-top img-fluid' alt="" />
+                                <div className='card-body'>
+                                    <p className='card-text text-center'>"Feeding the hungry is a powerful way to show love." — Unknown</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div className='col-lg-6 mb-4'>
+                            <div className='card'>
+                                <img src={AboutChef2} className='card-img-top img-fluid' alt="" />
+                                <div className='card-body'>
+                                    <p className='card-text text-center'>"No one has ever become poor by giving." — Anne Frank</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <p className="fw-bold">
-  FoodShare Network - Fighting Hunger, Reducing Waste, Building Community.
-</p>
+
+
+                <p className="text-center pb-5">
+                    <strong>  FoodShare Network - Fighting Hunger, Reducing Waste, Building Community.</strong>
+                </p>
 
             </div>
                 <br>

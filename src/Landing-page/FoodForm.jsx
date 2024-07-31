@@ -5,7 +5,7 @@ import Datetime from 'react-datetime';
 import 'react-datetime/css/react-datetime.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { FaUtensils, FaSortNumericUp, FaClipboard, FaClock, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaUtensils, FaSortNumericUp, FaClipboard, FaClock, FaMapMarkerAlt, FaEnvelope  } from 'react-icons/fa';
 import axios from 'axios';
 import TermsModal from './TermsModal'; // Import the TermsModal component
 import moment from 'moment'; // Import moment for time formatting
@@ -180,7 +180,7 @@ function FoodForm() {
             <Form.Group controlId="address" className="mb-3">
               <Form.Label><strong>Contact Information</strong></Form.Label>
               <InputGroup className="border rounded">
-                <InputGroup.Text><FaMapMarkerAlt /></InputGroup.Text>
+                <InputGroup.Text><FaEnvelope  /></InputGroup.Text>
                 <Form.Control
                   type="text"
                   placeholder="Enter your contact information"
