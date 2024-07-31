@@ -83,7 +83,7 @@ const DonationHistory = () => {
 
     return (
         <Container className="my-5 p-3 border">
-            <h2 className="text-center mb-4">Donation History</h2>
+            <h2 className="text-center mb-4 text-success">Donation History</h2>
             <Row className="g-4">
                 {donationHistory.map(donation => (
                     <Col key={donation.id} xs={12}>

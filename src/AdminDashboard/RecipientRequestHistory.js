@@ -49,7 +49,7 @@ const RecipientRequestHistory = () => {
 
     return (
         <Container className="my-5 p-3 border">
-            <h2 className="text-center mb-4">Recipient Request History</h2>
+            <h2 className="text-center mb-4 text-success">Recipient Request History</h2>
             <Row className="g-4">
                 {requestHistory.map(request => (
                     <Col key={request.id} xs={12}>

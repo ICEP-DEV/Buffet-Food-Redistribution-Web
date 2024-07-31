@@ -7,7 +7,7 @@ const Profile = () => {
 
   const [admin, setAdmin] = useState({
     username: 'admin',
-    fullName: 'Ndumiso',
+    fullName: 'FoodShare',
     email: 'foodShareNetworkAdmin@gmail.com',
     role: 'Administrator',
     createdAt: '2024-06-18',

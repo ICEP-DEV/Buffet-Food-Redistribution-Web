@@ -158,7 +158,7 @@ const RecipientAccounts = () => {
     return (
         <div className="d-flex justify-content-center">
             <Container className="my-4 px-3 m-5 p-3 border">
-                <h2 className="text-center mb-4">Recipient Accounts</h2>
+                <h2 className="text-center mb-4 text-success">Recipient Accounts</h2>
                 {/* <div className="d-flex justify-content-end mb-3">
                     <Button variant="primary" onClick={addUser}>Add Recipient</Button>
                 </div> */}

@@ -717,18 +717,18 @@ const AdminDash = () => {
               >
                 <FaUserCircle /> Profile
               </Nav.Link>
-              <Nav.Link
+              {/* <Nav.Link
                 className={`${isActive('/adminDash/settings') ? 'text-secondary' : 'text-white'} ${isNavbarShaking ? 'shake-animation' : ''}`}
                 onClick={() => { navigate('/adminDash/settings'); handleNavbarItemClick(); }}
               >
                 <FaCog /> Settings
-              </Nav.Link>
-              <Nav.Link
+              </Nav.Link> */}
+              {/* <Nav.Link
                 className={`${isActive('/adminDash/about') ? 'text-secondary' : 'text-white'} ${isNavbarShaking ? 'shake-animation' : ''}`}
                 onClick={() => { navigate('/adminDash/about'); handleNavbarItemClick(); }}
               >
                 <FaInfoCircle /> About
-              </Nav.Link>
+              </Nav.Link> */}
               <Nav.Link
                 className={`${isActive('/adminDash/notifications') ? 'text-secondary' : 'text-white'} ${isNavbarShaking ? 'shake-animation' : ''}`}
                 onClick={handleNotificationsClick}
@@ -766,7 +766,7 @@ const AdminDash = () => {
                 className="rounded-circle mb-2"
                 alt="ProfilePic"
               />
-              <h5 className="mt-2">Ndumiso Buthelezi</h5>
+              <h5 className="mt-2">Food Share</h5>
             </div>
           )}
 

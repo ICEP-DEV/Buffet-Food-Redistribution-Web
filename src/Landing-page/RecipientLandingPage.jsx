@@ -40,7 +40,7 @@ const LandingPage = () => {
                 </Link>
                 <Link to="/RequestedItemsHistory" className="btn btn-light mb-3 w-75 d-flex align-items-center justify-content-center sidebar-link" style={{ marginTop: '20px' }}>
                   <FontAwesomeIcon icon={faCircle} size="lg" className="me-2" />
-                  <span className="fw-bold">Record</span>
+                  <span className="fw-bold">Requests</span>
                 </Link>
                 <Link to="/contact" className="btn btn-light mb-3 w-75 d-flex align-items-center justify-content-center sidebar-link" style={{ marginTop: '20px' }}>
                   <FontAwesomeIcon icon={faEnvelope} size="lg" className="me-2" />
@@ -52,7 +52,7 @@ const LandingPage = () => {
                 </Link>
                 <Link to="/CustomForm" className="btn btn-light mb-3 w-75 d-flex align-items-center justify-content-center sidebar-link" style={{ marginTop: '20px' }}>
                   <FontAwesomeIcon icon={faComment} size="lg" className="me-2" />
-                  <span className="fw-bold">Send Feedback</span>
+                  <span className="fw-bold">Feedback</span>
                 </Link>
                 <Link to="/" onClick={handleLogout} className="btn btn-light mb-3 w-75 d-flex align-items-center justify-content-center sidebar-link" style={{ marginTop: '20px' }}>
                   <FontAwesomeIcon icon={faSignOutAlt} size="lg" className="me-2" />
@@ -61,7 +61,7 @@ const LandingPage = () => {
               </div>
             </div>
             <div className="col-md-10">
-              <div className="text-center position-relative mt-5">
+              <div className="text-center position-relative mt-1">
                 <div className="position-relative">
                   <video autoPlay loop muted className="img-fluid">
                     <source src={video} type="video/mp4"></source>

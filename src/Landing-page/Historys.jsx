@@ -41,7 +41,7 @@ function History() {
   };
 
   return (
-    <div className="container-fluid d-flex flex-column align-items-center bg-light" style={{ minHeight: '100vh', marginTop: '50px', paddingBottom: '50px', overflowY: 'auto' }}>
+    <div className="container-fluid d-flex flex-column align-items-center bg-light" style={{ minHeight: '90vh', marginTop: '50px', paddingBottom: '50px', overflowY: 'auto' }}>
       <h1 className="text-center mt-5 mb-4">Record</h1>
       <ListGroup className="w-100 mb-5" style={{ maxWidth: '800px', maxHeight: '500px', overflowY: 'auto' }}>
         {foodItems.map((item, index) => (

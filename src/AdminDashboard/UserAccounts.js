@@ -70,7 +70,7 @@ const UserAccounts = () => {
     return (
         <div className="d-flex justify-content-center">
             <Container className="my-4 px-3 m-5 p-3 border">
-                <h2 className="text-center mb-4">User Accounts</h2>
+                <h2 className="text-center mb-4 text-success">User Accounts</h2>
                 {/* <div className='bg-success'> */}
                 <div className="d-flex justify-content-between mb-3 align-items-center">
                     <InputGroup className="w-100 ">

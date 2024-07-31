@@ -2,10 +2,10 @@ import React from 'react';
 
 const PrivacyPolicyContent = () => {
   return (
-    <div className="container mt-5">
-      <div className='container-fluid p-5' style={{ backgroundColor: '#F8F8F8', maxWidth: '900px', height: '900px', overflowY: 'scroll' }}>
-        <br />
-        <h2 className="mb-3 text-center">Privacy Policy</h2>
+    <div className="container mt-3">
+      <div className='container-fluid p-5' style={{ backgroundColor: '#F8F8F8', maxWidth: '1500px', height: '1220px' }}>
+        <br></br>
+        <h2 className="mb-4 text-center">Privacy Policy</h2>
         <br />
         <p>
           <h5>FOODSHARE NETWORK PRIVACY PRACTICES</h5>

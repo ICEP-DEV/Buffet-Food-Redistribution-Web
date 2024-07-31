@@ -42,6 +42,7 @@ const NotificationModal = ({ show, handleClose, itemName }) => {
           <p>Error: {error}</p>
         ) : (
           <p>{requesterName} has made a request for {itemName}.</p>
+          
         )}
       </Modal.Body>
       <Modal.Footer>
