@@ -20,7 +20,7 @@ const CookieCard = ({ requesterName, foodName, foodDescription, requestId }) => 
     useEffect(() => {
         const fetchRecipientInfo = async () => {
             try {
-                const response = await axios.get(`http://localhost:5282/api/Email?requestid=${id}`);
+                const response = await axios.get(`http://localhost:5282/api/Email/${id}`);
                 setRecipientInfo(response.data); // Update recipientInfo state with fetched data
             } catch (error) {
                 console.error('Error fetching recipient information:', error);
