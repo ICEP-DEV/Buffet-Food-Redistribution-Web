@@ -157,6 +157,7 @@ const Sidebar = ({ onSelect }) => {
             User Profile
           </Nav.Link>
         </h5>
+        <p></p>
        
         <h5 className='text-center bg-light text-dark rounded'>
           <Nav.Link onClick={() => onSelect('histories')} className="font-weight-bold text-dark">
@@ -165,6 +166,7 @@ const Sidebar = ({ onSelect }) => {
             Donation History
           </Nav.Link>
         </h5>
+        <p></p>
        
         <h5 className='text-center bg-light text-dark rounded'>
           <Nav.Link onClick={() => onSelect('#')} className="font-weight-bold text-dark">
@@ -173,7 +175,7 @@ const Sidebar = ({ onSelect }) => {
             Pending Request
           </Nav.Link>
         </h5>
-       
+        <p></p>
         <h5 className='text-center bg-light text-dark rounded'>
           <Nav.Link onClick={() => onSelect('Reviewfeedback')} className="font-weight-bold text-dark">
             <FontAwesomeIcon icon={faCommenting} className="mr-2" />
@@ -181,7 +183,7 @@ const Sidebar = ({ onSelect }) => {
             Feedback
           </Nav.Link>
         </h5>
-       
+        <p></p>
        
         <h5 className='text-center bg-light text-dark rounded'>
           <Nav.Link onClick={() => onSelect('ProfileSettings')} className="font-weight-bold text-dark">

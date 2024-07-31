@@ -134,7 +134,7 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
-import { FaEye, FaEyeSlash } from 'react-icons/fa'; // Import icons
+import { FaEye, FaEyeSlash } from 'react-icons/fa'; // Import icons for password visibility toggle
 
 const RecepientSignUp = () => {
   const navigate = useNavigate();
@@ -183,8 +183,9 @@ const RecepientSignUp = () => {
 
   return (
     <div>
+      <br/>
       <ToastContainer />
-      <div className="signup" style={{ marginTop: '200px', marginBottom: '50px', paddingTop: '0' }}>
+      <div className="signup" style={{ marginTop: '50px', marginBottom: '80px', paddingTop: '0' }}>
         <form
           style={{
             width: '100%',
@@ -200,7 +201,7 @@ const RecepientSignUp = () => {
         >
           <h3 style={{ textAlign: 'center', margin: '0', lineHeight: '1', paddingBottom: '20px' }}>Sign Up</h3>
           <div className="mb-3">
-            <label style={{ fontWeight: 'bold' }}>Organisation name</label>
+            <label style={{ fontWeight: 'bold' }}>Organisation Name</label>
             <input
               type="text"
               className="form-control"
@@ -210,7 +211,7 @@ const RecepientSignUp = () => {
             />
           </div>
           <div className="mb-3">
-            <label style={{ fontWeight: 'bold' }}>Email address</label>
+            <label style={{ fontWeight: 'bold' }}>Email Address</label>
             <input
               type="email"
               className="form-control"
@@ -220,7 +221,7 @@ const RecepientSignUp = () => {
             />
           </div>
           <div className="mb-3">
-            <label style={{ fontWeight: 'bold' }}>Telephone number</label>
+            <label style={{ fontWeight: 'bold' }}>Telephone Number</label>
             <input
               type="tel"
               className="form-control"
@@ -229,19 +230,16 @@ const RecepientSignUp = () => {
               onChange={(e) => setTelephoneNumber(e.target.value)}
             />
           </div>
-          <div>
+          <div className="mb-3">
             <label style={{ fontWeight: 'bold' }}>Business Address</label>
-            <div className="mb-3">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Enter Street Address"
-                required
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-              />
-            </div>
-            {/* Other address fields */}
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Enter Street Address"
+              required
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+            />
           </div>
           <div className="mb-3 position-relative">
             <label style={{ fontWeight: 'bold' }}>Password</label>
@@ -276,7 +274,7 @@ const RecepientSignUp = () => {
               type="button"
               className="btn btn-light position-absolute end-0 top-50 translate-middle-y"
               style={{ background: 'transparent', border: 'none' }}
-              onClick={() => setConfirmPasswordVisible(!confirmPasswordVisible)} // Toggle password visibility
+              onClick={() => setConfirmPasswordVisible(!confirmPasswordVisible)} // Toggle confirm password visibility
             >
               {confirmPasswordVisible ? <FaEyeSlash /> : <FaEye />}
             </button>
@@ -296,4 +294,3 @@ const RecepientSignUp = () => {
 };
 
 export default RecepientSignUp;
-

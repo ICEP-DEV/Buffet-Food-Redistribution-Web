@@ -229,6 +229,7 @@ import ProfileApp from './Dashboard/profileApp';
 import FoodForm from './Landing-page/FoodForm';
 import ProfileSettings from './Dashboard/ProfileSettings';
 import RequestPage from './pages/request';
+import RecipientProfileApp from './Landing-page/RecipientProfileApp';
 
 // Create UserContext
 export const UserContext = createContext(null);
@@ -356,7 +357,10 @@ function App() {
         <Route path='Dashboard/profileApp' element={<UserProfile />} />
         <Route path='/forgot-password' element={<ForgotPassword />} />
         <Route path="/privacy" element={<PrivacyPolicyContent />} />
-        <Route path="/recipientProfile" element={<RecipientProfile recipient={recipientData} />} />
+        {/* tuesday work recipient profile updates */}
+        <Route path="/recipientProfile" element={<RecipientProfileApp recipient={recipientData} />} />
+
+
         {/* Feedback Routes */}
         <Route path="/form" element={<CustomForm updateFeedbackList={updateFeedbackList} />} />
         <Route path="/display" element={<Reviewfeedback feedbackList={feedbackList} />} />
@@ -367,6 +371,7 @@ function App() {
         <Route path='/profileapp' element={<ProfileApp />} />
         <Route path='/foodform' element={<FoodForm addFoodItem={addFoodItem} />} />
         <Route path='/profile-settings' element={<ProfileSettings />} />
+        <Route path='/recipient-profile' element={<RecipientProfileApp />} />
       </Routes>
 
       <footer className='bg-dark text-white fixed-bottom'>

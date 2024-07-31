@@ -34,38 +34,8 @@ export function ImageGallery() {
           </div>
         ))}
       </div>
-
-      {/* Static Gallery Section */}
-      <div className="container py-5">
-        <h2 className="text-center fs-1 mb-5 text-uppercase fw-bold">Static Image Gallery</h2>
-        <div className="row">
-          <div className="col-md-4 px-2">
-            <div className="my-3">
-              <img src={image1} className="img-fluid" alt="" />
-            </div>
-            <div className="my-3">
-              <img src={image2} className="img-fluid" alt="" />
-            </div>
-          </div>
-          <div className="col-md-4 px-2">
-            <div className="my-3">
-              <img src={image3} className="img-fluid" alt="" />
-            </div>
-            <div className="my-3">
-              <img src={image4} className="img-fluid" alt="" />
-            </div>
-          </div>
-          <div className="col-md-4 px-2">
-            <div className="my-3">
-              <img src={image5} className="img-fluid" alt="" />
-            </div>
-            <div className="my-3">
-              <img src={image6} className="img-fluid" alt="" />
-            </div>
-          </div>
-        </div>
       </div>
-    </div>
+
   );
 };
 
