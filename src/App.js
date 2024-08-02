@@ -423,15 +423,15 @@ import ForgotPassword from './pages/ForgotPassword';
 import PrivacyPolicyContent from './pages/PrivacyPolicyContent';
 import CustomForm from './Landing-page/CustomForm';
 import Reviewfeedback from './Dashboard/Reviewfeedback';
-import RecipientProfile from './Landing-page/RecipientProfile';
+//import RecipientProfile from './Landing-page/RecipientProfile';
 import Historys from './Landing-page/Historys';
 import Donordashboard from './Dashboard/Donordashboard';
 import ProfileApp from './Dashboard/profileApp';
 import FoodForm from './Landing-page/FoodForm';
 import ProfileSettings from './Dashboard/ProfileSettings';
 import RequestPage from './pages/request';
+import RecipientProfileApp from './Landing-page/RecipientProfile';
 import RequestedItemsHistory from './Landing-page/RequestedItemsHistory';
-
 // Create UserContext
 export const UserContext = createContext(null);
 
@@ -476,11 +476,11 @@ function App() {
           Home
         </Nav.Link>
       )}
-      {user.userType === 'admin' && (
+      {/* {user.userType === 'admin' && (
         <Nav.Link as={Link} to='/adminDash' className='active text-uppercase text-white'>
           Home
         </Nav.Link>
-      )}
+      )} */}
     </>
   ) : null;
 
@@ -555,10 +555,13 @@ function App() {
         <Route path='/recepientsignup' element={<RecepientSignUp />} />
         <Route path='/foodlisting' element={<FoodListing />} />
         <Route path='/RecipientLandingPage' element={<RecipientLandingPage />} />
-        <Route path='/profileApp' element={<UserProfile />} />
+        <Route path='Dashboard/profileApp' element={<UserProfile />} />
         <Route path='/forgot-password' element={<ForgotPassword />} />
         <Route path="/privacy" element={<PrivacyPolicyContent />} />
-        <Route path="/recipientProfile" element={<RecipientProfile recipient={recipientData} />} />
+        {/* tuesday work recipient profile updates */}
+        <Route path="/recipientProfile" element={<RecipientProfileApp recipient={recipientData} />} />
+
+
         {/* Feedback Routes */}
         <Route path="/form" element={<CustomForm updateFeedbackList={updateFeedbackList} />} />
         <Route path="/display" element={<Reviewfeedback feedbackList={feedbackList} />} />

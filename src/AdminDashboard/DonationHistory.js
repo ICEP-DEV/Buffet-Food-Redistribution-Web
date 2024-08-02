@@ -55,26 +55,27 @@
 
 import React, { useState, useEffect } from 'react';
 import { Container, Card, Row, Col } from 'react-bootstrap';
+import axios  from 'axios';
 
 const DonationHistory = () => {
     const [donationHistory, setDonationHistory] = useState([]);
-
+    const [error, setError] = useState(null); // Added error state
+    
     useEffect(() => {
         const fetchDonationHistory = async () => {
             try {
-                const response = await fetch('http://localhost:5282/api/FoodItem');
-                if (!response.ok) {
-                    throw new Error('Failed to fetch data');
-                }
-                const data = await response.json();
-                
+                const response = await axios.get('http://localhost:5282/api/FoodItem');
+                const data = response.data;
+
+                console.log('Fetched data:', data); // Log data
+
                 // Sort data by dateCooked in descending order (latest first)
                 data.sort((a, b) => new Date(b.dateCooked) - new Date(a.dateCooked));
 
                 setDonationHistory(data); // Set sorted data
             } catch (error) {
                 console.error('Error fetching donation history:', error);
-                // Optionally handle error state or show a message
+                setError('Error fetching donation history.'); // Set error state
             }
         };
 

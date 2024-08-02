@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircle, faInfoCircle, faEnvelope, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { UserContext } from '../App';
 import Typewriter from 'typewriter-effect'; // Importing Typewriter component
-
+ 
 const LandingPage = () => {
   const { setUser } = useContext(UserContext);
   const navigate = useNavigate();
@@ -26,9 +26,10 @@ const LandingPage = () => {
             <div className="col-md-2 p-0">
               <div className="bg-secondary text-light vh-100 d-flex flex-column align-items-center pt-3 rounded-end">
                 <img src={logo} alt="Food Share Network Logo rounded-end" className="img-fluid mb-3 rounded-end" style={{ maxWidth: '80%' }} />
-                <Link to="/Donordashboard" className="btn btn-light mb-3 w-75 d-flex align-items-center justify-content-center sidebar-link" style={{ marginTop: '20px' }}>
+                <Link to="/ProfileApp" className="btn btn-light mb-3 w-75 d-flex align-items-center justify-content-center sidebar-link" style={{ marginTop: '20px' }}>
                   <FaTachometerAlt size={20} className="me-2" />
-                  <span className="fw-bold">Dashboard</span>
+                  {/* <span className="fw-bold">Dashboard</span> */}
+                  <span className="fw-bold">Profile</span>
                 </Link>
                 <Link to="/foodform" className="btn btn-light mb-3 w-75 d-flex align-items-center justify-content-center sidebar-link" style={{ marginTop: '20px' }}>
                   <BiDonateHeart size={20} className="me-2" />
