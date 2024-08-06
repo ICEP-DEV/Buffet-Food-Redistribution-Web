@@ -1,96 +1,76 @@
 import React, { useState, useEffect } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserCircle, faUser, faEnvelope, faPhone, faMapMarker, faEdit, faSave, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faEnvelope, faPhone, faMapMarker, faUserCircle, faTrash, faEdit, faSave } from '@fortawesome/free-solid-svg-icons';
+import 'bootstrap/dist/css/bootstrap.css';
+import axios from 'axios';
 
-const RecipientProfile = () => {
-  const [userData, setUserData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+const ProfileVeiw = ({ userData = {}, onEdit, onDelete }) => {
   const [editMode, setEditMode] = useState(false);
-  const [editedUserData, setEditedUserData] = useState({});
+  const [editedUserData, setEditedUserData] = useState(userData);
 
   useEffect(() => {
-    const fetchUserProfile = async () => {
-      const token = localStorage.getItem('token');
-      if (!token) {
-        setLoading(false);
-        setError('No token available');
-        return;
-      }
-
-      try {
-        const response = await axios.get("http://localhost:5282/api/Recipient/Profile", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        setUserData(response.data);
-        setEditedUserData(response.data); // Initialize editedUserData with userData
-      } catch (err) {
-        setError(err.message || 'Error fetching user data');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchUserProfile();
-  }, []);
+    setEditedUserData(userData);
+  }, [userData]);
 
   const handleEditClick = () => {
     setEditMode(true);
   };
 
   const handleSaveClick = async () => {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      setError('No token available');
-      return;
-    }
-
     try {
-      const response = await axios.put("http://localhost:5282/api/Recipient/Profile", editedUserData, {
+      const { password, ...userDataWithoutPassword } = editedUserData;
+      const token = localStorage.getItem('token');
+
+      if (!token) {
+        throw new Error('No token available');
+      }
+
+      const response = await axios.put("http://localhost:5282/api/Donor", userDataWithoutPassword, {
         headers: {
-          Authorization: `Bearer ${token}`,
-        },
+          Authorization: `Bearer ${token}`
+        }
       });
-      setUserData(response.data); // Update user data with response
+
+      onEdit(editedUserData);
       setEditMode(false);
-    } catch (err) {
-      setError(err.message || 'Error updating user data');
+      console.log(response.data);
+    } catch (error) {
+      console.error('Error updating user:', error);
     }
   };
 
   const handleDeleteClick = async () => {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      setError('No token available');
-      return;
-    }
-
     try {
-      await axios.delete("http://localhost:5282/api/Recipient/Profile", {
+      const token = localStorage.getItem('token');
+
+      if (!token) {
+        throw new Error('No token available');
+      }
+
+      const response = await axios.delete("http://localhost:5282/api/Donor/Profile", {
         headers: {
-          Authorization: `Bearer ${token}`,
-        },
+          Authorization: `Bearer ${token}`
+        }
       });
-      setUserData(null);
-    } catch (err) {
-      setError(err.message || 'Error deleting user');
+
+      onDelete();
+      console.log(response.data);
+    } catch (error) {
+      console.error('Error deleting user:', error);
     }
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setEditedUserData((prevState) => ({
+    setEditedUserData(prevState => ({
       ...prevState,
-      [name]: value,
+      [name]: value
     }));
   };
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
+  if (!userData.donorName) {
+    return <p>No user data available.</p>;
+  }
 
   return (
     <div style={{ position: 'relative', minHeight: '94vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
@@ -108,9 +88,9 @@ const RecipientProfile = () => {
                   <strong>Name:</strong>
                 </div>
                 {!editMode ? (
-                  <p>{userData.recipientName}</p>
+                  <p>{userData.donorName}</p>
                 ) : (
-                  <input type="text" className="form-control" name="donorName" value={editedUserData.recipientName || ''} onChange={handleChange} />
+                  <input type="text" className="form-control" name="donorName" value={editedUserData.donorName || ''} onChange={handleChange} />
                 )}
               </div>
               <div className="mb-3">
@@ -119,9 +99,9 @@ const RecipientProfile = () => {
                   <strong>Email:</strong>
                 </div>
                 {!editMode ? (
-                  <p>{userData.recipientEmail}</p>
+                  <p>{userData.donorEmail}</p>
                 ) : (
-                  <input type="email" className="form-control" name="donorEmail" value={editedUserData.recipientEmail || ''} onChange={handleChange} />
+                  <input type="email" className="form-control" name="donorEmail" value={editedUserData.donorEmail || ''} onChange={handleChange} />
                 )}
               </div>
               <div className="mb-3">
@@ -130,9 +110,9 @@ const RecipientProfile = () => {
                   <strong>Telephone:</strong>
                 </div>
                 {!editMode ? (
-                  <p>{userData.recipientPhoneNum}</p>
+                  <p>{userData.donorPhoneNum}</p>
                 ) : (
-                  <input type="tel" className="form-control" name="donorPhoneNum" value={editedUserData.recipientPhoneNum || ''} onChange={handleChange} />
+                  <input type="tel" className="form-control" name="donorPhoneNum" value={editedUserData.donorPhoneNum || ''} onChange={handleChange} />
                 )}
               </div>
               <div className="mb-3">
@@ -141,9 +121,9 @@ const RecipientProfile = () => {
                   <strong>Address:</strong>
                 </div>
                 {!editMode ? (
-                  <p>{userData.recipientAddress}</p>
+                  <p>{userData.donorAddress}</p>
                 ) : (
-                  <input type="text" className="form-control" name="donorAddress" value={editedUserData.recipientAddress || ''} onChange={handleChange} />
+                  <input type="text" className="form-control" name="donorAddress" value={editedUserData.donorAddress || ''} onChange={handleChange} />
                 )}
               </div>
             </div>
@@ -164,6 +144,5 @@ const RecipientProfile = () => {
       </div>
     </div>
   );
-};
-
-export default RecipientProfile;
+}
+export default ProfileVeiw;
