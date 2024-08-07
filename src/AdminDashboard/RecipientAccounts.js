@@ -183,14 +183,14 @@ const RecipientAccounts = () => {
                                     <td>{user.recipientPhoneNum}</td>
                                     <td>{user.recipientAddress}</td>
                                     <td>
-                                        <Button
+                                        {/* <Button
                                             className="me-2"
                                             size="sm"
                                             variant="outline-primary"
                                             onClick={() => updateUser(user.id)}
                                         >
                                             Edit
-                                        </Button>
+                                        </Button> */}
                                         <Button
                                             size="sm"
                                             variant="outline-danger"

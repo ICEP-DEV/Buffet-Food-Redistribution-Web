@@ -54,7 +54,7 @@ const LandingPage = () => {
               </div>
             </div>
             <div className="col-md-10">
-              <div className="text-center position-relative mt-5">
+              <div className="text-center position-relative mt-0">
                 <div className="position-relative">
                   <video
                     autoPlay

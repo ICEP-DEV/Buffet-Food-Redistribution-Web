@@ -106,14 +106,14 @@ const UserAccounts = () => {
                                     <td>{user.donorAddress}</td>
                                     
                                     <td>
-                                        <Button
+                                        {/* <Button
                                             className="me-2"
                                             size="sm"
                                             variant="outline-primary"
                                             onClick={() => updateUser(user.donorId)}
                                         >
                                             Edit
-                                        </Button>
+                                        </Button> */}
                                         <Button
                                             size="sm"
                                             variant="outline-danger"

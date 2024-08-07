@@ -11,24 +11,24 @@ function TermsModal({ show, handleClose }) {
         <p>
           {/* Add your terms and conditions text here */}
           <div>
-           Agreement to maintaining the highest standards of food safety and hygiene to ensure the quality of redistributed food.</div>
+           1. Agreement to maintaining the highest standards of food safety and hygiene to ensure the quality of redistributed food.</div>
           <div>
-           Donors agree to donate only safe, unspoiled food and only food that is proven safe to consume. 
+           2. Donors agree to donate only safe, unspoiled food and only food that is proven safe to consume. 
           </div>
           <div>
-           Agreement to donate food that is not cooked 12 or more hours ago.
+           3. Agreement to donate food that is not cooked 12 or more hours ago.
           </div>
           <div>
-           The redistribution system is not liable for any illness or injury resulting from the consumption of redistributed food.
+           4. The redistribution system is not liable for any illness or injury resulting from the consumption of redistributed food.
           </div>
           <div>
-           Donors agree to abide by any and all applicable laws, regulations, and ordinances related to food donation and redistribution.
+           5. Donors agree to abide by any and all applicable laws, regulations, and ordinances related to food donation and redistribution.
           </div>
           <div>
-           By donating food, you agree to comply with all applicable laws and regulations.
+           6. By donating food, you agree to comply with all applicable laws and regulations.
           </div>
           <div>
-           Violating each of the above mentioned conditions, lawful actions may be taken against the violator.
+           7. Violating each of the above mentioned conditions, lawful actions may be taken against the violator.
           </div> 
           
         </p>
