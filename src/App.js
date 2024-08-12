@@ -33,6 +33,9 @@ import RequestPage from './pages/request';
 import RecipientProfileApp from './Landing-page/RecipientProfile';
 import RequestedItemsHistory from './Landing-page/RequestedItemsHistory';
 import FoodShareLogo from './components/FoodShareNetwork.jpeg';
+import SecurityPolicy from './pages/SecurityPolicy';
+import TermsOfUse from './pages/TermsOfUse';
+import AcceptedFoodPage from './pages/AcceptedFoodPage';
 // Create UserContext
 export const UserContext = createContext(null);
 
@@ -166,6 +169,11 @@ function App() {
         <Route path='Dashboard/profileApp' element={<UserProfile />} />
         <Route path='/forgot-password' element={<ForgotPassword />} />
         <Route path="/privacy" element={<PrivacyPolicyContent />} />
+        <Route path="/security" element={<SecurityPolicy />} />
+        <Route path="/terms of use" element={<TermsOfUse />} />
+        <Route path="/accepted food" element={<AcceptedFoodPage />} />
+        
+        
         {/* tuesday work recipient profile updates */}
         <Route path="/recipientProfile" element={<RecipientProfileApp recipient={recipientData} />} />
 

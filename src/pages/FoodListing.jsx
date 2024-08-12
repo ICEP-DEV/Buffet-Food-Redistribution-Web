@@ -299,6 +299,7 @@ function FoodListing({ acceptRequest, declineRequest }) {
   return (
     <div>
       <br></br>
+      <br></br>
       <h2 className="mt-5 mb-3 text-center">Available Donations</h2>
       <div className="d-flex justify-content-center mb-4">
         <InputGroup className="w-25 rounded-pill">
@@ -344,8 +345,10 @@ function FoodListing({ acceptRequest, declineRequest }) {
                         </tr>
                       </thead>
                     </table>
+                    
                   </div>
                 </div>
+                
                 <button
                   onClick={() => handleRequestClick(item)}
                   className="btn btn-primary mt-2 align-self-end"
@@ -355,10 +358,16 @@ function FoodListing({ acceptRequest, declineRequest }) {
                 </button>
               </div>
             </div>
+            
           </div>
-        ))}
+          
+        ))}<br></br>
+      <div><br></br>
+      <br></br></div>
+      <div><br></br>
+      <br></br></div>
       </div>
-
+      
       <Modal show={showModal} onHide={handleModalClose}>
         <Modal.Header closeButton>
           <Modal.Title>Confirm Request</Modal.Title>
@@ -377,6 +386,7 @@ function FoodListing({ acceptRequest, declineRequest }) {
       </Modal>
 
     </div>
+    
   );
 }
 

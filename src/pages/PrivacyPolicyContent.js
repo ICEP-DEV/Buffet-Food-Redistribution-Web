@@ -3,7 +3,10 @@ import React from 'react';
 const PrivacyPolicyContent = () => {
   return (
     <div className="container mt-3">
-      <div className='container-fluid p-5' style={{ backgroundColor: '#F8F8F8', maxWidth: '1500px', height: '1220px' }}>
+      <br />
+      <br />
+      <br />
+      <div className='container-fluid p-2' style={{ backgroundColor: '#F8F8F8', maxWidth: '900px', height: 'auto', border: '5px solid #E8E8E8'  }}>
         <br></br>
         <h2 className="mb-4 text-center">Privacy Policy</h2>
         <br />
@@ -77,6 +80,9 @@ const PrivacyPolicyContent = () => {
         <br />
         {/* Add more detailed privacy policy content as needed */}
       </div>
+      
+      <br />
+      <br />
       <br />
     </div>
   );

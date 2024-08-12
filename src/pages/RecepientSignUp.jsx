@@ -55,7 +55,6 @@ const RecepientSignUp = () => {
       <br/>
       <br/>
       <br/>
-      <br/>
       <ToastContainer />
       <div className="signup" style={{ marginTop: '50px', marginBottom: '80px', paddingTop: '0' }}>
         <form
@@ -160,6 +159,8 @@ const RecepientSignUp = () => {
             Already registered? <a href="/login">Login</a>
           </p>
         </form>
+        <br></br>
+        <br></br>
       </div>
     </div>
   );

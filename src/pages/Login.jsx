@@ -1,4 +1,3 @@
-
 // import React, { useState, useContext, useEffect } from 'react';
 // import axios from 'axios';
 // import { useNavigate, Link } from 'react-router-dom';
@@ -6,6 +5,7 @@
 // import 'react-toastify/dist/ReactToastify.css';
 // import { UserContext } from '../App';
 // import 'bootstrap/dist/css/bootstrap.min.css';
+// import '@fortawesome/fontawesome-free/css/all.min.css'; // Import Font Awesome
 
 // const Login = ({ onLoginSuccess }) => {
 //   const [email, setEmail] = useState('');
@@ -161,7 +161,7 @@
 //                 onClick={togglePasswordVisibility}
 //                 style={{ backgroundColor: '#fff', color: '#333' }}
 //               >
-//                 {showPassword ? 'Hide' : 'Show'}
+//                 <i className={`fas fa-eye${showPassword ? '' : '-slash'}`}></i>
 //               </button>
 //             </div>
 //           </div>
@@ -194,8 +194,6 @@
 // };
 
 // export default Login;
-
-
 
 import React, { useState, useContext, useEffect } from 'react';
 import axios from 'axios';
@@ -301,95 +299,113 @@ const Login = ({ onLoginSuccess }) => {
   };
 
   return (
-    <div className="signup-container" style={{ height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', margin: 0 }}>
+    <div className="container d-flex align-items-center justify-content-center min-vh-100">
       <ToastContainer />
-      <div className="signup">
-        <form style={{ width: '450px', margin: 'auto', background: '#A9A9A9', boxShadow: '0px 14px 80px rgba(34, 35, 58, 0.2)', padding: '40px 55px 45px 55px', borderRadius: '15px', transition: 'all .3s' }} onSubmit={handleLogin}>
-          <h3 style={{ textAlign: 'center', margin: '0', lineHeight: '1', paddingBottom: '20px' }}>Login</h3>
-          <div style={{ marginBottom: '15px' }}>
-            <input
-              type="radio"
-              name="userType"
-              value="Recipient"
-              onChange={(e) => setUserType(e.target.value)}
-              required
-            />{' '}
-            Recipient{' '}
-            <input
-              type="radio"
-              name="userType"
-              value="Donor"
-              onChange={(e) => setUserType(e.target.value)}
-              required
-            />{' '}
-            Donor{' '}
-            <input
-              type="radio"
-              name="userType"
-              value="Admin"
-              onChange={(e) => setUserType(e.target.value)}
-            />{' '}
-            Admin
-          </div>
-          {error && <div className="alert alert-danger">{error}</div>}
-          <div className="mb-3">
-            <label>Email address</label>
-            <input
-              type="email"
-              className="form-control"
-              placeholder="Enter email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
-          <div className="mb-3">
-            <label>Password</label>
-            <div className="input-group">
-              <input
-                type={showPassword ? 'text' : 'password'}
-                className="form-control"
-                placeholder="Enter password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-              <button
-                type="button"
-                className="btn btn-outline-secondary"
-                onClick={togglePasswordVisibility}
-                style={{ backgroundColor: '#fff', color: '#333' }}
-              >
-                <i className={`fas fa-eye${showPassword ? '' : '-slash'}`}></i>
-              </button>
-            </div>
-          </div>
-          {userType !== 'Admin' && (
-            <div className="mb-3">
-              <div className="custom-control custom-checkbox">
+      <div className="row justify-content-center w-100">
+        <div className="col-md-8 col-lg-6 col-xl-4">
+          <div className="signup">
+            <form
+              style={{
+                width: '100%',
+                background: '#A9A9A9',
+                boxShadow: '0px 14px 80px rgba(34, 35, 58, 0.2)',
+                padding: '40px 55px 45px 55px',
+                borderRadius: '15px',
+                transition: 'all .3s'
+              }}
+              onSubmit={handleLogin}
+            >
+              <h3 style={{ textAlign: 'center', margin: '0', lineHeight: '1', paddingBottom: '20px' }}>
+                Login
+              </h3>
+              <div style={{ marginBottom: '15px' }}>
                 <input
-                  type="checkbox"
-                  className="custom-control-input"
-                  id="customCheck1"
-                />
-                <label className="custom-control-label" htmlFor="customCheck1">
-                  Remember me
-                </label>
+                  type="radio"
+                  name="userType"
+                  value="Recipient"
+                  onChange={(e) => setUserType(e.target.value)}
+                  required
+                />{' '}
+                Recipient{' '}
+                <input
+                  type="radio"
+                  name="userType"
+                  value="Donor"
+                  onChange={(e) => setUserType(e.target.value)}
+                  required
+                />{' '}
+                Donor{' '}
+                <input
+                  type="radio"
+                  name="userType"
+                  value="Admin"
+                  onChange={(e) => setUserType(e.target.value)}
+                />{' '}
+                Admin
               </div>
-            </div>
-          )}
-          <div className="d-grid">
-            <button type="submit" className="btn btn-dark" style={{ width: '100%' }}>
-              Submit
-            </button>
+              {error && <div className="alert alert-danger">{error}</div>}
+              <div className="mb-3">
+                <label>Email address</label>
+                <input
+                  type="email"
+                  className="form-control"
+                  placeholder="Enter email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="mb-3">
+                <label>Password</label>
+                <div className="input-group">
+                  <input
+                    type={showPassword ? 'text' : 'password'}
+                    className="form-control"
+                    placeholder="Enter password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                  />
+                  <button
+                    type="button"
+                    className="btn btn-outline-secondary"
+                    onClick={togglePasswordVisibility}
+                    style={{ backgroundColor: '#fff', color: '#333' }}
+                  >
+                    <i className={`fas fa-eye${showPassword ? '' : '-slash'}`}></i>
+                  </button>
+                </div>
+              </div>
+              {userType !== 'Admin' && (
+                <div className="mb-3">
+                  <div className="custom-control custom-checkbox">
+                    <input
+                      type="checkbox"
+                      className="custom-control-input"
+                      id="customCheck1"
+                    />
+                    <label className="custom-control-label" htmlFor="customCheck1">
+                      Remember me
+                    </label>
+                  </div>
+                </div>
+              )}
+              <div className="d-grid">
+                <button type="submit" className="btn btn-dark" style={{ width: '100%' }}>
+                  Submit
+                </button>
+              </div>
+              <p className="forgot-password text-right mt-3">
+                Forgot <Link to="/forgot-password">password?</Link>
+              </p>
+            </form>
           </div>
-          <p className="forgot-password text-right">
-            Forgot <Link to="/forgot-password">password?</Link>
-          </p>
-        </form>
+        </div>
       </div>
     </div>
   );
 };
 
 export default Login;
+
+

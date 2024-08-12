@@ -117,6 +117,7 @@ function FoodForm() {
                   value={itemName}
                   onChange={(e) => setItemName(e.target.value)}
                   style={{ color: 'rgba(0, 0, 0, 1.5)' }}
+                  required
                 />
               </InputGroup>
             </Form.Group>
@@ -130,7 +131,7 @@ function FoodForm() {
                   value={itemQuantity}
                   onChange={(e) => setItemQuantity(e.target.value)}
                   min="0"
-                  style={{ color: 'rgba(0, 0, 0, 1.5)' }}
+                  style={{ color: 'rgba(0, 0, 0, 1.5)' }} required
                 />
               </InputGroup>
             </Form.Group>
@@ -144,6 +145,7 @@ function FoodForm() {
                   value={itemDescription}
                   onChange={(e) => setItemDescription(e.target.value)}
                   style={{ color: 'rgba(0, 0, 0, 1.5)' }}
+                  required
                 />
               </InputGroup>
             </Form.Group>
@@ -160,7 +162,9 @@ function FoodForm() {
                   inputProps={{
                     placeholder: 'Enter time cooked',
                     style: { color: 'rgba(0, 0, 0, 1.5)' }
+
                   }}
+                  required
                 />
               </InputGroup>
             </Form.Group>
@@ -174,6 +178,7 @@ function FoodForm() {
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
                   style={{ color: 'rgba(0, 0, 0, 1.5)' }}
+                  required
                 />
               </InputGroup>
             </Form.Group>
@@ -182,11 +187,12 @@ function FoodForm() {
               <InputGroup className="border rounded">
                 <InputGroup.Text><FaEnvelope  /></InputGroup.Text>
                 <Form.Control
-                  type="text"
+                  type="email"
                   placeholder="Enter your email address"
                   value={contact}
                   onChange={(e) => setContact(e.target.value)}
                   style={{ color: 'rgba(0, 0, 0, 1.5)' }}
+                  required
                 />
               </InputGroup>
             </Form.Group>

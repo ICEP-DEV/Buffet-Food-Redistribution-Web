@@ -20,6 +20,7 @@ const LandingPage = () => {
 
   return (
     <>
+    <br></br>
       <section id="video-section" className="header-banner mb-3 mt-5">
         <div className="container-fluid">
           <div className="row align-items-center">

@@ -149,14 +149,14 @@ function Home() {
                   <Link to="/ambassadors" className="text-decoration-none text-dark mb-3">
                     Our Ambassadors
                   </Link>
-                  <Link to="/terms" className="text-decoration-none text-dark mb-3">
-                    Terms and Conditions
+                  <Link to="/terms of use" className="text-decoration-none text-dark mb-3">
+                    Terms of Use
                   </Link>
                   <Link to="/privacy" className="text-decoration-none text-dark mb-3">
                     Privacy Policy
                   </Link>
                   
-                  <Link to="/privacy" className="text-decoration-none text-dark">
+                  <Link to="/security" className="text-decoration-none text-dark">
                     Security
                   </Link>
                 </div>

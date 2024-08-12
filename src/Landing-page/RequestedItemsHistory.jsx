@@ -1,56 +1,4 @@
 // import React, { useState, useEffect } from 'react';
-
-// const RequestedItemsHistory = () => {
-//   const [requestedItems, setRequestedItems] = useState([]);
-
-//   useEffect(() => {
-//     // Fetch requested items from localStorage on component mount
-//     const storedRequestedItems = JSON.parse(localStorage.getItem('requestedItems')) || [];
-//     setRequestedItems(storedRequestedItems);
-//   }, []);
-
-//   const formatCookedTime = (dateCooked) => {
-//     if (!dateCooked) return 'Not specified';
-
-//     const dateObject = new Date(dateCooked);
-//     if (isNaN(dateObject.getTime())) return 'Invalid date';
-
-//     return dateObject.toLocaleString();
-//   };
-
-//   return (
-//     <div className="container mt-5">
-//       <h2 className="text-center mb-5 pt-4">Request History</h2>
-//       {requestedItems.length === 0 ? (
-//         <p className="text-center">You have not requested any items yet.</p>
-//       ) : (
-//         <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-//           {requestedItems.map((item, index) => (
-//             <div key={index} className="col mb-3">
-//               <div className="card h-100">
-//                 <div className="card-body">
-//                   <h5 className="card-title">{item.itemName}</h5>
-//                   <p className="card-text">
-//                     <strong>Quantity:</strong> {item.quantity}<br />
-//                     <strong>Description:</strong> {item.description}<br />
-//                     <strong>Time Cooked:</strong> {formatCookedTime(item.dateCooked)}<br />
-//                     <strong>Address:</strong> {item.address}<br />
-//                     <strong>Requested Time:</strong> {new Date(item.requestTime).toLocaleString()}
-//                   </p>
-//                 </div>
-//               </div>
-//             </div>
-//           ))}
-//         </div>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default RequestedItemsHistory;
-
-
-// import React, { useState, useEffect } from 'react';
 // import axios from 'axios';
 
 // const RequestedItemsHistory = () => {
@@ -97,27 +45,19 @@
 //   };
 
 //   return (
-//     <div className="container mt-5 w-100">
+//     <div className="container mt-5">
+//       <br></br>
 //       <h2 className="text-center mb-5 pt-4">Request History</h2>
 //       {requestedItems.length === 0 ? (
 //         <p className="text-center">You have not requested any items yet.</p>
 //       ) : (
-//         <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 ">
+//         <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
 //           {requestedItems.map((item, index) => (
-//             <div key={index} className="col mb-3">
-//               <div className="card h-100 "style={{ width: '30rem' }}>
+//             <div key={index} className="col mb-4"> {/* Add bottom margin here */}
+//               <div className="card h-100" style={{ width: '100%' }}>
 //                 <div className="card-body">
 //                   <h5 className="card-title text-center">{item.itemName}</h5>
-//                   {/* <p className="card-text">
-//                     <strong>Quantity:</strong> {item.quantity}<br />
-//                     <strong>Description:</strong> {item.description}<br />
-//                     <strong>Time Cooked:</strong> {formatCookedTime(item.dateCooked)}<br />
-//                     <strong>Address:</strong> {item.address}<br />
-//                     <strong>Requested Time:</strong> {new Date(item.requestTime).toLocaleString()}<br />
-//                     <strong>Status:</strong> {getRequestStatus(item.id)}
-//                   </p> */}
-
-
+                  
 //                   <div className="table-responsive">
 //                     <table className="table table-bordered">
 //                       <thead>
@@ -144,7 +84,6 @@
 //                       </thead>
 //                     </table>
 //                   </div>
-
                   
 //                 </div>
 //               </div>
@@ -204,8 +143,14 @@ const RequestedItemsHistory = () => {
     return dateObject.toLocaleString();
   };
 
+  const handleClearStorage = () => {
+    localStorage.removeItem('requestedItems');
+    setRequestedItems([]);
+  };
+
   return (
     <div className="container mt-5">
+      <br></br>
       <h2 className="text-center mb-5 pt-4">Request History</h2>
       {requestedItems.length === 0 ? (
         <p className="text-center">You have not requested any items yet.</p>
@@ -249,8 +194,16 @@ const RequestedItemsHistory = () => {
             </div>
           ))}
         </div>
-      )}
+      )}<div className="text-center mb-3">
+      {/* <button className="btn btn-danger" onClick={handleClearStorage}>
+        Clear Request History
+      </button> */}
     </div>
+    <br></br>
+    <br></br>
+    <br></br>
+    </div>
+    
   );
 };
 
