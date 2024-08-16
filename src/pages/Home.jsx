@@ -9,7 +9,7 @@ import AboutImg from '../utils/img/img3.jpeg';
 import ContactImage from '../utils/img/contact-img.jpg';
 import Typewriter from 'typewriter-effect';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPhone, faEnvelope, faMapMarkerAlt, faFax } from '@fortawesome/free-solid-svg-icons';
+import { faPhone, faEnvelope, faMapMarkerAlt, faFax, faEnvelopeOpenText } from '@fortawesome/free-solid-svg-icons';
 
 function Home() {
   const [firstName, setFirstName] = useState('');
@@ -127,15 +127,53 @@ function Home() {
                   <h2 className="fs-1 mb-5 text-uppercase fw-bold">Contact Us</h2>
                   <p className="text-start">
                     <FontAwesomeIcon icon={faPhone} className="me-2" />
-                    071 371 8393
+                    <a href="tel:+2713718393" style={{
+                          textDecoration: 'none',
+                          color: 'black',
+                          transition: 'color 0.3s',
+                        }}
+                        onMouseEnter={(e) => (e.target.style.color = 'blue')}
+                        onMouseLeave={(e) => (e.target.style.color = 'black')}
+                        >Call us!
+                        </a>
+                  </p>
+                  <p className="text-start">
+                    <FontAwesomeIcon icon={faEnvelopeOpenText} className="me-2" />
+                    <a
+                        href="sms:0713718393"
+                        style={{
+                          textDecoration: 'none',
+                          color: 'black',
+                          transition: 'color 0.3s',
+                        }}
+                        onMouseEnter={(e) => (e.target.style.color = 'blue')}
+                        onMouseLeave={(e) => (e.target.style.color = 'black')}
+                          >Send a message!
+                     </a>
                   </p>
                   <p className="text-start">
                     <FontAwesomeIcon icon={faEnvelope} className="me-2" />
-                    networkfoodshare@gmail.com
+                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=networkfoodshare@gmail.com" style={{
+                          textDecoration: 'none',
+                          color: 'black',
+                          transition: 'color 0.3s',
+                        }}
+                        onMouseEnter={(e) => (e.target.style.color = 'blue')}
+                        onMouseLeave={(e) => (e.target.style.color = 'black')}
+                        >networkfoodshare@gmail.com
+                        </a>
                   </p>
                   <p className="text-start">
                     <FontAwesomeIcon icon={faFax} className="me-2" />
-                    Fax: (098) 765-4321
+                    Fax  <a href="https://www.hellofax.com" rel="noopener noreferrer" style={{
+                          textDecoration: 'none',
+                          color: 'black',
+                          transition: 'color 0.3s',
+                        }}
+                        onMouseEnter={(e) => (e.target.style.color = 'blue')}
+                        onMouseLeave={(e) => (e.target.style.color = 'black')}
+                        >(098) 765-4321
+                        </a>
                   </p>
                   <p className="text-start">
                     <FontAwesomeIcon icon={faMapMarkerAlt} className="me-2" />
@@ -146,17 +184,45 @@ function Home() {
               <div className="col-lg-3 ps-lg-5">
                 <div className="d-flex flex-column align-items-start">
                   <h2 className="fs-1 mb-5 text-uppercase fw-bold">Resources</h2>
-                  <Link to="/ambassadors" className="text-decoration-none text-dark mb-3">
+                  <Link to="/ambassadors" style={{
+                          textDecoration: 'none',
+                          color: 'black',
+                          transition: 'color 0.3s',
+                          marginBottom: '12px',
+                        }}
+                        onMouseEnter={(e) => (e.target.style.color = 'blue')}
+                        onMouseLeave={(e) => (e.target.style.color = 'black')}>
                     Our Ambassadors
                   </Link>
-                  <Link to="/terms of use" className="text-decoration-none text-dark mb-3">
+                  <Link to="/terms of use" style={{
+                          textDecoration: 'none',
+                          color: 'black',
+                          transition: 'color 0.3s',
+                          marginBottom: '12px',
+                        }}
+                        onMouseEnter={(e) => (e.target.style.color = 'blue')}
+                        onMouseLeave={(e) => (e.target.style.color = 'black')}>
                     Terms of Use
                   </Link>
-                  <Link to="/privacy" className="text-decoration-none text-dark mb-3">
+                  <Link to="/privacy" style={{
+                          textDecoration: 'none',
+                          color: 'black',
+                          transition: 'color 0.3s',
+                          marginBottom: '12px',
+                        }}
+                        onMouseEnter={(e) => (e.target.style.color = 'blue')}
+                        onMouseLeave={(e) => (e.target.style.color = 'black')}>
                     Privacy Policy
                   </Link>
                   
-                  <Link to="/security" className="text-decoration-none text-dark">
+                  <Link to="/security" style={{
+                          textDecoration: 'none',
+                          color: 'black',
+                          transition: 'color 0.3s',
+                          marginBottom: '12px',
+                        }}
+                        onMouseEnter={(e) => (e.target.style.color = 'blue')}
+                        onMouseLeave={(e) => (e.target.style.color = 'black')}>
                     Security
                   </Link>
                 </div>

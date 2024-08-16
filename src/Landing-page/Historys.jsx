@@ -41,9 +41,10 @@ function History() {
   };
 
   return (
-    <div className="container-fluid d-flex flex-column align-items-center bg-light" style={{ minHeight: '90vh', marginTop: '50px', paddingBottom: '50px', overflowY: 'auto' }}>
+    <div className="container-fluid d-flex flex-column align-items-center bg-light" style={{ minHeight: '100vh', marginTop: '50px', paddingBottom: '50px', overflowY: 'auto' }}>
       <h1 className="text-center mt-5 mb-4">Record</h1>
-      <ListGroup className="w-100 mb-5" style={{ maxWidth: '800px', maxHeight: '500px', overflowY: 'auto' }}>
+        
+      <ListGroup className="w-100 mb-5" style={{ maxWidth: '800px', maxHeight: '600px', overflowY: 'auto' }}>
         {foodItems.map((item, index) => (
           <ListGroup.Item key={index} className="border rounded d-flex flex-column flex-md-row justify-content-between align-items-center mt-3 p-3 bg-secondary text-light">
             <div className="flex-grow-1">
@@ -52,7 +53,7 @@ function History() {
               <div>Address: {item.address}</div>
               <div>Added at: {formatTime(item.addedAt)}, {formatDate(item.addedAt)}</div>
             </div>
-            <Button variant="dark" className="mt-3 mt-md-0 ml-md-3" onClick={() => handleRemove(index)}>Remove</Button>
+            <Button variant="danger" className="mt-3 mt-md-0 ml-md-3 " onClick={() => handleRemove(index)}>Remove</Button>
           </ListGroup.Item>
         ))}
       </ListGroup>

@@ -6,7 +6,7 @@ function SecurityPolicy() {
       <br />
       <br />
       <br />
-    
+      
         <div className='container-fluid p-5' style={{ backgroundColor: '#F8F8F8', maxWidth: '900px', height: 'auto', border: '5px solid #E8E8E8' }}>
         <br></br>
         <h1 className="mb-2 mt-0 text-center">Security Policy</h1>

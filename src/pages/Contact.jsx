@@ -39,7 +39,8 @@ function Contact() {
                   </p>
                   <p className="text-start">
                     <FontAwesomeIcon icon={faEnvelope} className="me-2" />
-                    networkfoodshare@gmail.com
+                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=networkfoodshare@gmail.com" target="_blank">networkfoodshare@gmail.com</a>
+
                   </p>
                   <p className="text-start">
                     <FontAwesomeIcon icon={faFax} className="me-2" />
