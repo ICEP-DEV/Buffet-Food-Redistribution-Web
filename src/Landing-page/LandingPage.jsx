@@ -152,20 +152,34 @@ const LandingPage = () => {
       default:
         return (
           <>
-            <div className="text-center position-relative mt-5">
+            <div className="text-center position-relative mt-2">
               <div className="position-relative">
-                <video autoPlay loop muted className="img-fluid">
+                <video autoPlay loop muted className="img-fluid mt-0">
                   <source src={video} type="video/mp4" />
                 </video>
                 <div className="position-absolute w-100 h-100" style={{ top: 0, left: 0, backgroundColor: 'rgba(0, 0, 0, 0.3)' }}></div>
-                <div className="position-absolute top-30 start-50 translate-middle text-white text-center">
-                  <h1 className="text-white fw-bold">
-                    <Typewriter options={{ strings: ['Welcome to FoodShare Network!'], autoStart: true, loop: true }} />
-                  </h1>
-                  <p className="text-white fw-bold">
-                    <Typewriter options={{ strings: ['WE MAKE A LIVING BY WHAT WE GET, BUT WE MAKE A LIFE BY WHAT WE GIVE...'], autoStart: true, loop: true }} />
-                  </p>
-                </div>
+                <div className="position-absolute top-50 start-50 translate-middle text-white text-center">
+            <h1 className="display-4 fw-bold">
+              <Typewriter
+                options={{
+                  strings: ['WELCOME TO FOODSHARE NETWORK!'],
+                  autoStart: true,
+                  loop: true,
+                }}
+              />
+            </h1>
+            <p className="lead fw-bold">
+              <Typewriter
+                options={{
+                  strings: [
+                    'WE MAKE A LIVING BY WHAT WE GET, BUT WE MAKE A LIFE BY WHAT WE GIVE...',
+                  ],
+                  autoStart: true,
+                  loop: true,
+                }}
+              />
+            </p>
+          </div>
               </div>
               <div className="header-overlay"></div>
             </div>
