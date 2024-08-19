@@ -36,6 +36,7 @@ import FoodShareLogo from './components/FoodShareNetwork.jpeg';
 import SecurityPolicy from './pages/SecurityPolicy';
 import TermsOfUse from './pages/TermsOfUse';
 import AcceptedFoodPage from './pages/AcceptedFoodPage';
+import Location from './pages/Location';
 // Create UserContext
 export const UserContext = createContext(null);
 
@@ -171,8 +172,8 @@ function App() {
         <Route path="/privacy" element={<PrivacyPolicyContent />} />
         <Route path="/security" element={<SecurityPolicy />} />
         <Route path="/terms of use" element={<TermsOfUse />} />
-        <Route path="/accepted food" element={<AcceptedFoodPage />} />
-        
+        <Route path="/accepted-food/:id" element={<AcceptedFoodPage />} />
+        <Route path ="/Location" element={<Location/>}/>
         
         {/* tuesday work recipient profile updates */}
         <Route path="/recipientProfile" element={<RecipientProfileApp recipient={recipientData} />} />

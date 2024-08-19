@@ -271,6 +271,7 @@ const RecipientProfile = () => {
         });
         setUserData(response.data);
         setEditedUserData(response.data); // Initialize editedUserData with userData
+        console.log(response.data)
       } catch (err) {
         setError(err.message || 'Error fetching user data');
       } finally {
@@ -380,28 +381,28 @@ const RecipientProfile = () => {
                     <tr>
                       <td>
                         {!editMode ? (
-                          <p>{userData.recipientName}</p>
+                          <p>{userData?.recipientName}</p> // Use optional chaining in case userData is null
                         ) : (
                           <input type="text" className="form-control" name="recipientName" value={editedUserData.recipientName || ''} onChange={handleChange} />
                         )}
                       </td>
                       <td>
                         {!editMode ? (
-                          <p>{userData.recipientEmail}</p>
+                          <p>{userData?.recipientEmail}</p>
                         ) : (
                           <input type="email" className="form-control" name="recipientEmail" value={editedUserData.recipientEmail || ''} onChange={handleChange} />
                         )}
                       </td>
                       <td>
                         {!editMode ? (
-                          <p>{userData.recipientPhoneNum}</p>
+                          <p>{userData?.recipientPhoneNum}</p>
                         ) : (
                           <input type="tel" className="form-control" name="recipientPhoneNum" value={editedUserData.recipientPhoneNum || ''} onChange={handleChange} />
                         )}
                       </td>
                       <td>
                         {!editMode ? (
-                          <p>{userData.recipientAddress}</p>
+                          <p>{userData?.recipientAddress}</p>
                         ) : (
                           <input type="text" className="form-control" name="recipientAddress" value={editedUserData.recipientAddress || ''} onChange={handleChange} />
                         )}
