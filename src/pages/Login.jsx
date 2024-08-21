@@ -489,7 +489,15 @@ const Login = ({ onLoginSuccess }) => {
 
       if (result.data.flag) {
         toast.success(result.data.message);
-        handleLoginSuccess(result.data.token, userType.toLowerCase() === 'recipient' ? '/RecipientLandingPage' : '/home');
+        const prefixUsername = getPrefixUsername(email);
+        setUser({ prefixUsername, userType: userType.toLowerCase() });
+
+        sessionStorage.setItem('token', result.data.token);
+        setTimeout(() => {
+          navigate(userType.toLowerCase() === 'recipient' ? '/RecipientLandingPage' : '/home');
+        }, 5000);
+
+        if (onLoginSuccess) onLoginSuccess();
       } else {
         toast.warning(result.data.message);
       }

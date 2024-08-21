@@ -249,7 +249,7 @@ import { useNavigate } from 'react-router-dom';
 import video from '../components/videos/f.mp4';
 import logo from '../components/FoodShareNetwork.jpeg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faInfoCircle, faEnvelope, faSignOutAlt, faUser, faComment } from '@fortawesome/free-solid-svg-icons';
+import { faSignOutAlt, faUser, faComment } from '@fortawesome/free-solid-svg-icons';
 import { UserContext } from '../App';
 import Typewriter from 'typewriter-effect'; 
 import CustomForm from './CustomForm';
@@ -261,6 +261,7 @@ import Contact from '../pages/Contact';
 import About from '../pages/About';
 import GeolocationComponent from './GeolocationComponent';
 import GeocodingComponent from './GeocodingComponent';
+import MyMap from './Map';
 
 const LandingPage = () => {
   const { setUser } = useContext(UserContext);
@@ -306,7 +307,7 @@ const LandingPage = () => {
       <div className="sidebar bg-white text-light d-flex flex-column align-items-center pt-5" style={{ width: '350px', position: 'fixed', height: '100vh' }}>
         <br/>
         <img src={logo} alt="Food Share Network Logo" className="img-fluid mb-3" style={{ maxWidth: '80%' }} />
-        <button onClick={() => setActiveComponent('Profile')} className="btn btn-light bg-dark text-light mb-3 w-75 d-flex align-items-center justify-content-center sidebar-link">
+        <button onClick={() => setActiveComponent('RecipientProfile')} className="btn btn-light bg-dark text-light mb-3 w-75 d-flex align-items-center justify-content-center sidebar-link">
           <FontAwesomeIcon icon={faUser} className="me-2" />
           <span className="fw-bold">Profile</span>
         </button>
@@ -326,11 +327,11 @@ const LandingPage = () => {
           <span className="fw-bold">Distance</span>
         </button>
         <br/>
-        {/* <button onClick={() => setActiveComponent('GeocodingComponent')} className="btn btn-light bg-dark text-light mb-3 w-75 d-flex align-items-center justify-content-center sidebar-link">
+        <button onClick={() => setActiveComponent('MyMap')} className="btn btn-light bg-dark text-light mb-3 w-75 d-flex align-items-center justify-content-center sidebar-link">
           <FontAwesomeIcon icon={faUser} className="me-2" />
           <span className="fw-bold">Map</span>
         </button>
-        <br/> */}
+        <br/>
         {/* <button onClick={() => setActiveComponent('Contact')} className="btn btn-light bg-dark text-light mb-3 w-75 d-flex align-items-center justify-content-center sidebar-link">
           <FontAwesomeIcon icon={faEnvelope} className="me-2" />
           <span className="fw-bold">Contact</span>
@@ -373,10 +374,10 @@ const LandingPage = () => {
             <div className="header-overlay"></div>
           </div>
         )}
-        {activeComponent === 'Profile' && <RecipientProfile recipient={recipient} />}
+        {activeComponent === 'RecipientProfile' && <RecipientProfile recipient={recipient} />}
         {activeComponent === 'FoodListing' && <FoodListing recipient={recipient} />}
         {activeComponent === 'RequestedItemsHistory' && <RequestedItemsHistory recipient={recipient} />}
-        {activeComponent === 'MapComponent' && <MapComponent recipient={recipient} />}
+        {activeComponent === 'MyMap' && <MyMap recipient={recipient} />}
         {activeComponent === 'Contact' && <Contact recipient={recipient} />}
         {activeComponent === 'About' && <About recipient={recipient} />}
         {activeComponent === 'CustomForm' && <CustomForm recipient={recipient} />}

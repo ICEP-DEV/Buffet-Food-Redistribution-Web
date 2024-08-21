@@ -219,7 +219,7 @@
 // export default FoodForm;
 
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
+import { Link, } from 'react-router-dom'; // Import useNavigate
 import { Form, Button, InputGroup } from 'react-bootstrap';
 import Datetime from 'react-datetime';
 import 'react-datetime/css/react-datetime.css';
@@ -239,8 +239,8 @@ function FoodForm() {
   const [contact, setContact] = useState('');
   const [agreedToTerms, setAgreedToTerms] = useState(false); // State for terms checkbox
   const [showTermsModal, setShowTermsModal] = useState(false); // State for showing the modal
-  const token = localStorage.getItem('token');
-  const navigate = useNavigate(); // Initialize navigate
+  const token = sessionStorage.getItem('token');
+  // const navigate = useNavigate(); // Initialize navigate
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -311,7 +311,7 @@ function FoodForm() {
           const formattedTime = moment(donationTime).format('YYYY-MM-DD HH:mm:ss');
           toast.success(`Food item added successfully at ${formattedTime}!`);
           
-          navigate('/record'); // Redirect to the History page
+          // navigate('/record'); // Redirect to the History page
         } else {
           toast.error('Error adding food item. Please try again later.');
         }

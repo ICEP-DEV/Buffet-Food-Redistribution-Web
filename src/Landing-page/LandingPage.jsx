@@ -118,7 +118,7 @@ import logo from '../components/FoodShareNetwork.jpeg';
 import { FaTachometerAlt } from 'react-icons/fa';
 import { BiDonateHeart } from 'react-icons/bi';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircle, faInfoCircle, faEnvelope, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { faCircle, faInfoCircle, faEnvelope, faSignOutAlt, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { UserContext } from '../App';
 import Typewriter from 'typewriter-effect';
 import DonorDashboard from './DonorDashboard';
@@ -126,7 +126,9 @@ import FoodForm from './FoodForm';
 import History from './Historys';
 import Contact from '../pages/Contact';
 import About from '../pages/About';
-
+import AcceptedFoodPage from '../pages/AcceptedFoodPage';
+// import UserProfile from '../Dashboard/UserProfile';
+import DonorProfile from './DonorProfile';
 const LandingPage = () => {
   const { setUser } = useContext(UserContext);
   const [activePage, setActivePage] = useState('home');
@@ -141,14 +143,18 @@ const LandingPage = () => {
     switch (activePage) {
       case 'dashboard':
         return <DonorDashboard donor={{ /* pass the donor data here */ }} />;
+      case 'DonorProfile':
+        return <DonorProfile />;
       case 'donate':
-        return <FoodForm />;
+          return <FoodForm />;
       case 'record':
         return <History />;
       case 'contact':
         return <Contact/>;
       case 'about':
         return <About/>;
+        case 'accepted food':
+          return <AcceptedFoodPage/>;
       default:
         return (
           <>
@@ -208,12 +214,22 @@ const LandingPage = () => {
                   </button>
                   <br/>
                   <button
+                    onClick={() => setActivePage('DonorProfile')}
+                    className="btn btn-dark text-light mb-3 w-75 d-flex align-items-center justify-content-center sidebar-link"
+                  >
+                    <BiDonateHeart size={20} className="me-2" />
+                    <span className="fw-bold">Profile</span>
+                  </button>
+                  <br/>
+                  <button
                     onClick={() => setActivePage('donate')}
                     className="btn btn-dark text-light mb-3 w-75 d-flex align-items-center justify-content-center sidebar-link"
                   >
                     <BiDonateHeart size={20} className="me-2" />
                     <span className="fw-bold">Donate</span>
                   </button>
+
+
                   <br/>
                   <button
                     onClick={() => setActivePage('record')}
@@ -239,13 +255,25 @@ const LandingPage = () => {
                     <span className="fw-bold">About</span>
                   </button>
                   <br/>
+
+
+
                   <button
+                    onClick={() => setActivePage('accepted food')}
+                    className="btn btn-dark text-light mb-3 w-75 d-flex align-items-center justify-content-center sidebar-link"
+                  >
+                    <FontAwesomeIcon icon={faCheck} size="lg" className="me-2" />
+                    <span className="fw-bold">Accepted Iterm</span>
+                  </button>
+                  <br/>
+
+                  {/* <button
                     onClick={handleLogout}
                     className="btn btn-dark text-light mb-3 w-75 d-flex align-items-center justify-content-center sidebar-link"
                   >
                     <FontAwesomeIcon icon={faSignOutAlt} size="lg" className="me-2" />
                     <span className="fw-bold">Logout</span>
-                  </button>
+                  </button> */}
                 </div>
               </div>
               <div className="col-md-10">

@@ -1,16 +1,37 @@
-// import React, { useState } from 'react';
+// import React, { useState, useEffect } from 'react';
 // import { useLocation, useNavigate } from 'react-router-dom';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
 // const AcceptedFoodPage = () => {
 //     const location = useLocation();
 //     const navigate = useNavigate();
-//     const { requesterName, foodName, foodDescription } = location.state || {};
+//     const [acceptedItems, setAcceptedItems] = useState([]);
 //     const [isCollected, setIsCollected] = useState(false);
 
-//     const handleCollect = () => {
-//         setIsCollected(true); // Update state to simulate the food item being collected
+//     useEffect(() => {
+//         // Retrieve data from location state or localStorage
+//         const stateAcceptedItems = location.state?.acceptedItems || [];
+//         if (stateAcceptedItems.length > 0) {
+//             setAcceptedItems(stateAcceptedItems);
+//         } else {
+//             // Fallback to localStorage if state is not available
+//             const storedAcceptedItems = JSON.parse(localStorage.getItem('acceptedItems')) || [];
+//             setAcceptedItems(storedAcceptedItems);
+//         }
+//     }, [location.state]);
+
+//     const handleCollect = (index) => {
+//         // Update state to simulate the food item being collected
+//         const updatedItems = [...acceptedItems];
+//         updatedItems.splice(index, 1); // Remove the collected item
+//         setAcceptedItems(updatedItems);
+
+//         // Update localStorage after collection
+//         localStorage.setItem('acceptedItems', JSON.stringify(updatedItems));
+        
+//         setIsCollected(true);
 //         alert('Food collected!');
+
 //         // Optionally navigate to another page after collection
 //         navigate('/'); // Redirect to home or another page
 //     };
@@ -18,149 +39,137 @@
 //     return (
 //         <div className="container mt-5">
 //             <h1>Accepted Food Items</h1>
-//             {!isCollected && requesterName && foodName ? (
-//                 <div className="card mt-3">
-//                     <div className="card-body">
-//                         <h5 className="card-title">{foodName}</h5>
-//                         <h6 className="card-subtitle mb-2 text-muted">Requested by: {requesterName}</h6>
-//                         <p className="card-text">{foodDescription}</p>
-//                         <button className="btn btn-success" onClick={handleCollect}>Collect</button>
-//                     </div>
-//                 </div>
+//             {acceptedItems.length > 0 ? (
+//                 <ul className="list-group">
+//                     {acceptedItems.map((item, index) => (
+//                         <li key={index} className="list-group-item">
+//                             <h5>{item.foodName}</h5>
+//                             <h6 className="card-subtitle mb-2 text-muted">Requested by: {item.requesterName}</h6>
+//                             <p>{item.foodDescription}</p>
+//                             <button className="btn btn-success" onClick={() => handleCollect(index)}>Collect</button>
+//                         </li>
+//                     ))}
+//                 </ul>
 //             ) : (
-//                 <p>{isCollected ? 'This food item has been collected.' : 'No food items accepted yet.'}</p>
+//                 <p>{isCollected ? 'This food item has been collected.' : 'No accepted food items yet.'}</p>
 //             )}
 //         </div>
 //     );
 // };
 
 // export default AcceptedFoodPage;
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { useDispatch } from 'react-redux';
-import { acceptRequest, declineRequest } from '../Redux/actions';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { useParams, useNavigate } from 'react-router-dom';
 
-const CookieCard = ({ requesterName, foodName, foodDescription, requestId }) => {
+import React, { useState, useEffect } from 'react';
+import { /*useNavigate*/ useParams } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+
+const AcceptedFoodPage = () => {
     const { id } = useParams();
-    const navigate = useNavigate(); // Hook for navigation
-    const dispatch = useDispatch();
-    const [acceptMessage, setAcceptMessage] = useState('');
-    const [declineMessage, setDeclineMessage] = useState('');
-    const [timer, setTimer] = useState(0);
-    const [showCard, setShowCard] = useState(true);
+  //  const navigate = useNavigate();
+    const [acceptedItems, setAcceptedItems] = useState([]);
+    const [collectedItems, setCollectedItems] = useState([]);
     const [recipientInfo, setRecipientInfo] = useState(null);
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        const donorItems = async () => {
+            try {
+                const response = await axios.get("http://localhost:5282/api/FoodDonation/Donor-Items", {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                console.log(response.data);
+                setAcceptedItems(response.data);
+                setCollectedItems(new Array(response.data.length).fill(false)); // Initialize collectedItems state
+            } catch (error) {
+                console.error('Error fetching donor items:', error);
+                toast.error('Error fetching donor items.');
+            }
+        };
+        donorItems();
+    }, []);
 
     useEffect(() => {
         const fetchRecipientInfo = async () => {
             try {
                 const response = await axios.get(`http://localhost:5282/api/Email/${id}`);
-                setRecipientInfo(response.data); // Update recipientInfo state with fetched data
+                setRecipientInfo(response.data);
+                console.log(response.data);
             } catch (error) {
                 console.error('Error fetching recipient information:', error);
                 toast.error('Error fetching recipient information.');
             }
         };
-
         fetchRecipientInfo();
     }, [id]);
 
-    const respondToRequest = async (accepted) => {
+    const handleCollect = async (index) => {
         try {
-            const response = await axios.put(`http://localhost:5282/api/Request/updatestatus/${id}?newStatus=${accepted ? 'Accepted' : 'Declined'}`);
-            if (response.status === 200) {
-                if (accepted) {
-                    setAcceptMessage('Your request has been accepted. Expires in 32 minutes.');
-                    setTimer(32 * 60); // 32 minutes in seconds
-                    dispatch(acceptRequest()); // Dispatch acceptRequest action
-                    toast.success('Response sent!');
-                    
-                    // Navigate to AcceptedFoodPage
-                    navigate('/accepted-food', {
-                        state: {
-                            requesterName,
-                            foodName,
-                            foodDescription
-                        }
-                    });
+            // Remove the item from the local state
+            const updatedItems = [...acceptedItems];
+            updatedItems.splice(index, 1); // Remove the collected item
+            setAcceptedItems(updatedItems);
+    
+            // Update the collectedItems state
+            const updatedCollectedItems = [...collectedItems];
+            updatedCollectedItems[index] = true;
+            setCollectedItems(updatedCollectedItems);
 
-                    // Update status in localStorage
-                    const storedRequestedItems = JSON.parse(localStorage.getItem('requestedItems')) || [];
-                    const updatedItems = storedRequestedItems.map(item =>
-                        item.requestId === id ? { ...item, status: 'Waiting for Collection' } : item
-                    );
-                    localStorage.setItem('requestedItems', JSON.stringify(updatedItems));
-                } else {
-                    setDeclineMessage('Your response has been sent!');
-                    dispatch(declineRequest()); // Dispatch declineRequest action
-                    setShowCard(false); // Hide the card after declining
-                    toast.success('Response sent!');
-                    
-                    // Update status in localStorage
-                    const storedRequestedItems = JSON.parse(localStorage.getItem('requestedItems')) || [];
-                    const updatedItems = storedRequestedItems.map(item =>
-                        item.requestId === id ? { ...item, status: 'Declined' } : item
-                    );
-                    localStorage.setItem('requestedItems', JSON.stringify(updatedItems));
-                }
-                const emailResponse = await axios.post(`http://localhost:5282/api/Email/RecipientMail?requestId=${id}`);
-                console.log('Email Response:', emailResponse.data);
-            } else {
-                console.error('Failed to respond to request:', response.data);
-                toast.error('Failed to respond to request.');
-            }
+            // Update the server about the collection
+            await axios.put(`http://localhost:5282/api/Request/updateCollection/${id}`, {
+                // If needed, pass additional data for the update
+            });
+    
+            // Optionally update local storage (only if required)
+            localStorage.setItem('acceptedItems', JSON.stringify(updatedItems));
+    
+            // Show success message
+            toast.success('Collection updated');
+    
+            //navigate('/'); // Redirect to home or another page
         } catch (error) {
-            console.error('Error responding to request:', error.response || error.message || error);
-            toast.error('Error responding to request.');
+            // Handle errors
+            console.error('Error collecting food:', error);
+            toast.error('Error sending response.');
         }
     };
 
     return (
-        <div>
+        <div className="container mt-5">
             <ToastContainer />
-            {recipientInfo && ( // Conditionally render if recipientInfo is not null
-                <div className="container-fluid d-flex justify-content-center align-items-center vh-100" style={{ backgroundColor: 'rgba(50, 50, 50, 0.2)' }}>
-                    <div className="card text-center border" style={{
-                        backgroundColor: 'rgba(255, 255, 255, 0.8)',
-                        boxShadow: '0 4px 15px rgba(0, 0, 0, 0.2)',
-                        transition: 'transform 0.2s, box-shadow 0.2s',
-                        borderRadius: '20px',
-                        width: '300px',
-                        height: '200px',
-                        margin: 'auto'
-                    }}
-                        onMouseEnter={(e) => {
-                            e.currentTarget.style.transform = 'scale(1.05)';
-                            e.currentTarget.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.3)';
-                        }}
-                        onMouseLeave={(e) => {
-                            e.currentTarget.style.transform = 'scale(1)';
-                            e.currentTarget.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.2)';
-                        }}
-                    >
-                        <div className="d-flex justify-content-center align-items-center" style={{ height: '100px', width: '100%' }}>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" fill="red" className="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">
-                                <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
-                            </svg>
-                        </div>
-                        <p className="cookieHeading" style={{ fontWeight: 'bold' }}>Pending Donation Request!</p>
-                        <p className="cookieDescription" style={{ fontWeight: 'bold', color: 'grey', fontSize: '0.8em' }}>
-                            {recipientInfo.RecipientName} has made a request from {recipientInfo.RecipientAddress}
-                        </p>
-                        <div className="buttonContainer" style={{ width: '100%', display: 'flex', justifyContent: 'center', gap: '25px' }}>
-                            <button className="btn btn-success acceptButton rounded-pill" onClick={() => respondToRequest(true)}>Accept</button>
-                            <button className="btn btn-danger declineButton rounded-pill" onClick={() => respondToRequest(false)}>Decline</button>
-                        </div>
-                         <br />
-                    </div>
-                </div>
+            <h1>Accepted Food Items</h1>
+            {acceptedItems.length > 0 ? (
+                <ul className="list-group">
+                    {acceptedItems.map((item, index) => (
+                        <li key={index} className="list-group-item">
+                            {recipientInfo ? (
+                                <h6 className="card-subtitle mb-2 text-muted">
+                                    Requested by: {recipientInfo.RecipientName}
+                                </h6>
+                            ) : (
+                                <p>Loading recipient information...</p>
+                            )}
+                            <h5>Food Type: {item.itemName}</h5>
+                            <h5>Description: {item.description}</h5>
+                            <h5>Quantity: {item.quantity}</h5>
+                            <button
+                                className="btn btn-success"
+                                onClick={() => handleCollect(index)}
+                                disabled={collectedItems[index]} // Disable button if item has been collected
+                            >
+                                {collectedItems[index] ? 'Collected' : 'Collect'}
+                            </button>
+                        </li>
+                    ))}
+                </ul>
+            ) : (
+                <p>{collectedItems.length > 0 ? 'This food item has been collected.' : 'No accepted food items yet.'}</p>
             )}
-            {acceptMessage && <p>{acceptMessage}</p>}
-            {declineMessage && <p>{declineMessage}</p>}
         </div>
     );
 };
 
-export default CookieCard;
+export default AcceptedFoodPage;

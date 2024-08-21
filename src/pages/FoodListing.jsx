@@ -397,6 +397,8 @@
 // });
 
 // export default connect(mapStateToProps, { acceptRequest, declineRequest })(FoodListing);
+
+
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUtensils, faSearch } from '@fortawesome/free-solid-svg-icons';
@@ -433,30 +435,6 @@ function FoodListing({ acceptRequest, declineRequest }) {
 
     fetchData();
   }, []);
-
-  useEffect(() => {
-    const checkAndRemoveOldItems = () => {
-      const currentTime = new Date();
-      foodItems.forEach(item => {
-        const timeCooked = new Date(item.dateCooked);
-        const hoursSinceCooked = (currentTime - timeCooked) / (1000 * 60 * 60);
-
-        if (hoursSinceCooked >= 6) {
-          setTimeout(() => {
-            setFoodItems(prevItems => prevItems.filter(i => i.id !== item.id));
-            setFilteredFoodItems(prevItems => prevItems.filter(i => i.id !== item.id));
-          }, 9910000);
-        } else {
-          setTimeout(() => {
-            setFoodItems(prevItems => prevItems.filter(i => i.id !== item.id));
-            setFilteredFoodItems(prevItems => prevItems.filter(i => i.id !== item.id));
-          }, 9915000);
-        }
-      });
-    };
-
-    checkAndRemoveOldItems();
-  }, [foodItems]);
 
   const handleRequest = async () => {
     if (selectedItem) {
@@ -517,8 +495,8 @@ function FoodListing({ acceptRequest, declineRequest }) {
 
   return (
     <div>
-      <br></br>
-      <br></br>
+      <br />
+      <br />
       <h2 className="mt-5 mb-3 text-center">Available Donations</h2>
       <div className="d-flex justify-content-center mb-4">
         <InputGroup className="w-25 rounded-pill">
@@ -536,13 +514,18 @@ function FoodListing({ acceptRequest, declineRequest }) {
           </InputGroup.Text>
         </InputGroup>
       </div>
+      <div className="d-flex justify-content-center mb-4">
+        <Button variant="warning" onClick={clearLocalStorage}>
+          Clear Local Storage
+        </Button>
+      </div>
       <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-2 mb-5">
         {filteredFoodItems.map((item) => (
           <div key={item.id} className="col">
             <div className={`card h-100 shadow rounded p-3 ${requestedItems.some((requestedItem) => requestedItem.id === item.id) ? 'bg-light disabled' : ''}`}>
               <div className="card-body d-flex flex-column justify-content-between">
                 <div>
-                  <h5 className="card-title text-center ">{item.itemName}</h5>
+                  <h5 className="card-title text-center">{item.itemName}</h5>
                   <div className="table-responsive">
                     <table className="table table-bordered">
                       <thead>
@@ -603,7 +586,6 @@ function FoodListing({ acceptRequest, declineRequest }) {
       <br></br>
       <br></br>
     </div>
-    
   );
 }
 
@@ -612,3 +594,4 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, { acceptRequest, declineRequest })(FoodListing);
+

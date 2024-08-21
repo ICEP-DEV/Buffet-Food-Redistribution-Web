@@ -129,8 +129,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 
 const CookieCard = ({ requesterName, foodName, foodDescription, requestId }) => {
     const { id } = useParams();
-    const navigate = useNavigate(); // Hook for navigation
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [acceptMessage, setAcceptMessage] = useState('');
     const [declineMessage, setDeclineMessage] = useState('');
     const [timer, setTimer] = useState(0);
@@ -141,7 +141,7 @@ const CookieCard = ({ requesterName, foodName, foodDescription, requestId }) => 
         const fetchRecipientInfo = async () => {
             try {
                 const response = await axios.get(`http://localhost:5282/api/Email/${id}`);
-                setRecipientInfo(response.data); // Update recipientInfo state with fetched data
+                setRecipientInfo(response.data);
             } catch (error) {
                 console.error('Error fetching recipient information:', error);
                 toast.error('Error fetching recipient information.');
@@ -158,39 +158,26 @@ const CookieCard = ({ requesterName, foodName, foodDescription, requestId }) => 
                 if (accepted) {
                     setAcceptMessage('Your request has been accepted. Expires in 32 minutes.');
                     setTimer(32 * 60); // 32 minutes in seconds
-                    dispatch(acceptRequest()); // Dispatch acceptRequest action
+                    dispatch(acceptRequest());
                     toast.success('Response sent!');
-                    
-                    // Navigate to AcceptedFoodPage
-                    navigate('/accepted food', {
-                        state: {
-                            requesterName,
-                            foodName,
-                            foodDescription
-                        }
-                    });
 
-                    // Update status in localStorage
-                    const storedRequestedItems = JSON.parse(localStorage.getItem('requestedItems')) || [];
-                    const updatedItems = storedRequestedItems.map(item =>
-                        item.requestId === id ? { ...item, status: 'Waiting for Collection' } : item
-                    );
-                    localStorage.setItem('requestedItems', JSON.stringify(updatedItems));
+                    // Update accepted items in localStorage
+                    const storedAcceptedItems = JSON.parse(localStorage.getItem('acceptedItems')) || [];
+                    const updatedAcceptedItems = [
+                        ...storedAcceptedItems,
+                        { requestId, requesterName, foodName, foodDescription }
+                    ];
+                    localStorage.setItem('acceptedItems', JSON.stringify(updatedAcceptedItems));
+
+                    // Redirect to AcceptedFoodPage
+                    navigate(`/accepted-food/${id}`);
                 } else {
                     setDeclineMessage('Your response has been sent!');
-                    dispatch(declineRequest()); // Dispatch declineRequest action
-                    setShowCard(false); // Hide the card after declining
+                    dispatch(declineRequest());
+                    setShowCard(false);
                     toast.success('Response sent!');
-                    
-                    // Update status in localStorage
-                    const storedRequestedItems = JSON.parse(localStorage.getItem('requestedItems')) || [];
-                    const updatedItems = storedRequestedItems.map(item =>
-                        item.requestId === id ? { ...item, status: 'Declined' } : item
-                    );
-                    localStorage.setItem('requestedItems', JSON.stringify(updatedItems));
                 }
-                const emailResponse = await axios.post(`http://localhost:5282/api/Email/RecipientMail?requestId=${id}`);
-                console.log('Email Response:', emailResponse.data);
+                await axios.post(`http://localhost:5282/api/Email/RecipientMail?requestId=${id}`);
             } else {
                 console.error('Failed to respond to request:', response.data);
                 toast.error('Failed to respond to request.');
@@ -204,7 +191,7 @@ const CookieCard = ({ requesterName, foodName, foodDescription, requestId }) => 
     return (
         <div>
             <ToastContainer />
-            {recipientInfo && ( // Conditionally render if recipientInfo is not null
+            {recipientInfo && showCard && (
                 <div className="container-fluid d-flex justify-content-center align-items-center vh-100" style={{ backgroundColor: 'rgba(50, 50, 50, 0.2)' }}>
                     <div className="card text-center border" style={{
                         backgroundColor: 'rgba(255, 255, 255, 0.8)',
@@ -237,7 +224,7 @@ const CookieCard = ({ requesterName, foodName, foodDescription, requestId }) => 
                             <button className="btn btn-success acceptButton rounded-pill" onClick={() => respondToRequest(true)}>Accept</button>
                             <button className="btn btn-danger declineButton rounded-pill" onClick={() => respondToRequest(false)}>Decline</button>
                         </div>
-                         <br />
+                        <br />
                     </div>
                 </div>
             )}
