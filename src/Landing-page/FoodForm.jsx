@@ -239,7 +239,7 @@ function FoodForm() {
   const [contact, setContact] = useState('');
   const [agreedToTerms, setAgreedToTerms] = useState(false); // State for terms checkbox
   const [showTermsModal, setShowTermsModal] = useState(false); // State for showing the modal
-  const token = localStorage.getItem('token');
+  const token = sessionStorage.getItem('token');
   const navigate = useNavigate(); // Initialize navigate
 
   const handleSubmit = async (e) => {

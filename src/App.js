@@ -707,10 +707,11 @@ import SecurityPolicy from './pages/SecurityPolicy';
 import TermsOfUse from './pages/TermsOfUse';
 import AcceptedFoodPage from './pages/AcceptedFoodPage';
 import PrivateRoute from './PrivateRoutes/PrivateRoute';
+import AcceptedFoodRoute from  './PrivateRoutes/PrivateRoute';
 import GeolocationComponent from './Landing-page/GeolocationComponent';
 import OrganizationVerification from './pages/Verification';
 import GeocodingComponent from './Landing-page/GeocodingComponent';
-
+import AuthRoute from './PrivateRoutes/AuthRoute';
 
 export const UserContext = createContext(null);
 
@@ -737,7 +738,7 @@ function App() {
   const handleLogout = () => {
     setUser(null);
     setIsLoggedIn(false);
-    localStorage.removeItem('token');
+    sessionStorage.removeItem('token');
     navigate('/');
     
   };
@@ -842,11 +843,9 @@ function App() {
         <Route path="/request/:id" element={<RequestPage />} />
         <Route path="/verification" element={<OrganizationVerification />} />
         <Route path="/Geocoding" element={<GeocodingComponent />} />
-        <Route path="/accepted-food/:id" element={<AcceptedFoodPage />} />
-        
        
-        <Route element={<PrivateRoute />}>
-          <Route path='/foodform' element={<FoodForm addFoodItem={addFoodItem} />} />
+      
+        <Route path='/foodform' element={<FoodForm addFoodItem={addFoodItem} />} />
           <Route path='/profile-settings' element={<ProfileSettings />} />
           <Route path='/RequestedItemsHistory' element={<RequestedItemsHistory />} />
           <Route path='/profileapp' element={<ProfileApp />} />
@@ -856,11 +855,24 @@ function App() {
           <Route path='/adminDash/*' element={<AdminDash />} />
           <Route path="/form" element={<CustomForm updateFeedbackList={updateFeedbackList} />} />
           <Route path='Dashboard/profileApp' element={<UserProfile />} />
-          
+          {/* <Route path="/accepted-food/:id" element={<AcceptedFoodPage />} /> */}
+
           {/* <Route path="/recipientProfile" element={<RecipientProfileApp recipient={recipientData} />} /> */}
           <Route path='/home' element={<LandingPage />} />
           <Route path='/record' element={<Historys />} />
           
+          <Route
+                    path="/accepted-food/:id"
+                    element={
+                        <AuthRoute>
+                            <AcceptedFoodPage />
+                        </AuthRoute>
+                    }
+                />
+                
+        <Route element={<PrivateRoute />}>
+          
+       
           {/* Adding the route for handling geolocation and donor request */}
           <Route path='/donorRequest' element={
             !requestAccepted ? (

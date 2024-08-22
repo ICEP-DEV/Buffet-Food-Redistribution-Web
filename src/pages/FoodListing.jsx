@@ -436,7 +436,7 @@ function FoodListing({ acceptRequest, declineRequest }) {
 
   const handleRequest = async () => {
     if (selectedItem) {
-      const token = localStorage.getItem('token');
+      const token = sessionStorage.getItem('token');
       const requestTime = new Date().toISOString();
 
       try {
