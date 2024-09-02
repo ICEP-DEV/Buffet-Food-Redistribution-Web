@@ -103,7 +103,7 @@ import axios from 'axios';
 const RequestedItemsHistory = () => {
   const [requestedItems, setRequestedItems] = useState([]);
   const [requestStatuses, setRequestStatuses] = useState({});
-
+  const token = sessionStorage.getItem('token');
   useEffect(() => {
     // Fetch requested items from localStorage on component mount
     const storedRequestedItems = JSON.parse(localStorage.getItem('requestedItems')) || [];
@@ -112,7 +112,11 @@ const RequestedItemsHistory = () => {
     // Fetch request statuses from the backend
     const fetchRequestStatuses = async () => {
       try {
-        const response = await axios.get('http://localhost:5282/api/Request');
+        const response = await axios.get("http://localhost:5282/api/Request/DonorRequests", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         const statusData = response.data;
         console.log(statusData);
         // Create a map of donationId to status
@@ -128,7 +132,7 @@ const RequestedItemsHistory = () => {
     };
 
     fetchRequestStatuses();
-  }, []);
+  }, [token]);
 
   const getRequestStatus = (donationId) => {
     return requestStatuses[donationId] || 'Unknown';

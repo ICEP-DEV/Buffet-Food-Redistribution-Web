@@ -73,7 +73,7 @@ const AcceptedFoodPage = () => {
     const [recipientInfo, setRecipientInfo] = useState(null);
 
     useEffect(() => {
-        const token = localStorage.getItem('token');
+        const token = sessionStorage.getItem('token');
         const donorItems = async () => {
             try {
                 const response = await axios.get("http://localhost:5282/api/FoodDonation/Donor-Items", {
@@ -139,6 +139,10 @@ const AcceptedFoodPage = () => {
 
     return (
         <div className="container mt-5">
+            <div>
+                <br/>
+                <br/>
+            </div>
             <ToastContainer />
             <h1>Accepted Food Items</h1>
             {acceptedItems.length > 0 ? (
@@ -173,3 +177,4 @@ const AcceptedFoodPage = () => {
 };
 
 export default AcceptedFoodPage;
+
