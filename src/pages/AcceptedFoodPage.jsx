@@ -64,6 +64,7 @@ import { /*useNavigate*/ useParams } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
+import Login from './Login';
 
 const AcceptedFoodPage = () => {
     const { id } = useParams();
@@ -71,6 +72,8 @@ const AcceptedFoodPage = () => {
     const [acceptedItems, setAcceptedItems] = useState([]);
     const [collectedItems, setCollectedItems] = useState([]);
     const [recipientInfo, setRecipientInfo] = useState(null);
+    
+
 
     useEffect(() => {
         const token = sessionStorage.getItem('token');

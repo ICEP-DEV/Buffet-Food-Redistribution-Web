@@ -855,21 +855,14 @@ function App() {
           <Route path='/adminDash/*' element={<AdminDash />} />
           <Route path="/form" element={<CustomForm updateFeedbackList={updateFeedbackList} />} />
           <Route path='Dashboard/profileApp' element={<UserProfile />} />
-          {/* <Route path="/accepted-food/:id" element={<AcceptedFoodPage />} /> */}
+          { <Route path="/accepted-food/:id" element={<AcceptedFoodPage  />} /> }
 
           {/* <Route path="/recipientProfile" element={<RecipientProfileApp recipient={recipientData} />} /> */}
           <Route path='/home' element={<LandingPage />} />
           <Route path='/record' element={<Historys />} />
           
-          <Route
-                    path="/accepted-food/:id"
-                    element={
-                        <AuthRoute>
-                            <AcceptedFoodPage />
-                        </AuthRoute>
-                    }
-                />
-                
+      
+
         <Route element={<PrivateRoute />}>
           
        
