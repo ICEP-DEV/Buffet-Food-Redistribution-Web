@@ -10,7 +10,7 @@ const ForgotPassword = () => {
     event.preventDefault();
 
     try {
-      const result = await axios.post('http://localhost:5282/api/resetPassword', { email });
+      const result = await axios.post(`http://localhost:5282/api/Email/ResetMail?email=${email}`);
 
       if (result.data.flag) {
         toast.success(result.data.message);

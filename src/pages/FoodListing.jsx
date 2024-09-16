@@ -397,6 +397,8 @@
 // });
 
 // export default connect(mapStateToProps, { acceptRequest, declineRequest })(FoodListing);
+
+
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUtensils, faSearch } from '@fortawesome/free-solid-svg-icons';
@@ -413,6 +415,7 @@ function FoodListing({ acceptRequest, declineRequest }) {
   const [filteredFoodItems, setFilteredFoodItems] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
+  const [transportConfirmed, setTransportConfirmed] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -434,8 +437,39 @@ function FoodListing({ acceptRequest, declineRequest }) {
     fetchData();
   }, []);
 
+  const getRequestCounts = () => {
+    const storedCounts = JSON.parse(localStorage.getItem('requestCounts')) || {};
+    return storedCounts;
+  };
+
+  const updateRequestCounts = () => {
+    const counts = getRequestCounts();
+    const today = new Date().toDateString();
+
+    if (!counts[today]) {
+      counts[today] = 0;
+    }
+
+    counts[today] += 1;
+    localStorage.setItem('requestCounts', JSON.stringify(counts));
+  };
+
+  const getRequestCountForToday = () => {
+    const counts = getRequestCounts();
+    const today = new Date().toDateString();
+    return counts[today] || 0;
+  };
+
   const handleRequest = async () => {
     if (selectedItem) {
+      const requestCountToday = getRequestCountForToday();
+
+      if (requestCountToday >= 2) {
+        alert('You have reached the daily limit of 2 requests.');
+        setShowModal(false);
+        return;
+      }
+
       const token = sessionStorage.getItem('token');
       const requestTime = new Date().toISOString();
 
@@ -452,8 +486,11 @@ function FoodListing({ acceptRequest, declineRequest }) {
         setRequestedItems(updatedRequestedItems);
         localStorage.setItem('requestedItems', JSON.stringify(updatedRequestedItems));
 
+        updateRequestCounts(); // Update request counts after a successful request
+
         alert(`Request for ${selectedItem.itemName} sent!`);
         setShowModal(false); // Close modal
+        setTransportConfirmed(false); // Reset transport confirmation
 
       } catch (error) {
         console.error('Error handling request:', error);
@@ -469,6 +506,11 @@ function FoodListing({ acceptRequest, declineRequest }) {
   const handleModalClose = () => {
     setSelectedItem(null);
     setShowModal(false);
+    setTransportConfirmed(false); // Reset transport confirmation
+  };
+
+  const handleTransportConfirm = () => {
+    setTransportConfirmed(true);
   };
 
   const handleSearchQueryChange = (e) => {
@@ -480,9 +522,9 @@ function FoodListing({ acceptRequest, declineRequest }) {
     setFilteredFoodItems(filtered);
   };
 
-  // Function to clear local storage
   const clearLocalStorage = () => {
     localStorage.removeItem('requestedItems');
+    localStorage.removeItem('requestCounts'); // Clear request counts as well
     setRequestedItems([]);
     alert('Local storage cleared!');
   };
@@ -511,11 +553,6 @@ function FoodListing({ acceptRequest, declineRequest }) {
             <FontAwesomeIcon icon={faSearch} />
           </InputGroup.Text>
         </InputGroup>
-      </div>
-      <div className="d-flex justify-content-center mb-4">
-        <Button variant="warning" onClick={clearLocalStorage}>
-          Clear Local Storage
-        </Button>
       </div>
       <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-2 mb-5">
         {filteredFoodItems.map((item) => (
@@ -562,18 +599,35 @@ function FoodListing({ acceptRequest, declineRequest }) {
 
       <Modal show={showModal} onHide={handleModalClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Confirm Request</Modal.Title>
+          <Modal.Title>{transportConfirmed ? "Confirm Request" : "Transport Confirmation"}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Are you sure you want to request {selectedItem?.itemName}?
+          {transportConfirmed ? (
+            `Are you sure you want to request ${selectedItem?.itemName}?`
+          ) : (
+            "Do you have transport to collect the donation?"
+          )}
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="danger" onClick={handleModalClose}>
-            Cancel
-          </Button>
-          <Button variant="success" onClick={handleRequest}>
-            Confirm
-          </Button>
+          {transportConfirmed ? (
+            <>
+              <Button variant="danger" onClick={handleModalClose}>
+                Cancel
+              </Button>
+              <Button variant="success" onClick={handleRequest}>
+                Confirm
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button variant="secondary" onClick={handleModalClose}>
+                No
+              </Button>
+              <Button variant="primary" onClick={handleTransportConfirm}>
+                Yes
+              </Button>
+            </>
+          )}
         </Modal.Footer>
       </Modal>
 
@@ -592,3 +646,5 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, { acceptRequest, declineRequest })(FoodListing);
+
+

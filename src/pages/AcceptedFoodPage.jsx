@@ -89,7 +89,7 @@ const AcceptedFoodPage = () => {
                 setCollectedItems(new Array(response.data.length).fill(false)); // Initialize collectedItems state
             } catch (error) {
                 console.error('Error fetching donor items:', error);
-                toast.error('Error fetching donor items.');
+                //toast.error('Error fetching donor items.');
             }
         };
         donorItems();
@@ -103,7 +103,7 @@ const AcceptedFoodPage = () => {
                 console.log(response.data);
             } catch (error) {
                 console.error('Error fetching recipient information:', error);
-                toast.error('Error fetching recipient information.');
+                
             }
         };
         fetchRecipientInfo();
@@ -136,12 +136,16 @@ const AcceptedFoodPage = () => {
         } catch (error) {
             // Handle errors
             console.error('Error collecting food:', error);
-            toast.error('Error sending response.');
+            //toast.error('Error sending response.');
         }
     };
 
     return (
         <div className="container mt-5">
+            <div>
+                <br/>
+                <br/>
+            </div>
             <ToastContainer />
             <h1>Accepted Food Items</h1>
             {acceptedItems.length > 0 ? (
@@ -176,3 +180,4 @@ const AcceptedFoodPage = () => {
 };
 
 export default AcceptedFoodPage;
+

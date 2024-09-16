@@ -2,6 +2,7 @@ import React from 'react';
 import { Container, Row, Col, Card, Table } from 'react-bootstrap';
 import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, Legend, BarChart, Bar, ResponsiveContainer } from 'recharts';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Leaderboard from '../Leader-Board/Leaderboard';
 
 // Sample data
 const sampleData = {
@@ -145,7 +146,13 @@ const DonorDashboard = () => {
           </Card>
         </Col>
       </Row>
+      <div>
+      <Container className="mt-5 ">
+              <Leaderboard />
+        </Container>
+      </div>
     </Container>
+   
   );
 };
 
