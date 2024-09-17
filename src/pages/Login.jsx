@@ -748,7 +748,7 @@ const Login = ({ onLoginSuccess }) => {
       console.log(result.data.token);
       if (result.data.token) {
         toast.success(result.data.message);
-        handleLoginSuccess(result.data.token, "./adminDash");
+        handleLoginSuccess(result.data.token, "/adminDash");
         
       } else {
         toast.warning(result.data.message);

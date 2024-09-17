@@ -686,7 +686,7 @@ function App() {
           <Route path='/DonorProfile' element={<DonorProfile />} />
           <Route path="/accepted-food/:id" element={<AcceptedFoodPage />} />
           <Route path="/form" element={<CustomForm updateFeedbackList={updateFeedbackList} />} />
-          <Route path='/login/adminDash/*' element={<AdminDash />} />
+          <Route path='/adminDash/*' element={<AdminDash />} />
 
           {/* <Route path='/ContactForm' element={<ContactForm />} /> */}
           <Route path='/Leaderboard' element={<Leaderboard />} />
