@@ -542,6 +542,7 @@ import UpdatePassword from './update-password/UpdatePassword';
 // import ContactForm from './testing-form/ContactForm';
 import SessionManager from './Session/SessionManager'; // Import SessionManager
 import Leaderboard from './Leader-Board/Leaderboard'
+import ResetPassword from './update-password/ResetPassword';
 
 
  
@@ -687,6 +688,9 @@ function App() {
           <Route path="/form" element={<CustomForm updateFeedbackList={updateFeedbackList} />} />
           {/* <Route path='/ContactForm' element={<ContactForm />} /> */}
           <Route path='/Leaderboard' element={<Leaderboard />} />
+        {/* password */}
+          <Route path='/reset-password' element={<ResetPassword />} />
+          
 
           
           <Route element={<SessionManager><PrivateRoute /></SessionManager>}>
