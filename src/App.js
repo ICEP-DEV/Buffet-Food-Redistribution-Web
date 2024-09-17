@@ -686,6 +686,8 @@ function App() {
           <Route path='/DonorProfile' element={<DonorProfile />} />
           <Route path="/accepted-food/:id" element={<AcceptedFoodPage />} />
           <Route path="/form" element={<CustomForm updateFeedbackList={updateFeedbackList} />} />
+          <Route path='/login/adminDash/*' element={<AdminDash />} />
+
           {/* <Route path='/ContactForm' element={<ContactForm />} /> */}
           <Route path='/Leaderboard' element={<Leaderboard />} />
         {/* password */}
@@ -700,7 +702,7 @@ function App() {
             <Route path='/profileapp' element={<ProfileApp />} />
             <Route path='/donordashboard' element={<Donordashboard />} />
             <Route path='/foodlisting' element={<FoodListing />} />
-            <Route path='/adminDash/*' element={<AdminDash />} />
+            
             <Route path='/landing-page' element={<LandingPage />} />
             <Route path='/record' element={<Historys />} />
             <Route path='/donorRequest' element={
