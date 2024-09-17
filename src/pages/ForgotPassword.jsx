@@ -1,25 +1,27 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import React, { useState } from "react";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ForgotPassword = () => {
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
 
   const handleResetPassword = async (event) => {
     event.preventDefault();
 
     try {
-      const result = await axios.post(`http://localhost:5282/api/Email/ResetMail?email=${email}`);
+      const result = await axios.post(
+        `http://localhost:5282/api/Email/ResetMail?email=${email}`
+      );
 
-      if (result.data.flag) {
-        toast.success(result.data.message);
+      if (result) {
+        toast.success("Reset password email sent!");
       } else {
-        toast.warning(result.data.message);
+        toast.warning("Error sending email!");
       }
     } catch (error) {
-      console.error('Password reset failed:', error.response);
-      toast.error('Password reset failed. Please try again later.');
+      console.error("Password reset failed:", error.response);
+      toast.error("Password reset failed. Please try again later.");
     }
   };
 
@@ -33,7 +35,9 @@ const ForgotPassword = () => {
                 <h3 className="card-title text-center mb-4">Forgot Password</h3>
                 <form onSubmit={handleResetPassword}>
                   <div className="mb-5">
-                    <label htmlFor="email" className="form-label">Email address</label>
+                    <label htmlFor="email" className="form-label">
+                      Email address
+                    </label>
                     <input
                       type="email"
                       className="form-control"
