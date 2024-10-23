@@ -1,4 +1,3 @@
-
 // import React, { useState, useEffect } from 'react';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faUtensils, faSearch } from '@fortawesome/free-solid-svg-icons';
@@ -68,7 +67,7 @@
 //       try {
 //         // Example of sending an email to the donor
 //         await axios.post(`http://localhost:5282/api/Email/DonorMail?email=${selectedItem.contact}&itemId=${selectedItem.id}`);
-        
+
 //         // Example of sending a request to the backend to mark the item as requested
 //         await axios.post(`http://localhost:5282/api/Request?foodDonationId=${selectedItem.id}`, {}, {
 //           headers: {
@@ -184,7 +183,6 @@
 
 // export default connect(mapStateToProps, { acceptRequest, declineRequest })(FoodListing);
 
-
 // import React, { useState, useEffect } from 'react';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faUtensils, faSearch } from '@fortawesome/free-solid-svg-icons';
@@ -295,7 +293,7 @@
 //   if (loading) {
 //     return <div>Loading...</div>;
 //   }
-  
+
 //   return (
 //     <div>
 //       <br></br>
@@ -345,10 +343,10 @@
 //                         </tr>
 //                       </thead>
 //                     </table>
-                    
+
 //                   </div>
 //                 </div>
-                
+
 //                 <button
 //                   onClick={() => handleRequestClick(item)}
 //                   className="btn btn-primary mt-2 align-self-end"
@@ -358,16 +356,16 @@
 //                 </button>
 //               </div>
 //             </div>
-            
+
 //           </div>
-          
+
 //         ))}<br></br>
 //       <div><br></br>
 //       <br></br></div>
 //       <div><br></br>
 //       <br></br></div>
 //       </div>
-      
+
 //       <Modal show={showModal} onHide={handleModalClose}>
 //         <Modal.Header closeButton>
 //           <Modal.Title>Confirm Request</Modal.Title>
@@ -388,7 +386,7 @@
 //         <button onClick={clearLocalStorage} className="btn btn-danger mb-3">Clear Local Storage</button>
 //       </div>
 //     </div>
-    
+
 //   );
 // }
 
@@ -398,20 +396,19 @@
 
 // export default connect(mapStateToProps, { acceptRequest, declineRequest })(FoodListing);
 
-
-import React, { useState, useEffect } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUtensils, faSearch } from '@fortawesome/free-solid-svg-icons';
-import axios from 'axios';
-import { connect } from 'react-redux';
-import { acceptRequest, declineRequest } from '../Redux/actions';
-import { InputGroup, FormControl, Button, Modal } from 'react-bootstrap';
+import React, { useState, useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUtensils, faSearch } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
+import { connect } from "react-redux";
+import { acceptRequest, declineRequest } from "../Redux/actions";
+import { InputGroup, FormControl, Button, Modal } from "react-bootstrap";
 
 function FoodListing({ acceptRequest, declineRequest }) {
   const [foodItems, setFoodItems] = useState([]);
   const [requestedItems, setRequestedItems] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const [filteredFoodItems, setFilteredFoodItems] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
@@ -420,16 +417,18 @@ function FoodListing({ acceptRequest, declineRequest }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:5282/api/FoodItem');
+        const response = await axios.get("http://localhost:5282/api/FoodItem");
         setFoodItems(response.data);
         setFilteredFoodItems(response.data);
 
-        const storedRequestedItems = JSON.parse(localStorage.getItem('requestedItems')) || [];
+        console.log(response.data);
+        const storedRequestedItems =
+          JSON.parse(localStorage.getItem("requestedItems")) || [];
         setRequestedItems(storedRequestedItems);
 
         setLoading(false);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
         setLoading(false);
       }
     };
@@ -438,7 +437,8 @@ function FoodListing({ acceptRequest, declineRequest }) {
   }, []);
 
   const getRequestCounts = () => {
-    const storedCounts = JSON.parse(localStorage.getItem('requestCounts')) || {};
+    const storedCounts =
+      JSON.parse(localStorage.getItem("requestCounts")) || {};
     return storedCounts;
   };
 
@@ -451,7 +451,7 @@ function FoodListing({ acceptRequest, declineRequest }) {
     }
 
     counts[today] += 1;
-    localStorage.setItem('requestCounts', JSON.stringify(counts));
+    localStorage.setItem("requestCounts", JSON.stringify(counts));
   };
 
   const getRequestCountForToday = () => {
@@ -464,36 +464,44 @@ function FoodListing({ acceptRequest, declineRequest }) {
     if (selectedItem) {
       const requestCountToday = getRequestCountForToday();
 
-      if (requestCountToday >= 2) {
-        alert('You have reached the daily limit of 2 requests.');
+      if (requestCountToday >= 200) {
+        alert("You have reached the daily limit of 200 requests.");
         setShowModal(false);
         return;
       }
 
-      const token = sessionStorage.getItem('token');
+      const token = sessionStorage.getItem("token");
       const requestTime = new Date().toISOString();
 
       try {
-        await axios.post(`http://localhost:5282/api/Email/DonorMail?email=${selectedItem.contact}&itemId=${selectedItem.id}`);
-        await axios.post(`http://localhost:5282/api/Request?foodDonationId=${selectedItem.id}`, {}, {
-          headers: {
-            Authorization: `Bearer ${token}`
+        await axios.post(
+          `http://localhost:5282/api/Email/DonorMail?email=${selectedItem.contact}&itemId=${selectedItem.id}`
+        );
+        await axios.post(
+          `http://localhost:5282/api/Request?foodDonationId=${selectedItem.id}`,
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
           }
-        });
+        );
 
-        const updatedItem = { ...selectedItem, requestTime, status: 'Pending' };
+        const updatedItem = { ...selectedItem, requestTime, status: "Pending" };
         const updatedRequestedItems = [...requestedItems, updatedItem];
         setRequestedItems(updatedRequestedItems);
-        localStorage.setItem('requestedItems', JSON.stringify(updatedRequestedItems));
+        localStorage.setItem(
+          "requestedItems",
+          JSON.stringify(updatedRequestedItems)
+        );
 
         updateRequestCounts(); // Update request counts after a successful request
 
         alert(`Request for ${selectedItem.itemName} sent!`);
         setShowModal(false); // Close modal
         setTransportConfirmed(false); // Reset transport confirmation
-
       } catch (error) {
-        console.error('Error handling request:', error);
+        console.error("Error handling request:", error);
       }
     }
   };
@@ -516,17 +524,17 @@ function FoodListing({ acceptRequest, declineRequest }) {
   const handleSearchQueryChange = (e) => {
     const query = e.target.value.toLowerCase();
     setSearchQuery(query);
-    const filtered = foodItems.filter(item =>
+    const filtered = foodItems.filter((item) =>
       item.address.toLowerCase().includes(query)
     );
     setFilteredFoodItems(filtered);
   };
 
   const clearLocalStorage = () => {
-    localStorage.removeItem('requestedItems');
-    localStorage.removeItem('requestCounts'); // Clear request counts as well
+    localStorage.removeItem("requestedItems");
+    localStorage.removeItem("requestCounts"); // Clear request counts as well
     setRequestedItems([]);
-    alert('Local storage cleared!');
+    alert("Local storage cleared!");
   };
 
   if (loading) {
@@ -557,7 +565,15 @@ function FoodListing({ acceptRequest, declineRequest }) {
       <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-2 mb-5">
         {filteredFoodItems.map((item) => (
           <div key={item.id} className="col">
-            <div className={`card h-100 shadow rounded p-3 ${requestedItems.some((requestedItem) => requestedItem.id === item.id) ? 'bg-light disabled' : ''}`}>
+            <div
+              className={`card h-100 shadow rounded p-3 ${
+                requestedItems.some(
+                  (requestedItem) => requestedItem.id === item.id
+                )
+                  ? "bg-light disabled"
+                  : ""
+              }`}
+            >
               <div className="card-body d-flex flex-column justify-content-between">
                 <div>
                   <h5 className="card-title text-center">{item.itemName}</h5>
@@ -574,7 +590,11 @@ function FoodListing({ acceptRequest, declineRequest }) {
                         </tr>
                         <tr>
                           <th scope="col">Time Cooked</th>
-                          <td>{item.dateCooked ? new Date(item.dateCooked).toLocaleString() : 'Not specified'}</td>
+                          <td>
+                            {item.dateCooked
+                              ? new Date(item.dateCooked).toLocaleString()
+                              : "Not specified"}
+                          </td>
                         </tr>
                         <tr>
                           <th scope="col">Address</th>
@@ -587,9 +607,19 @@ function FoodListing({ acceptRequest, declineRequest }) {
                 <button
                   onClick={() => handleRequestClick(item)}
                   className="btn btn-primary mt-2 align-self-end"
-                  disabled={requestedItems.some((requestedItem) => requestedItem.id === item.id)}
+                  disabled={requestedItems.some(
+                    (requestedItem) => requestedItem.id === item.id
+                  )}
                 >
-                  {requestedItems.some((requestedItem) => requestedItem.id === item.id) ? 'Requested' : <><FontAwesomeIcon icon={faUtensils} /> Request</>}
+                  {requestedItems.some(
+                    (requestedItem) => requestedItem.id === item.id
+                  ) ? (
+                    "Requested"
+                  ) : (
+                    <>
+                      <FontAwesomeIcon icon={faUtensils} /> Request
+                    </>
+                  )}
                 </button>
               </div>
             </div>
@@ -599,14 +629,14 @@ function FoodListing({ acceptRequest, declineRequest }) {
 
       <Modal show={showModal} onHide={handleModalClose}>
         <Modal.Header closeButton>
-          <Modal.Title>{transportConfirmed ? "Confirm Request" : "Transport Confirmation"}</Modal.Title>
+          <Modal.Title>
+            {transportConfirmed ? "Confirm Request" : "Transport Confirmation"}
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {transportConfirmed ? (
-            `Are you sure you want to request ${selectedItem?.itemName}?`
-          ) : (
-            "Do you have transport to collect the donation?"
-          )}
+          {transportConfirmed
+            ? `Are you sure you want to request ${selectedItem?.itemName}?`
+            : "Do you have transport to collect the donation?"}
         </Modal.Body>
         <Modal.Footer>
           {transportConfirmed ? (
@@ -632,7 +662,9 @@ function FoodListing({ acceptRequest, declineRequest }) {
       </Modal>
 
       <div className="text-center">
-        <button onClick={clearLocalStorage} className="btn btn-danger mb-3">Clear Local Storage</button>
+        <button onClick={clearLocalStorage} className="btn btn-danger mb-3">
+          Clear Local Storage
+        </button>
       </div>
       <br></br>
       <br></br>
@@ -645,6 +677,6 @@ const mapStateToProps = (state) => ({
   requests: state.requests,
 });
 
-export default connect(mapStateToProps, { acceptRequest, declineRequest })(FoodListing);
-
-
+export default connect(mapStateToProps, { acceptRequest, declineRequest })(
+  FoodListing
+);

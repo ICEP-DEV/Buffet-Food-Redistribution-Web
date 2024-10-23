@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Container, Form, Button, Alert, Card } from 'react-bootstrap';
+import axios from 'axios';
 
 const ResetPassword = () => {
     const [newPassword, setNewPassword] = useState('');
@@ -23,6 +24,7 @@ const ResetPassword = () => {
             setSuccess('Password has been reset successfully!');
             // Here you would typically send the password to your server.
             // Example: axios.post('/api/reset-password', { newPassword });
+            //const response =  axios.put("http://localhost:5282/api/Email/ResetDonorPassword?email=")
         }
     };
 

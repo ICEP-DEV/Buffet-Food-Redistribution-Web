@@ -64,7 +64,7 @@ const DonationHistory = () => {
     useEffect(() => {
         const fetchDonationHistory = async () => {
             try {
-                const response = await axios.get('http://localhost:5282/api/FoodItem');
+                const response = await axios.get('http://localhost:5282/api/FoodItem/Admin-Items');
                 const data = response.data;
 
                 console.log('Fetched data:', data); // Log data
