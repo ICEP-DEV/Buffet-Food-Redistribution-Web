@@ -8,6 +8,7 @@ import { BrowserRouter } from 'react-router-dom';
 import {createStore} from 'redux';
 import {Provider} from 'react-redux';
 import rootReducer from './Redux/reducers'
+import Chat from './ChatComponent/chat';
 
 const store = createStore(rootReducer);
 
